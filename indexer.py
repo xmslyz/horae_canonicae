@@ -32,7 +32,7 @@ def fill_dict(filename, _):
 
     try:
         for year in years:
-            for month in range(9, 10):
+            for month in range(9, 13):
                 for day in range(
                         1, calendar.monthrange(int(year), month)[1] + 1
                 ):
