@@ -332,7 +332,6 @@ class TestFindProperWeek(TestCase):
                     self.assertEqual(exception_message, expected_message)
                 else:
                     result = find_proper_week(initium, finis, c_day)
-                    print(result)
                     self.assertEqual(result, expected_week)
 
 

@@ -6,7 +6,7 @@ import math
 # Reference date for a known new moon (Jan 6, 2000 is a common reference)
 new_moon_date = datetime.datetime(2000, 1, 6)
 
-# Lunar cycle (synodic month) in days
+# A lunar cycle (synodic month) in days
 lunar_cycle = 29.53058867
 
 
