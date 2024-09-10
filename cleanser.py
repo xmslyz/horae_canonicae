@@ -22,7 +22,7 @@ def clear_data():
 
 
 def _delete_in_thread(*args):
-    # FOR LOOP to remove all residence of junk in [0] index
+    # FORLOOP to remove all residence of junk in [0] index
     for _ in range(4):
         delete_junk(args[0])
 
@@ -158,7 +158,8 @@ def delete_junk(filename):
         "W wersji PREMIUM dostępne jest nagranie tej Godziny w formacie MP3("
         "lewy górny róg strony).",
         "Jeżeli poniżej nie wyświetliły się teksty czytań i Te Deum, kliknij "
-        "tutaj i przeładuj tę stronę(dotyczy głównie użytkowników urządzeń mobilnych).",
+        "tutaj i przeładuj tę stronę(dotyczy głównie użytkowników urządzeń "
+        "mobilnych).",
         "Hymn |",
         "Psalmodia |",
         "I Czytanie |",
@@ -187,19 +188,6 @@ def delete_junk(filename):
         "II Nieszpory",
         "Kompleta",
     ]
-    filename_to_remove_map = {
-        "com": "Kompleta",
-        "inv": "Wezwanie",
-        "lau": "Jutrznia",
-        "lec": "Godzina Czytań",
-        "ter": "Modlitwa przedpołudniowa",
-        "sex": "Modlitwa południowa",
-        "non": "Modlitwa popołudniowa",
-        "vis": "Nieszpory"
-    }
-
-    # if filename in filename_to_remove_map:
-    #     JUNK_3_CLASS.remove(filename_to_remove_map[filename])
 
     scraped_dir = "1_scrapping"
     scraped_path = f"{scraped_dir}/{filename}.json"
@@ -214,8 +202,8 @@ def delete_junk(filename):
         jsdic = tools.open_json_file(scraped_path)
         for year in years:
             for month in range(1, 13):
-                for day in range(1, calendar.monthrange(int(year), month)[1]
-                                    + 1):
+                for day in range(1, calendar.monthrange(
+                        int(year), month)[1] + 1):
                     print(month, day, filename)
                     for w in tools.range_of_memories_depth(10):
                         cleared_str = ''
@@ -230,9 +218,6 @@ def delete_junk(filename):
                             for pattern in patterns:
                                 # whipe all occurrences of the date
                                 raw_data = re.sub(pattern, '', raw_data)
-
-                            # Replace non-breaking spaces with a regular space (or you can use '' to remove them completely)
-                            cleaned_text = re.sub(pattern, ' ', raw_data)
 
                             splited = raw_data.split("\n")
 
@@ -272,22 +257,3 @@ def delete_junk(filename):
 
     except Exception as e:
         print(e)
-
-# def get_antiphones(element: str, idx: int) -> (str, int):
-#     """
-#         Find the index of the first occurrence of a pattern in a list of
-#         strings.
-#
-#         Parameters:
-#             element (str): line of text
-#             idx (int): indes of line
-#
-#         Returns:
-#             str: number of anthiphone
-#             int: The index of next element of list
-#
-#         """
-#     pattern_ants = "^.*([1-3]) ant.*$"  # gen
-#     val = re.findall(pattern_ants, element)
-#     if val:
-#         return val[0], idx + 1
