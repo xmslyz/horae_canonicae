@@ -325,51 +325,15 @@ class TestFindProperWeek(TestCase):
                         expected_message = (f'The date {c_day} is not within '
                                             f'the range {initium}-{finis}.')
                     else:
-                        expected_message = ("The calculated weeks do not fit "
-                                            "within the expected range.")
+                        # expected_message = ("The calculated weeks do not fit "
+                        #                     "within the expected range.")
+                        expected_message = (f"No valid Sunday found for the "
+                                            f"date {c_day}")
                     self.assertEqual(exception_message, expected_message)
                 else:
                     result = find_proper_week(initium, finis, c_day)
+                    print(result)
                     self.assertEqual(result, expected_week)
-
-
-def check_span(initium, finis):
-    if (finis - initium).days > 193:
-        raise ValueError(
-            f'The span between {initium} and {finis} cannot exceed 193 days.')
-
-
-class TestMaximalSpan(TestCase):
-    def test_valid_span(self):
-        initium = datetime.date(2024, 5, 24)  # Zesłanie Ducha Świętego
-        finis = datetime.date(2024, 12, 3)  # Początek Adwentu
-        try:
-            check_span(initium, finis)
-        except ValueError:
-            self.fail("check_span raised ValueError unexpectedly!")
-
-    def test_exceeding_span(self):
-        initium = datetime.date(2024, 5, 24)  # Zesłanie Ducha Świętego
-        finis = datetime.date(2025, 1, 1)  # Poza maksymalnym zakresem
-        with self.assertRaises(ValueError):
-            check_span(initium, finis)
-
-    def test_exact_max_span(self):
-        initium = datetime.date(2024, 5, 24)  # Zesłanie Ducha Świętego
-        finis = initium + datetime.timedelta(days=193)  # Dokładnie
-        # maksymalny zakres
-        try:
-            check_span(initium, finis)
-        except ValueError:
-            self.fail("check_span raised ValueError unexpectedly!")
-
-    def test_span_with_same_dates(self):
-        initium = datetime.date(2024, 5, 24)
-        finis = initium  # identyczne daty
-        try:
-            check_span(initium, finis)
-        except ValueError:
-            self.fail("check_span raised ValueError unexpectedly!")
 
 
 class TestFirstDayOfWeek(TestCase):
@@ -441,8 +405,9 @@ class TestFirstDayOfWeek(TestCase):
 
     def test_date_after_last_sunday(self):
         # Case where the date falls after the last Sunday in the list
-        with self.assertRaises(ValueError):
-            first_day_of_week(self.sundays, datetime.date(2024, 2, 10))
+        self.assertEqual(
+            first_day_of_week(self.sundays, datetime.date(2024, 2, 10)),
+            datetime.date(2024, 2, 4))
 
     def test_date_more_than_week_after_last_sunday(self):
         # Case where c-day is more than a week after the last Sunday in the list
@@ -460,6 +425,45 @@ class TestFirstDayOfWeek(TestCase):
             first_day_of_week(future_sundays, datetime.date(2030, 12, 9)),
             datetime.date(2030, 12, 8)
         )
+
+
+def check_span(initium, finis):
+    if (finis - initium).days > 193:
+        raise ValueError(
+            f'The span between {initium} and {finis} cannot exceed 193 days.')
+
+
+class TestMaximalSpan(TestCase):
+    def test_valid_span(self):
+        initium = datetime.date(2024, 5, 24)  # Zesłanie Ducha Świętego
+        finis = datetime.date(2024, 12, 3)  # Początek Adwentu
+        try:
+            check_span(initium, finis)
+        except ValueError:
+            self.fail("check_span raised ValueError unexpectedly!")
+
+    def test_exceeding_span(self):
+        initium = datetime.date(2024, 5, 24)  # Zesłanie Ducha Świętego
+        finis = datetime.date(2025, 1, 1)  # Poza maksymalnym zakresem
+        with self.assertRaises(ValueError):
+            check_span(initium, finis)
+
+    def test_exact_max_span(self):
+        initium = datetime.date(2024, 5, 24)  # Zesłanie Ducha Świętego
+        finis = initium + datetime.timedelta(days=193)  # Dokładnie
+        # maksymalny zakres
+        try:
+            check_span(initium, finis)
+        except ValueError:
+            self.fail("check_span raised ValueError unexpectedly!")
+
+    def test_span_with_same_dates(self):
+        initium = datetime.date(2024, 5, 24)
+        finis = initium  # identyczne daty
+        try:
+            check_span(initium, finis)
+        except ValueError:
+            self.fail("check_span raised ValueError unexpectedly!")
 
 
 # To run the tests

@@ -122,51 +122,50 @@ def get_liturgical_season(target_date: datetime.date) -> str:
     Parameters:
         target_date (datetime.date): The date for which the liturgical season is
          determined.
-        lit_year (int): The liturgical year in which to check the date.
 
     Returns:
         str: The name of the liturgical season ('Advent', 'Christmas',
         'Ordinary', 'Lent', 'Easter'), or 'Unknown' if the date does not fall
         within any defined liturgical period.
     """
-    lit_year = find_proper_scope(target_date)
+    li_year = find_proper_scope(target_date)
 
-    def advent_season(target_date: datetime.date, lit_year: int) -> bool:
-        start_date = advent_start_date(lit_year)
-        end_date = datetime.datetime.strptime(f'24.12.{lit_year}',
+    def advent_season(t_date: datetime.date, l_year: int) -> bool:
+        start_date = advent_start_date(l_year)
+        end_date = datetime.datetime.strptime(f'24.12.{l_year}',
                                               '%d.%m.%Y').date()
 
-        return start_date <= target_date <= end_date
+        return start_date <= t_date <= end_date
 
-    def xmass_season(target_date: datetime.date, lit_year: int) -> bool:
-        start_date = datetime.datetime.strptime(f'25.12.{lit_year}',
+    def xmass_season(t_date: datetime.date, l_year: int) -> bool:
+        start_date = datetime.datetime.strptime(f'25.12.{l_year}',
                                                 '%d.%m.%Y').date()
-        end_date = baptism_sunday(lit_year + 1)
-        return start_date <= target_date < end_date
+        end_date = baptism_sunday(l_year + 1)
+        return start_date <= t_date < end_date
 
-    def ordinary_season(target_date: datetime.date, lit_year: int) -> bool:
-        first_part_start = baptism_sunday(lit_year + 1)
-        first_part_end, _, second_part_start = easter_time(lit_year + 1)
-        first_part = first_part_start < target_date < first_part_end
-        second_part = second_part_start < target_date < advent_start_date(
-            lit_year + 1)
+    def ordinary_season(t_date: datetime.date, l_year: int) -> bool:
+        first_part_start = baptism_sunday(l_year + 1)
+        first_part_end, _, second_part_start = easter_time(l_year + 1)
+        first_part = first_part_start < t_date < first_part_end
+        second_part = second_part_start < t_date < advent_start_date(
+            l_year + 1)
         return first_part or second_part
 
-    def lent_season(target_date: datetime.date, lit_year: int) -> bool:
-        start_date, end_date, _ = easter_time(lit_year + 1)
-        return start_date <= target_date < end_date
+    def lent_season(t_date: datetime.date, l_year: int) -> bool:
+        start_date, end_date, _ = easter_time(l_year + 1)
+        return start_date <= t_date < end_date
 
-    def easter_season(target_date: datetime.date, lit_year: int) -> bool:
-        _, start_date, end_date = easter_time(lit_year + 1)
-        return start_date <= target_date <= end_date
+    def easter_season(t_date: datetime.date, l_year: int) -> bool:
+        _, start_date, end_date = easter_time(l_year + 1)
+        return start_date <= t_date <= end_date
 
     # Map seasons to their corresponding functions
     seasons = {
-        'Advent': lambda: advent_season(target_date, lit_year),
-        'Christmas': lambda: xmass_season(target_date, lit_year),
-        'Ordinary': lambda: ordinary_season(target_date, lit_year),
-        'Lent': lambda: lent_season(target_date, lit_year),
-        'Easter': lambda: easter_season(target_date, lit_year),
+        'Advent': lambda: advent_season(target_date, li_year),
+        'Christmas': lambda: xmass_season(target_date, li_year),
+        'Ordinary': lambda: ordinary_season(target_date, li_year),
+        'Lent': lambda: lent_season(target_date, li_year),
+        'Easter': lambda: easter_season(target_date, li_year),
     }
 
     # Check which season the date belongs to
