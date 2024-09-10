@@ -176,45 +176,63 @@ def check_date(year, month, day):
     print("eas", easter_seson(target, cal_year))
 
 
-def find_proper_week(year):
+def find_proper_week(initium, finis, year, c_day) -> int:
     """
     ...
 
     """
-    scope_to_1: datetime.timedelta = easter_time(year)[0] - baptism_sunday(year)
-
     sundays = []
-    sun_we = []
-    for i in range(0, scope_to_1.days + 1):
+    sun_week_no = []
+
+    scope_part_one: datetime.timedelta = easter_time(year)[0] - baptism_sunday(year)
+
+    # szukaj niedziel w 1 części Okresu Zwykłego
+    for i in range(0, scope_part_one.days + 1):
         q_day = baptism_sunday(year) + datetime.timedelta(i)
+        # if queried day is sunday, append to a list
         if q_day.weekday() == 6:
             sundays.append(q_day)
-            sun_we.append(q_day.isocalendar()[1])
+            sun_week_no.append(q_day.isocalendar()[1])
 
-    # br: datetime.timedelta = easter_time(year)[2] - easter_time(year)[0]
-    # print(br.days // 7)
-
-    scope_to_2: datetime.timedelta = (advent_start_date(year) - easter_time(
+    scope_part_two: datetime.timedelta = (advent_start_date(year) - easter_time(
         year)[2])
 
-    for i in range(0, scope_to_2.days):
+    for i in range(0, scope_part_two.days):
         q_day = easter_time(year)[2] + datetime.timedelta(i)
         if q_day.weekday() == 6:
             sundays.append(q_day)
-            sun_we.append(q_day.isocalendar()[1] - 13)
+            # - 13 weeks for lent and eastertide
+            sun_week_no.append(q_day.isocalendar()[1] - 13)
 
-    print(year, "\n")
-    print(sun_we[0::4])
-    print(sun_we[1::4])
-    print(sun_we[2::4])
-    print(sun_we[3::4])
-    print(sundays[0::4])
-    print(sundays[1::4])
-    print(sundays[2::4])
-    print(sundays[3::4])
-    # find each sunday after baptism untill reach ash wensday
+    q_sunday = first_day_of_week(sundays, c_day)
+    for index in range(0, 5):
+        if q_sunday in sundays[index::4]:
+            return index + 1
+
+
+def first_day_of_week(sundays: list, c_day: datetime.date) -> datetime.date:
+    """
+    Finds the Sunday that corresponds to the given day.
+
+    Parameters:
+        sundays (list): List of Sundays within a given period.
+        c_day (datetime.date): The day for which the corresponding Sunday is
+        found.
+
+    Returns:
+        datetime.date: The Sunday that corresponds to the given day.
+
+    """
+    for sunday in sundays:
+        # Calculate the difference in days
+        difference = (c_day - sunday).days
+
+        # If the difference is within the current week (0 to 6),
+        # return the Sunday
+        if 0 <= difference < 7:
+            return sunday
 
 
 if __name__ == "__main__":
-    for x in range(2024, 2040):
-        find_proper_week(x)
+    s_day = datetime.date(2024, 9, 9)
+    print(find_proper_week(2024, s_day))
