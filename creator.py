@@ -202,17 +202,16 @@ def find_proper_week(year):
         if q_day.weekday() == 6:
             sundays.append(q_day)
             sun_we.append(q_day.isocalendar()[1] - 13)
+
+    print(year, "\n")
     print(sun_we[0::4])
     print(sun_we[1::4])
     print(sun_we[2::4])
     print(sun_we[3::4])
-    print(year, "\n")
-
     print(sundays[0::4])
     print(sundays[1::4])
     print(sundays[2::4])
     print(sundays[3::4])
-
     # find each sunday after baptism untill reach ash wensday
 
 
