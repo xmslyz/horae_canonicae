@@ -131,7 +131,7 @@ def xmass_season(target_date: datetime.date, lit_year: int):
 
 def ordinary_season(target_date, lit_year: int):
     first_part_start = baptism_sunday(lit_year + 1)
-    first_part_end, _,  second_part_start = easter_time(lit_year + 1)
+    first_part_end, _, second_part_start = easter_time(lit_year + 1)
 
     first_part = first_part_start < target_date < first_part_end
     second_part = second_part_start < target_date < advent_start_date(
@@ -165,8 +165,8 @@ def find_proper_scope(search_date):
     return None  # Jeśli nie znaleziono, co teoretycznie nie powinno się zdarzyć
 
 
-if __name__ == "__main__":
-    target = datetime.date(2024, 2, 14)
+def check_date(year, month, day):
+    target = datetime.date(year, month, day)
     cal_year = find_proper_scope(target)
 
     print("adv", advent_season(target, cal_year))
@@ -174,3 +174,48 @@ if __name__ == "__main__":
     print("ord", ordinary_season(target, cal_year))
     print("len", lent_seson(target, cal_year))
     print("eas", easter_seson(target, cal_year))
+
+
+def find_proper_week(year):
+    """
+    ...
+
+    """
+    scope_to_1: datetime.timedelta = easter_time(year)[0] - baptism_sunday(year)
+
+    sundays = []
+    sun_we = []
+    for i in range(0, scope_to_1.days + 1):
+        q_day = baptism_sunday(year) + datetime.timedelta(i)
+        if q_day.weekday() == 6:
+            sundays.append(q_day)
+            sun_we.append(q_day.isocalendar()[1])
+
+    # br: datetime.timedelta = easter_time(year)[2] - easter_time(year)[0]
+    # print(br.days // 7)
+
+    scope_to_2: datetime.timedelta = (advent_start_date(year) - easter_time(
+        year)[2])
+
+    for i in range(0, scope_to_2.days):
+        q_day = easter_time(year)[2] + datetime.timedelta(i)
+        if q_day.weekday() == 6:
+            sundays.append(q_day)
+            sun_we.append(q_day.isocalendar()[1] - 13)
+    print(sun_we[0::4])
+    print(sun_we[1::4])
+    print(sun_we[2::4])
+    print(sun_we[3::4])
+    print(year, "\n")
+
+    print(sundays[0::4])
+    print(sundays[1::4])
+    print(sundays[2::4])
+    print(sundays[3::4])
+
+    # find each sunday after baptism untill reach ash wensday
+
+
+if __name__ == "__main__":
+    for x in range(2024, 2040):
+        find_proper_week(x)
