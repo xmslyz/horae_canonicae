@@ -313,18 +313,3 @@ def first_day_of_week(sundays: list, c_day: datetime.date) -> datetime.date:
     except ValueError as e:
         print(f"Error: {e}")
         raise  # Re-raise the ValueError to propagate the error
-
-
-if __name__ == "__main__":
-    s_day = datetime.date(2024, 2, 12)
-    sundays = [
-        datetime.date(2023, 12, 24),  # Christmas
-        datetime.date(2023, 12, 31),  # End of 2023
-        datetime.date(2024, 1, 7),  # 1st week of 2024
-        datetime.date(2024, 1, 14),
-        datetime.date(2024, 1, 21),
-        datetime.date(2024, 1, 28),
-        datetime.date(2024, 2, 4)
-    ]
-
-    print(first_day_of_week(sundays, s_day))
