@@ -6,13 +6,6 @@ import calendar
 import gausianmethod
 
 
-def find_officium():
-    # look for a day of week
-    # look for a liturgical week
-    # look in general calendar
-    ...
-
-
 def advent_start_date(year):
     """
     Searches for the first Sunday of Advent.
@@ -34,13 +27,13 @@ def advent_start_date(year):
     else:
         # Otherwise, find the previous Sunday before Christmas
         shift = 24 - xmas_day.weekday()
-        last_sunday = datetime.datetime.strptime(f'{shift}-12-{year}', '%d-%m-%Y')
+        last_sunday = datetime.datetime.strptime(
+            f'{shift}-12-{year}', '%d-%m-%Y')
 
     # Advent starts 4 Sundays before Christmas (3 Sundays = 21 days)
     advent_start = last_sunday - datetime.timedelta(days=21)
 
     return advent_start.date()
-
 
 
 def is_epiphany_in_first_week(year):
@@ -141,7 +134,8 @@ def ordinary_season(target_date, lit_year: int):
     first_part_end, _,  second_part_start = easter_time(lit_year + 1)
 
     first_part = first_part_start < target_date < first_part_end
-    second_part = second_part_start < target_date < advent_start_date(lit_year + 1)
+    second_part = second_part_start < target_date < advent_start_date(
+        lit_year + 1)
 
     return bool(first_part | second_part)
 
@@ -173,10 +167,10 @@ def find_proper_scope(search_date):
 
 if __name__ == "__main__":
     target = datetime.date(2024, 2, 14)
-    year = find_proper_scope(target)
+    cal_year = find_proper_scope(target)
 
-    print("adv", advent_season(target, year))
-    print("xma", xmass_season(target, year))
-    print("ord", ordinary_season(target, year))
-    print("len", lent_seson(target, year))
-    print("eas", easter_seson(target, year))
+    print("adv", advent_season(target, cal_year))
+    print("xma", xmass_season(target, cal_year))
+    print("ord", ordinary_season(target, cal_year))
+    print("len", lent_seson(target, cal_year))
+    print("eas", easter_seson(target, cal_year))
