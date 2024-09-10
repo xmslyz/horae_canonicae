@@ -240,7 +240,7 @@ def find_proper_week(initium: datetime.date, finis: datetime.date,
             raise ValueError(f'The end date is earlier than initial date.')
         if (finis - initium).days > 193:
             raise ValueError(
-                f'The span between {initium} and {finis} cannot exceed 193 days.')
+                f'The span {initium} - {finis} cannot exceed 193 days.')
         if initium == finis == c_day:
             raise ValueError(
                 f'The dates {initium}, {finis}, and {c_day} are all the same.')
