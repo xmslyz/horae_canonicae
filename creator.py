@@ -13,6 +13,7 @@ class Skeleton:
         self.sunday_dates = []
         self.sunday_weeknumbers = []
         self.actual_sunday = None
+        self.current_psalter_week = None
         self.season = None
         self.adv_start = None
         self.adv_end = None
@@ -41,7 +42,8 @@ class Skeleton:
             f"Rok Liturgiczny:\t{self.year} - {self.year + 1}\n"
             f"Okres liturgiczny: \t{self.season}\n"
             f"Cykl czytań:\t\t{self.dominical_cycle} [{self.weekday_cycle}]\n"
-            f"Bierząca niedziela:\t{self.actual_sunday}\n"
+            f"Bieżąca niedziela:\t{self.actual_sunday}\n"
+            f"Tydzień psałterza:\t{self.current_psalter_week}\n"
             f"ADV:\t\t\t\t{self.adv_start} - {self.adv_end}\n"
             f"XMS:\t\t\t\t{self.xms_start} - {self.xms_end}\n"
             f"ORD1:\t\t\t\t{self.ot1_start} - {self.ot1_end}\n"
@@ -61,6 +63,7 @@ class Skeleton:
         self.ordinary_season_alter()
         self.get_liturgical_season()
         self.find_proper_week()
+        self.psalter_weeks()
 
     def find_proper_scope(self) -> int:
         """
@@ -306,6 +309,7 @@ class Skeleton:
         finis = getattr(self, f"{self.season}_end")
 
         try:
+            # error protection
             if finis < initium:
                 raise ValueError(f'The end date is earlier than initial date.')
             if (finis - initium).days > 207:
@@ -315,12 +319,12 @@ class Skeleton:
                 raise ValueError(
                     f'The dates {initium}, {finis}, and {c_day} are all the '
                     f'same.')
-
             if self.lg_day < initium or self.lg_day > finis:
                 raise ValueError(
                     f'The date {self.lg_day} is not within the range '
                     f'{initium}-{finis}.')
 
+            # if season is ot2 needs joining
             if self.season == "ot2":
                 self.sundays_in_scope(self.ot1_end, self.ot1_start)
                 self.sundays_in_scope(finis, initium, True)
@@ -348,8 +352,26 @@ class Skeleton:
         except Exception as e:
             raise Exception(f"An error occurred: {e}")
 
+    def psalter_weeks(self):
+        sun_dict = {"1": [], "2": [], "3": [], "4": []}
+
+        # add sunday of baptims for spacer
+        self.sunday_dates.insert(0, self.xms_end)
+
+        # add sunday of pentecost for spacer
+        no_of_weeks = self.sundays_in_scope(self.ot1_end, self.ot1_start)
+        self.sunday_dates.insert(no_of_weeks + 1, self.eas_end)
+        for i in range(1, 5):
+            for sun in self.sunday_dates[i-1::4]:
+                sun_dict[str(i)].append(sun)
+
+        for key, value in sun_dict.items():
+            for sunday in value:
+                if self.first_day_of_week() == sunday:
+                    self.current_psalter_week = key
+
     def sundays_in_scope(self, finis: datetime.date, initium: datetime.date,
-                         ot_season=False):
+                         ot_season=False) -> int:
         """
         Creates a list of all Sundays within a given date range.
 
@@ -359,21 +381,25 @@ class Skeleton:
             ot_season (bool): extra recursion for an Ordinary season
 
         Returns:
-            tuple: Two lists - one with the dates of Sundays and the other with
-            their corresponding ISO week numbers.
+            int: number of weeks in scope
         """
         # If the scope is 2nd part of OT, -13 week numbers for Lent and
         # Eastertide
         ot_mod = 13 if ot_season else 0
         scope = finis - initium
-
+        number_of_weeks = []
         # Find all Sundays within the date range
         for i in range(scope.days + 1):
             q_day = initium + datetime.timedelta(i)
             # If queried day is a Sunday, append it to the list
             if q_day.weekday() == 6:  # Sunday has weekday number 6
-                self.sunday_dates.append(q_day)
-                self.sunday_weeknumbers.append(q_day.isocalendar()[1] - ot_mod)
+                if q_day not in self.sunday_dates:
+                    self.sunday_dates.append(q_day)
+                if q_day.isocalendar()[1] - ot_mod not in self.sunday_weeknumbers:
+                    self.sunday_weeknumbers.append(q_day.isocalendar()[1] - ot_mod)
+                number_of_weeks.append(q_day)
+
+        return len(number_of_weeks)
 
     def first_day_of_week(self):
         """
@@ -395,7 +421,8 @@ class Skeleton:
                     return sunday
 
             # If no valid Sunday is found, raise ValueError
-            raise ValueError(f"No valid Sunday found for the date {self.lg_day}")
+            raise ValueError(
+                f"No valid Sunday found for the date {self.lg_day}")
 
         except ValueError as e:
             print(f"Error: {e}")

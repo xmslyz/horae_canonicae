@@ -16,8 +16,8 @@ with open("base_files/invitatory.json", encoding="utf-8") as f:
 with open("base_files/invitatorium_antifonarium.json", encoding="utf-8") as f:
     antiphones = json.load(f)
 
-# officium_date = datetime.date(2020, 12, 4)
-officium_date = datetime.date.today()
+officium_date = datetime.date(2021, 8, 8)
+# officium_date = datetime.date.today()
 
 skell = Skeleton(officium_date)
 print(skell)
