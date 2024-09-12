@@ -22,12 +22,14 @@ with open("base_files/invitatorium_antifonarium.json", encoding="utf-8") as f:
 my_list = []
 for x in range(2012, 2030)[::3]:
     sk = Skeleton(datetime.date(x, 1, 1))
-    my_list.append(sk.len_start)
+    my_list.append(sk.eas_start)
 
-print(my_list)
+# print(my_list)
 
-# for y in my_list:
-    # sk = Skeleton(y)
+for y in my_list:
+    sk = Skeleton(y)
+    print(sk)
+    print()
     # print(sk.current_psalter_week)
     # print(y)
     # print(sk.eas_start)
