@@ -19,12 +19,12 @@ with open("base_files/invitatorium_antifonarium.json", encoding="utf-8") as f:
 # officium_date = datetime.date.today()
 # sk = Skeleton(officium_date)
 
-# my_list = []
-# for x in range(2020, 2021):
-    # sk = Skeleton(datetime.date(x, 1, 1))
-    # my_list.append(sk.len_start)
+my_list = []
+for x in range(2012, 2030)[::3]:
+    sk = Skeleton(datetime.date(x, 1, 1))
+    my_list.append(sk.len_start)
 
-# print(my_list)
+print(my_list)
 
 # for y in my_list:
     # sk = Skeleton(y)
@@ -33,8 +33,8 @@ with open("base_files/invitatorium_antifonarium.json", encoding="utf-8") as f:
     # print(sk.eas_start)
     # print(sk.sunday_dates)
 
-sk = Skeleton(datetime.date(2024, 2, 18))
-print(sk)
+# sk = Skeleton(datetime.date(2024, 2, 18))
+# print(sk)
 
 
 # inv skeleton

@@ -411,9 +411,9 @@ class Skeleton:
                         if self.check_ashes_week():
                             self.current_psalter_week = 4
                         elif self.first_day_of_week() == sunday:
-                            self.current_psalter_week = key
+                            self.current_psalter_week = int(key)
                     elif self.first_day_of_week() == sunday:
-                        self.current_psalter_week = key
+                        self.current_psalter_week = int(key)
 
     def sundays_in_scope(self, finis: datetime.date, initium: datetime.date,
                          ot_season=False) -> int:
