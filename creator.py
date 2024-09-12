@@ -15,7 +15,6 @@ class Skeleton:
         self.sunday_weeknumbers = []
         self.actual_sunday = None
         self.current_psalter_week = None
-        self.season = None
         self.adv_start = None
         self.adv_end = None
         self.xms_start = None
@@ -147,7 +146,7 @@ class Skeleton:
 
         return dominical_cycle, weekday_cycle
 
-    def get_liturgical_season(self) -> ():
+    def get_liturgical_season(self):
         """
         Determines the liturgical season for a given date
 
@@ -170,56 +169,75 @@ class Skeleton:
         for season, check_func in seasons.items():
             if check_func():
                 self.season = season
-                # return check_func()[1]
+                break
 
     def advent_season(self) -> bool:
-        self.adv_start = self.advent_start_date(self.year)
-        self.adv_end = datetime.datetime.strptime(f'24.12.{self.year}',
-                                                  '%d.%m.%Y').date()
-        query = self.adv_start <= self.lg_day <= self.adv_end
-        if query:
-            return query
+        try:
+            self.adv_start = self.advent_start_date(self.year)
+            self.adv_end = datetime.datetime.strptime(f'24.12.{self.year}',
+                                                      '%d.%m.%Y').date()
+            query = self.adv_start <= self.lg_day <= self.adv_end
+            if query:
+                return query
+
+        except Exception as e:
+            print(e)
 
     def xmass_season(self) -> bool:
-        self.xms_start = datetime.datetime.strptime(f'25.12.{self.year}',
-                                                    '%d.%m.%Y').date()
-        self.xms_end = self.baptism_sunday()
-        query = self.xms_start <= self.lg_day < self.xms_end
-        if query:
-            return query
+        try:
+            self.xms_start = datetime.datetime.strptime(f'25.12.{self.year}',
+                                                        '%d.%m.%Y').date()
+            self.xms_end = self.baptism_sunday()
+            query = self.xms_start <= self.lg_day <= self.xms_end
+            if query:
+                return query
+        except Exception as e:
+            print(e)
 
     def ordinary_season(self) -> bool:
-        self.ot1_start = self.baptism_sunday() + datetime.timedelta(1)
-        self.ot1_end = self.len_start - datetime.timedelta(1)
-        query = self.ot1_start < self.lg_day < self.ot1_end
-        if query:
-            return query
+        try:
+            self.ot1_start = self.baptism_sunday() + datetime.timedelta(1)
+            self.ot1_end = self.len_start - datetime.timedelta(1)
+            query = self.ot1_start <= self.lg_day < self.ot1_end
+            if query:
+                return query
+        except Exception as e:
+            print(e)
 
     def lent_season(self) -> bool:
-        self.len_start, self.eas_start, self.eas_end = self.easter_time()
-        self.len_end = self.eas_start - datetime.timedelta(7)
-        self.palm_sunday = self.eas_start - datetime.timedelta(6)
-        self.fig_monday = self.eas_start - datetime.timedelta(5)
-        self.spy_wednesday = self.eas_start - datetime.timedelta(4)
-        self.maundy_thursday = self.eas_start - datetime.timedelta(3)
-        self.good_friday = self.eas_start - datetime.timedelta(2)
-        self.holy_saturday = self.eas_start - datetime.timedelta(1)
-        query = self.len_start <= self.lg_day < self.eas_start
-        if query:
-            return query
+        try:
+            self.len_start, self.eas_start, self.eas_end = self.easter_time()
+            self.len_end = self.eas_start - datetime.timedelta(7)
+            self.palm_sunday = self.eas_start - datetime.timedelta(6)
+            self.fig_monday = self.eas_start - datetime.timedelta(5)
+            self.spy_wednesday = self.eas_start - datetime.timedelta(4)
+            self.maundy_thursday = self.eas_start - datetime.timedelta(3)
+            self.good_friday = self.eas_start - datetime.timedelta(2)
+            self.holy_saturday = self.eas_start - datetime.timedelta(1)
+            query = self.len_start <= self.lg_day < self.eas_start
+            if query:
+                return query
+        except Exception as e:
+            print(e)
 
     def easter_season(self) -> bool:
-        query = self.eas_start <= self.lg_day < self.eas_end
-        if query:
-            return query
+        try:
+            query = self.eas_start <= self.lg_day < self.eas_end
+            if query:
+                return query
+        except Exception as e:
+            print(e)
 
     def ordinary_season_alter(self) -> bool:
-        self.ot2_start = self.eas_end + datetime.timedelta(1)
-        self.ot2_end = (self.advent_start_date(self.year + 1) -
-                        datetime.timedelta(1))
-        query = self.ot2_start < self.lg_day < self.ot2_end
-        if query:
-            return query
+        try:
+            self.ot2_start = self.eas_end + datetime.timedelta(1)
+            self.ot2_end = (self.advent_start_date(self.year + 1) -
+                            datetime.timedelta(1))
+            query = self.ot2_start <= self.lg_day < self.ot2_end
+            if query:
+                return query
+        except Exception as e:
+            print(e)
 
     def is_epiphany_in_first_week(self):
         """
@@ -234,13 +252,15 @@ class Skeleton:
         Returns:
         bool: True if Epiphany (January 6th) falls in the first week of the year.
         """
+        try:
+            # Get the weekday of January 1st (0=Monday, 1=Tuesday, ..., 6=Sunday)
+            first_day_no = datetime.datetime.strptime(
+                f'01-01-{self.year}', '%d-%m-%Y').weekday()
 
-        # Get the weekday of January 1st (0=Monday, 1=Tuesday, ..., 6=Sunday)
-        first_day_no = datetime.datetime.strptime(
-            f'01-01-{self.year}', '%d-%m-%Y').weekday()
-
-        # If the first day of the year is Monday (0) or Tuesday (1), return True
-        return first_day_no in [0, 1]
+            # If the first day of the year is Monday (0) or Tuesday (1), return True
+            return first_day_no in [0, 1]
+        except Exception as e:
+            print(e)
 
     def baptism_sunday(self):
         """
@@ -250,25 +270,27 @@ class Skeleton:
         Returns:
             datetime.date: The date of Baptism of the Lord.
         """
+        try:
+            # Date for January 6th (Epiphany)
+            epiphany_date = datetime.datetime.strptime(f'06-01-{self.year + 1}',
+                                                       '%d-%m-%Y')
 
-        # Date for January 6th (Epiphany)
-        epiphany_date = datetime.datetime.strptime(f'06-01-{self.year + 1}',
-                                                   '%d-%m-%Y')
+            # Find the weekday of January 6th (0=Monday, 1=Tuesday, ..., 6=Sunday)
+            epiphany_weekday = epiphany_date.weekday()
 
-        # Find the weekday of January 6th (0=Monday, 1=Tuesday, ..., 6=Sunday)
-        epiphany_weekday = epiphany_date.weekday()
+            # If January 6th is a Sunday,
+            # the Baptism of the Lord is the following Sunday
+            if epiphany_weekday == 6:
+                days_until_next_sunday = 7
+            else:
+                days_until_next_sunday = (6 - epiphany_weekday) % 7
 
-        # If January 6th is a Sunday,
-        # the Baptism of the Lord is the following Sunday
-        if epiphany_weekday == 6:
-            days_until_next_sunday = 7
-        else:
-            days_until_next_sunday = (6 - epiphany_weekday) % 7
+            baptism_sunday_date = epiphany_date + datetime.timedelta(
+                days=days_until_next_sunday)
 
-        baptism_sunday_date = epiphany_date + datetime.timedelta(
-            days=days_until_next_sunday)
-
-        return baptism_sunday_date.date()
+            return baptism_sunday_date.date()
+        except Exception as e:
+            print(e)
 
     def easter_time(self):
         """
@@ -278,19 +300,21 @@ class Skeleton:
             tuple: A tuple containing the dates of Ash Wednesday, Easter, and
             Pentecost.
         """
+        try:
+            # Compute the date of Easter using the Gaussian method
+            easter = gausianmethod.computus(self.year + 1)
 
-        # Compute the date of Easter using the Gaussian method
-        easter = gausianmethod.computus(self.year + 1)
+            # Calculate the date of Ash Wednesday (46 days before Easter)
+            lent_duration = datetime.timedelta(days=46)
+            ash_wednesday = easter - lent_duration
 
-        # Calculate the date of Ash Wednesday (46 days before Easter)
-        lent_duration = datetime.timedelta(days=46)
-        ash_wednesday = easter - lent_duration
+            # Calculate the date of Pentecost (49 days after Easter)
+            eastertide = datetime.timedelta(days=49)
+            pentecost = easter + eastertide
 
-        # Calculate the date of Pentecost (49 days after Easter)
-        eastertide = datetime.timedelta(days=49)
-        pentecost = easter + eastertide
-
-        return ash_wednesday, easter, pentecost
+            return ash_wednesday, easter, pentecost
+        except Exception as e:
+            print(e)
 
     def find_proper_week(self) -> int:
         """
@@ -312,7 +336,6 @@ class Skeleton:
         finis = getattr(self, f"{self.season}_end")
 
         try:
-            # error protection
             if finis < initium:
                 raise ValueError(f'The end date is earlier than initial date.')
             if (finis - initium).days > 207:
@@ -333,7 +356,6 @@ class Skeleton:
                 self.sundays_in_scope(finis, initium, True)
             else:
                 self.sundays_in_scope(finis, initium)
-
             # Find the Sunday that corresponds to `lg_day`
             self.actual_sunday = self.first_day_of_week()
 
@@ -357,13 +379,11 @@ class Skeleton:
 
     def psalter_weeks(self):
         sun_dict = {"1": [], "2": [], "3": [], "4": []}
-
         # add sunday of baptims for spacer
-        self.sunday_dates.insert(0, self.xms_end)
-
+        # self.sunday_dates.insert(0, self.xms_end)
         # add sunday of pentecost for spacer
-        no_of_weeks = self.sundays_in_scope(self.ot1_end, self.ot1_start)
-        self.sunday_dates.insert(no_of_weeks + 1, self.eas_end)
+        # no_of_weeks = self.sundays_in_scope(self.ot1_end, self.ot1_start)
+        # self.sunday_dates.insert(no_of_weeks + 1, self.eas_end)
         for i in range(1, 5):
             for sun in self.sunday_dates[i-1::4]:
                 sun_dict[str(i)].append(sun)
@@ -415,6 +435,15 @@ class Skeleton:
             ValueError: If no valid Sunday is found for the given day.
         """
         try:
+            bapism = self.sunday_dates[0] - datetime.timedelta(7)
+            no_of_weeks = self.sundays_in_scope(self.ot1_end, self.ot1_start)
+            pentecost = self.eas_end
+            if self.season in ["ot1", "ot2"]:
+                if bapism not in self.sunday_dates:
+                    self.sunday_dates.insert(0, self.sunday_dates[0] - datetime.timedelta(7))
+                if pentecost not in self.sunday_dates:
+                    self.sunday_dates.insert(no_of_weeks + 1, self.eas_end)
+
             for sunday in self.sunday_dates:
                 # Calculate the difference in days
                 difference = (self.lg_day - sunday).days

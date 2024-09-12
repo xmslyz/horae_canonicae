@@ -16,11 +16,34 @@ with open("base_files/invitatory.json", encoding="utf-8") as f:
 with open("base_files/invitatorium_antifonarium.json", encoding="utf-8") as f:
     antiphones = json.load(f)
 
-officium_date = datetime.date(2021, 8, 8)
 # officium_date = datetime.date.today()
+# sk = Skeleton(officium_date)
 
-skell = Skeleton(officium_date)
-print(skell)
+# test_cases = [
+#             datetime.date(2012, 1, 9),
+#             datetime.date(2013, 1, 14),
+#             datetime.date(2014, 1, 13),
+#             datetime.date(2015, 1, 12),
+#             datetime.date(2024, 1, 8),
+#         ]
+
+test_cases = [
+            datetime.date(2012, 5, 28),
+            datetime.date(2013, 5, 20),
+            datetime.date(2014, 6, 9),
+            datetime.date(2015, 5, 25),
+            datetime.date(2016, 5, 16),
+            datetime.date(2017, 6, 5),
+            datetime.date(2018, 5, 21),
+            datetime.date(2019, 6, 10),
+            datetime.date(2020, 6, 1),
+            datetime.date(2021, 5, 24)
+        ]
+
+for x in test_cases:
+    skell = Skeleton(x)
+    print(skell.current_psalter_week)
+
 
 # inv skeleton
 no_ant = False
