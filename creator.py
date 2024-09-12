@@ -50,8 +50,7 @@ class Skeleton:
             f"LEN:\t\t\t\t{self.len_start} - {self.len_end}\n"
             f"HOLY WEEK:\t\t\t{self.palm_sunday} - {self.holy_saturday}\n"
             f"EAS:\t\t\t\t{self.eas_start} - {self.eas_end}\n"
-            f"ORD2:\t\t\t\t{self.ot2_start} - {self.ot2_end}\n"
-            f""
+            f"ORD2:\t\t\t\t{self.ot2_start} - {self.ot2_end}"
         )
 
     def gen_cal(self):
@@ -350,19 +349,34 @@ class Skeleton:
                     f'The date {self.lg_day} is not within the range '
                     f'{initium}-{finis}.')
 
-            # if season is ot2 needs joining
+            # if season is ot2, needs joining
             if self.season == "ot2":
                 self.sundays_in_scope(self.ot1_end, self.ot1_start)
                 self.sundays_in_scope(finis, initium, True)
             else:
                 self.sundays_in_scope(finis, initium)
-            # Find the Sunday that corresponds to `lg_day`
-            self.actual_sunday = self.first_day_of_week()
 
-            # Find the index of the proper week
-            for index in range(4):
-                if self.actual_sunday in self.sunday_dates[index::4]:
-                    return index + 1
+            if self.season == "xms":
+                return 1
+            elif self.season == "len":
+                # form Ash W. to Sat. 4th week of psalter
+                if self.check_ashes_week():
+                    self.actual_sunday = "Tydzień po Popielcu"
+                    return 4
+                else:
+                    # Find the Sunday that corresponds to `lg_day`
+                    self.actual_sunday = self.first_day_of_week()
+                    # Find the index of the proper week
+                    for index in range(4):
+                        if self.actual_sunday in self.sunday_dates[index::4]:
+                            return index + 1
+            else:
+                # Find the Sunday that corresponds to `lg_day`
+                self.actual_sunday = self.first_day_of_week()
+                # Find the index of the proper week
+                for index in range(4):
+                    if self.actual_sunday in self.sunday_dates[index::4]:
+                        return index + 1
 
             # If no match is found, raise an error
             raise IndexError(
@@ -377,21 +391,29 @@ class Skeleton:
         except Exception as e:
             raise Exception(f"An error occurred: {e}")
 
+    def check_ashes_week(self):
+        return self.len_start <= self.lg_day <= self.len_start + datetime.timedelta(
+            3)
+
     def psalter_weeks(self):
         sun_dict = {"1": [], "2": [], "3": [], "4": []}
-        # add sunday of baptims for spacer
-        # self.sunday_dates.insert(0, self.xms_end)
-        # add sunday of pentecost for spacer
-        # no_of_weeks = self.sundays_in_scope(self.ot1_end, self.ot1_start)
-        # self.sunday_dates.insert(no_of_weeks + 1, self.eas_end)
+        # 4 week psalter
         for i in range(1, 5):
-            for sun in self.sunday_dates[i-1::4]:
+            for sun in self.sunday_dates[i - 1::4]:
                 sun_dict[str(i)].append(sun)
 
-        for key, value in sun_dict.items():
-            for sunday in value:
-                if self.first_day_of_week() == sunday:
-                    self.current_psalter_week = key
+        if self.season == "xms":
+            self.current_psalter_week = 1
+        else:
+            for key, value in sun_dict.items():
+                for sunday in value:
+                    if self.season == "len":
+                        if self.check_ashes_week():
+                            self.current_psalter_week = 4
+                        elif self.first_day_of_week() == sunday:
+                            self.current_psalter_week = key
+                    elif self.first_day_of_week() == sunday:
+                        self.current_psalter_week = key
 
     def sundays_in_scope(self, finis: datetime.date, initium: datetime.date,
                          ot_season=False) -> int:
@@ -418,8 +440,10 @@ class Skeleton:
             if q_day.weekday() == 6:  # Sunday has weekday number 6
                 if q_day not in self.sunday_dates:
                     self.sunday_dates.append(q_day)
-                if q_day.isocalendar()[1] - ot_mod not in self.sunday_weeknumbers:
-                    self.sunday_weeknumbers.append(q_day.isocalendar()[1] - ot_mod)
+                if q_day.isocalendar()[
+                    1] - ot_mod not in self.sunday_weeknumbers:
+                    self.sunday_weeknumbers.append(
+                        q_day.isocalendar()[1] - ot_mod)
                 number_of_weeks.append(q_day)
 
         return len(number_of_weeks)
@@ -435,12 +459,14 @@ class Skeleton:
             ValueError: If no valid Sunday is found for the given day.
         """
         try:
-            bapism = self.sunday_dates[0] - datetime.timedelta(7)
-            no_of_weeks = self.sundays_in_scope(self.ot1_end, self.ot1_start)
-            pentecost = self.eas_end
             if self.season in ["ot1", "ot2"]:
+                bapism = self.sunday_dates[0] - datetime.timedelta(7)
+                no_of_weeks = self.sundays_in_scope(self.ot1_end,
+                                                    self.ot1_start)
+                pentecost = self.eas_end
                 if bapism not in self.sunday_dates:
-                    self.sunday_dates.insert(0, self.sunday_dates[0] - datetime.timedelta(7))
+                    self.sunday_dates.insert(0, self.sunday_dates[
+                        0] - datetime.timedelta(7))
                 if pentecost not in self.sunday_dates:
                     self.sunday_dates.insert(no_of_weeks + 1, self.eas_end)
 

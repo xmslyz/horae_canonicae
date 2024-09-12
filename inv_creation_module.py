@@ -19,30 +19,22 @@ with open("base_files/invitatorium_antifonarium.json", encoding="utf-8") as f:
 # officium_date = datetime.date.today()
 # sk = Skeleton(officium_date)
 
-# test_cases = [
-#             datetime.date(2012, 1, 9),
-#             datetime.date(2013, 1, 14),
-#             datetime.date(2014, 1, 13),
-#             datetime.date(2015, 1, 12),
-#             datetime.date(2024, 1, 8),
-#         ]
+# my_list = []
+# for x in range(2020, 2021):
+    # sk = Skeleton(datetime.date(x, 1, 1))
+    # my_list.append(sk.len_start)
 
-test_cases = [
-            datetime.date(2012, 5, 28),
-            datetime.date(2013, 5, 20),
-            datetime.date(2014, 6, 9),
-            datetime.date(2015, 5, 25),
-            datetime.date(2016, 5, 16),
-            datetime.date(2017, 6, 5),
-            datetime.date(2018, 5, 21),
-            datetime.date(2019, 6, 10),
-            datetime.date(2020, 6, 1),
-            datetime.date(2021, 5, 24)
-        ]
+# print(my_list)
 
-for x in test_cases:
-    skell = Skeleton(x)
-    print(skell.current_psalter_week)
+# for y in my_list:
+    # sk = Skeleton(y)
+    # print(sk.current_psalter_week)
+    # print(y)
+    # print(sk.eas_start)
+    # print(sk.sunday_dates)
+
+sk = Skeleton(datetime.date(2024, 2, 18))
+print(sk)
 
 
 # inv skeleton
