@@ -7,8 +7,9 @@ import gausianmethod
 class Skeleton:
     def __init__(self, lg_day: datetime.date):
         self.lg_day = lg_day
-        self.year = self.find_proper_scope()
-        self.dominical_cycle, self.weekday_cycle = self.liturgical_cycle()
+        self.year = None
+        self.dominical_cycle = None
+        self.weekday_cycle = None
         self.season = None
         self.sunday_dates = []
         self.sunday_weeknumbers = []
@@ -55,6 +56,8 @@ class Skeleton:
         )
 
     def gen_cal(self):
+        self.year = self.find_proper_scope()
+        self.dominical_cycle, self.weekday_cycle = self.liturgical_cycle()
         self.advent_season()
         self.xmass_season()
         self.lent_season()

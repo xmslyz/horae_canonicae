@@ -1,16 +1,17 @@
 from unittest import TestCase
 import datetime
-from creator import (advent_start_date, is_epiphany_in_first_week,
-                     baptism_sunday, easter_time, get_liturgical_season,
-                     find_proper_scope, find_proper_week, first_day_of_week)
+from creator import Skeleton
 
 
 class TestAdventStartDate(TestCase):
     def test_advent_start_date_regular_year(self):
         # 1st December 2024 is the first Sunday of Advent
+
+        lg_day = datetime.date(2024, 2, 15)
+        sk = Skeleton(lg_day)
         year = 2024
         expected = datetime.date(2024, 12, 1)
-        result = advent_start_date(year)
+        result = sk.advent_start_date(year)
         self.assertEqual(result, expected)
 
     def test_advent_start_date_christmas_sunday(self):
