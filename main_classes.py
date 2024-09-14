@@ -4,7 +4,7 @@
 import abc
 import json
 from abc import ABC
-from datetime import datetime
+import datetime
 from colorama import Fore, Style, init
 
 from creator import Skeleton
@@ -21,7 +21,7 @@ class Hours:
 
     @staticmethod
     def calendar():
-        sk = Skeleton(datetime.today().date())
+        sk = Skeleton(datetime.date(2024, 5, 2))
         return sk
 
 
@@ -159,10 +159,14 @@ class Readings(Hours, ABC):
         with open("library/cons.json", encoding="utf-8") as f:
             return json.load(f)
 
-    @staticmethod
-    def get_base():
-        with open("base_files/ot/ot_lec.json", encoding="utf-8") as f:
-            return json.load(f)
+    def get_base(self):
+        season = self.calendar.season
+        if season.startswith("ot"):
+            with open(f"base_files/{season[:-1]}/{season[:-1]}_lec.json", encoding="utf-8") as f:
+                return json.load(f)
+        else:
+            with open(f"base_files/{season}/{season}_lec.json", encoding="utf-8") as f:
+                return json.load(f)
 
     def pray(self):
         print("\u2554" + "\u2550" * 17 + "\u2557")
