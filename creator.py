@@ -1,4 +1,6 @@
 # amDg
+# +JMJ
+
 import datetime
 
 import gausianmethod
