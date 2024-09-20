@@ -14,21 +14,22 @@ from creator import Skeleton
 
 
 class Hours:
-    def __init__(self):
+    def __init__(self, propiae):
         self.__rank = None
         self.__joined = False
         self.__with_inv = True
         self.__is_lent = False
         self.__full = True
         self.__clasic_td = True
-        self.calendar = self.calendar()
+        # self.propiae = self.propiae()
+        self.propiae = propiae
+        self.propia = self.propiae.lg_day
         self.hour = None
 
-    @staticmethod
-    def calendar():
-        # sk = Skeleton(datetime.date(2024, 7, 2))
-        sk = Skeleton(datetime.datetime.today().date())
-        return sk
+    # @staticmethod
+    # def propiae():
+    #     sk = Skeleton(datetime.datetime.today().date())
+    #     return sk
 
     @staticmethod
     def get_const():
@@ -36,7 +37,7 @@ class Hours:
             return json.load(f)
 
     def get_base(self):
-        season = self.calendar.season
+        season = self.propiae.season
         try:
             if season.startswith("ot"):
                 with open(f"base_files/{season[:-1]}/{season[:-1]}_{self.hour}.json", encoding="utf-8") as f:
@@ -218,12 +219,14 @@ class Hours:
 
 
 class Invitatory(Hours, ABC):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, propiae):
+        super().__init__(propiae)
         self.hour = "inv"
         self.const = self.get_const()
-        self.psalter_week = str(self.calendar.current_psalter_week)
-        self.weekday_no = str(self.calendar.lg_day.weekday())
+        self.psalter_week = str(propiae.current_psalter_week)
+        # self.psalter_week = str(self.propiae.current_psalter_week)
+        self.weekday_no = str(propiae.lg_day.weekday())
+        # self.weekday_no = str(self.propiae.lg_day.weekday())
         self.__no_ant = False
 
     @property
@@ -292,13 +295,14 @@ class Invitatory(Hours, ABC):
 
 
 class Readings(Hours, ABC):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, propiae):
+        super().__init__(propiae)
+        self.propiae = propiae
         self.hour = "lec"
         self.const = self.get_const()
         self.base = self.get_base()
-        self.psalter_week = str(self.calendar.current_psalter_week)
-        self.weekday_no = str(self.calendar.lg_day.weekday())
+        self.psalter_week = str(self.propiae.current_psalter_week)
+        self.weekday_no = str(self.propiae.lg_day.weekday())
 
     def pray(self):
         print("\u2554" + "\u2550" * 17 + "\u2557")
@@ -386,18 +390,17 @@ class Readings(Hours, ABC):
 
 
 class Morning(Hours, ABC):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, propiae):
+        super().__init__(propiae)
         self.hour = "lau"
         self.const = self.get_const()
         self.base = self.get_base()
         self.solo = True
         self.def_inter = True
         self.pater_intro = False
-        self.psalter_week = str(self.calendar.current_psalter_week)
-        self.weekday_no = str(self.calendar.lg_day.weekday())
-
-
+        self.propiae = propiae
+        self.psalter_week = str(self.propiae.current_psalter_week)
+        self.weekday_no = str(self.propiae.lg_day.weekday())
 
     def pray(self):
         print("\u2554" + "\u2550" * 11 + "\u2557")
@@ -418,7 +421,7 @@ class Morning(Hours, ABC):
     def opening(self):
         """ """
         if self.with_inv:
-            inv = Invitatory()
+            inv = Invitatory(self.propiae)
             return f"{inv.opening()}\n{inv.psalmodia()}"
 
         else:
@@ -546,19 +549,20 @@ class Morning(Hours, ABC):
 
 
 class Daytime(Hours, ABC):
-    def __init__(self, hour):
-        super().__init__()
+    def __init__(self, propiae):
+        super().__init__(propiae)
+        self.propiae = propiae
         self.hour = hour
         self.const = self.get_const()
         self.psalter_base = self.get_psalter()
         self.fixed_base = self.get_fixed()
         self.solo = True
         self.def_inter = True
-        self.psalter_week = str(self.calendar.current_psalter_week)
-        self.weekday_no = str(self.calendar.lg_day.weekday())
+        self.psalter_week = str(self.propiae.current_psalter_week)
+        self.weekday_no = str(self.propiae.lg_day.weekday())
 
     def get_psalter(self):
-        season = self.calendar.season
+        season = self.propiae.season
         try:
             if season.startswith("ot"):
                 with open(f"base_files/{season[:-1]}/{season[:-1]}_daytime_psalter.json", encoding="utf-8") as f:
@@ -570,7 +574,7 @@ class Daytime(Hours, ABC):
             raise Exception
 
     def get_fixed(self):
-        season = self.calendar.season
+        season = self.propiae.season
         try:
             if season.startswith("ot"):
                 with open(f"base_files/{season[:-1]}/{season[:-1]}_daytime_fixed.json", encoding="utf-8") as f:
@@ -686,16 +690,17 @@ class Daytime(Hours, ABC):
 
 
 class Evening(Hours, ABC):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, propiae):
+        super().__init__(propiae)
+        self.propiae = propiae
         self.hour = "vis"
         self.const = self.get_const()
         self.base = self.get_base()
         self.solo = True
         self.def_inter = True
         self.pater_intro = False
-        self.psalter_week = str(self.calendar.current_psalter_week)
-        self.weekday_no = str(self.calendar.lg_day.weekday())
+        self.psalter_week = str(self.propiae.current_psalter_week)
+        self.weekday_no = str(self.propiae.lg_day.weekday())
 
     def pray(self):
         print("\u2554" + "\u2550" * 12 + "\u2557")
@@ -843,13 +848,14 @@ class Evening(Hours, ABC):
 
 
 class Night(Hours, ABC):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, propiae):
+        super().__init__(propiae)
+        self.propiae = propiae
         self.const = self.get_const()
         self.solo = True
         self.def_inter = True
-        self.psalter_week = str(self.calendar.current_psalter_week)
-        self.weekday_no = str(self.calendar.lg_day.weekday())
+        self.psalter_week = str(self.propiae.current_psalter_week)
+        self.weekday_no = str(self.propiae.lg_day.weekday())
 
     def get_base(self):
         try:
@@ -952,7 +958,7 @@ class Night(Hours, ABC):
 
     def maria(self):
         title = f"\u2731 ANTYFONA KOŃCOWA DO NAJŚWIĘTSZEJ MARYI PANNY \u2731\n"
-        if not self.calendar.season == "eas":
+        if not self.propiae.season == "eas":
             return title + "\n" + self.get_base()["maria"][str(random.choice(range(1, 6)))]
         else:
             return title + "\n" + self.get_base()["maria"]["eas"]
@@ -967,10 +973,4 @@ def save_const(placement, const_txt):
     with open("library/cons.json", "w", encoding="utf-8") as f:
         json.dump(t, f, indent=4)
 
-
-if __name__ == "__main__":
-    x = Night()
-    x.is_lent = False
-    x.solo = False
-    x.pray()
 

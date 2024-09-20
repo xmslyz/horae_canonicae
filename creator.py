@@ -2,6 +2,10 @@
 # +JMJ
 
 import datetime
+import json
+from pprint import pprint
+from webbrowser import Error
+import inspect
 
 import gausianmethod
 
@@ -487,3 +491,79 @@ class Skeleton:
         except ValueError as e:
             print(f"Error: {e}")
             raise  # Re-raise the ValueError to propagate the error
+
+
+class Propia(Skeleton):
+    def __init__(self, lg_day: datetime.date):
+        super().__init__(lg_day)
+        self.cls = None
+        self.rank = None
+        self.feast = None
+        self.locus = None
+        self.ordo = None
+        self.agenda = self.open_database()
+        self.feast_in_date()
+
+    def __str__(self):
+        return (
+            f"Szukana data:\t\t{self.lg_day}\n"
+            f"Okres liturgiczny: \t{self.season}\n"
+            f"Tydzień psałterza:\t{self.current_psalter_week}\n"
+            f"W liturgii:\t\t\t{self.feast}\n"
+            f"\t- ranga\t\t\t{self.rank}\n"
+            f"\t- wspólne\t\t{self.cls}\n"
+        )
+
+    @staticmethod
+    def open_database():
+        with open("litcalendar/anual_agenda.json", encoding="utf-8") as f:
+            return json.load(f)
+
+    def feast_in_date(self):
+        # # #
+        # stack_info = inspect.stack()
+        # for frame in stack_info:
+        #     print(frame.filename, "|", frame.function, "|", frame.code_context[0].strip())
+        # # #
+
+        month_str = str(self.lg_day.month)
+        day_str = str(self.lg_day.day)
+        msg_prompt = ''
+        keys = self.agenda[month_str][day_str]
+        try:
+            for key in keys.keys():
+                if keys[key].get('where') == "omnia":
+                    msg_prompt += (
+                        f"[{key}] {keys[key].get('feast')} "
+                        f"[{keys[key].get("rank")}]"
+                    )
+
+            normal = "[0] DZIEŃ POWSZEDNI\n"
+
+            prompt = input(f"Dziś w kalendarzu masz następujące możliwości:\n{normal}{msg_prompt}\nWybierz:\t ... ")
+            if prompt != "0":
+                self.feast: dict = self.agenda[month_str][day_str][prompt].get("feast")
+                self.rank: dict = self.agenda[month_str][day_str][prompt].get("rank")
+                self.cls: dict = self.get_class_type(self.agenda[month_str][day_str][prompt].get("class"))
+            else:
+                self.feast = "Dzień powszedni"
+                self.rank = ""
+                self.cls = ""
+
+        except Exception as e:
+            print(e)
+
+    @staticmethod
+    def get_class_type(cls_type):
+        """ """
+        if cls_type:
+            classes = cls_type.split("|")
+
+            if len(classes) == 1:
+                return cls_type
+            else:
+                return cls_type
+        else:
+            return cls_type
+
+
