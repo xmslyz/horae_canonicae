@@ -430,7 +430,13 @@ class Morning(Hours, ABC):
 
 
     def hymn(self):
-        """   """
+        """
+        Następuje odpowiedni hymn.
+        Hymn na niedziele i dni powszednie Okresu Zwykłego podano w psałterzu.
+        Hymn na uroczystości i święta znajduje się w Tekstach własnych lub wspólnych.
+        We wspomnienia świętych, jeśli nie ma hymnu własnego, można go dowolnie wybrać albo z Tekstów wspólnych, albo z bieżącego dnia.
+
+        """
         return f"\u2731 HYMN \u2731\n{self.base[self.psalter_week][self.weekday_no]['hymn']}"
 
     def psalm(self, psalm):
@@ -474,9 +480,12 @@ class Morning(Hours, ABC):
 
     def psalmodia(self):
         """
-        0|1|2|3|4|5|6 - psalter
-        s|f - propia
-        m - psalter *propia
+        Po hymnie następuje psalmodia. Składa się ona z jednego psalmu porannego, pieśni ze Starego Testamentu oraz z psalmu pochwalnego.
+        Wymienione części psalmodii odmawia się z odpowiednimi antyfonami.
+        W niedziele i dni powszednie Okresu Zwykłego odmawia się psalmy i pieśń z psałterza i tam się znajdują ich antyfony.
+        W uroczystości i święta bierze się psalmy i pieśń z I niedzieli psałterza, antyfony zaś z Tekstów własnych lub wspólnych.
+        We wspomnienia świętych odmawia się psalmy, pieśń i antyfony z bieżącego dnia, chyba że te wspomnienia mają psalmy lub antyfony własne.
+
         """
         psalmody = "\u2731 PSALMODIA \u2731\n"
         for psalm in ["psalm1", "psalm2", "psalm3"]:
@@ -497,14 +506,22 @@ class Morning(Hours, ABC):
 
     def readings(self):
         """
-        1 lecture + own responsory -> propia de tempore (pdt) | when s|f -> propia|comunes
-        2 lecture + own responsory -> date | -> 'pdt'
+        Czytanie na niedziele i dni powszednie Okresu Zwykłego znajduje się w psałterzu.
+        W uroczystości i święta czytanie podano w Tekstach własnych lub wspólnych.
+        We wspomnienia świętych czytanie krótkie bierze się albo z Tekstów wspólnych, albo z bieżącego dnia, chyba że podano czytanie własne.
+
         """
         lectures = ''
         lectures += self.base[self.psalter_week][self.weekday_no].get("lecture", f"*** no lecture for today in database ***") + "\n"
         return lectures
 
     def canticle(self):
+        """
+        Następnie odmawia się pieśń z Ewangelii z odpowiednią antyfoną.
+        W niedziele Okresu Zwykłego antyfonę do pieśni Zachariasza bierze się z Tekstów okresowych; w dni powszednie z psałterza.
+        Przy obchodach świętych, jeśli nie mają antyfony własnej, bierze się ją z Tekstów wspólnych, a we wspomnienia świętych albo z Tekstów wspólnych, albo z dnia bieżącego.
+
+        """
         canticle = self.base[self.psalter_week][self.weekday_no].get('zachary', "")
         if canticle != "":
             return (f"\u2731 PIEŚŃ ZACHARIASZA (Łk 1, 68-79) \u2731\n\n"
@@ -513,6 +530,13 @@ class Morning(Hours, ABC):
             return "\n*** no Antiphone for Canticle of Zacariach for today in database ***\n"
 
     def intercessions(self):
+        """
+        Po skończeniu pieśni Zachariasza odmawia się prośby.
+        Prośby na niedziele i dni powszednie Okresu Zwykłego podano w psałterzu.
+        Prośby na uroczystości i święta znajdują się w Tekstach własnych lub wspólnych.
+        We wspomnienia świętych prośby bierze się albo z Tekstów wspólnych, albo z bieżącego dnia, chyba że są własne.
+
+        """
         intercessions = self.base[self.psalter_week][self.weekday_no].get('petitions', "")
         if intercessions:
             petis = ""
@@ -539,7 +563,12 @@ class Morning(Hours, ABC):
         return intro + "\n\n" + paternoster
 
     def prayer(self):
-        """ pdt|propia|comunes """
+        """
+        Po "Ojcze nasz" odmawia się modlitwę, której nie poprzedza się wezwaniem "Módlmy się".
+        Tę modlitwę końcową w niedziele Okresu Zwykłego bierze się z Tekstów okresowych,
+        w dni powszednie z psałterza, w oficjach o świętych z Tekstów własnych lub wspólnych.
+
+        """
         ...
         prayer = self.base[self.psalter_week][self.weekday_no].get("prayer", f"*** no prayers for today in database ***")
         return f"MODLITWA\nMódlmy się:\n{prayer}" if not self.joined else ""
