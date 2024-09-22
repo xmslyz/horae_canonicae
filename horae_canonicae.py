@@ -9,7 +9,9 @@ from main_classes import Hours, Evening
 
 def pray():
     today = datetime.datetime.today().date()
+    # other = datetime.date(2024, 9, 17)
     pp = Propia(today)
+    # pp = Propia(other)
 
     while True:
         prompt = input(
@@ -40,8 +42,8 @@ def pray():
                 lec = lg.Readings(pp)
                 lec.pray()
             case "5":
-                now = datetime.datetime.now()
-                print(f"Current time: {now}")
+                mh = lg.Daytime(pp)
+                mh.pray()
             case "6":
                 vis = lg.Evening(pp)
                 vis.pray()
@@ -55,6 +57,9 @@ def pray():
                 exit()
             case _:
                 print("Invalid input. Please enter a number from 0 to 8.")
+
+
+
 
 
 if __name__ == "__main__":

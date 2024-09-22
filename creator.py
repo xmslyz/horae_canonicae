@@ -3,7 +3,9 @@
 
 import datetime
 import json
+from operator import index
 from pprint import pprint
+from traceback import extract_tb
 from webbrowser import Error
 import inspect
 
@@ -502,7 +504,7 @@ class Propia(Skeleton):
         self.locus = None
         self.ordo = None
         self.agenda = self.open_database()
-        self.feast_in_date()
+        self.choose_celebration()
 
     def __str__(self):
         return (
@@ -519,39 +521,121 @@ class Propia(Skeleton):
         with open("litcalendar/anual_agenda.json", encoding="utf-8") as f:
             return json.load(f)
 
-    def feast_in_date(self):
-        # # #
-        # stack_info = inspect.stack()
-        # for frame in stack_info:
-        #     print(frame.filename, "|", frame.function, "|", frame.code_context[0].strip())
-        # # #
+    def get_celebrations(self):
+        """
+        Scans all liturgical commemorations and returns a dictionary of feasts and their ranks.
 
+        Returns:
+            dict: A dictionary where keys are liturgical ranks (e.g., "S", "F")
+                  and values are dictionaries of feasts with an index as the key.
+        """
         month_str = str(self.lg_day.month)
         day_str = str(self.lg_day.day)
-        msg_prompt = ''
-        keys = self.agenda[month_str][day_str]
+
         try:
-            for key in keys.keys():
-                if keys[key].get('where') == "omnia":
-                    msg_prompt += (
-                        f"[{key}] {keys[key].get('feast')} "
-                        f"[{keys[key].get("rank")}]"
-                    )
+            keys = self.agenda[month_str][day_str]
+        except KeyError:
+            print(f"No data for {month_str}-{day_str} in the agenda.")
+            return {}
 
-            normal = "[0] DZIEŃ POWSZEDNI\n"
+        celebrations = {}
+        ranks = ["S", "F", "MO", "ML", "MA", "KL"]
 
-            prompt = input(f"Dziś w kalendarzu masz następujące możliwości:\n{normal}{msg_prompt}\nWybierz:\t ... ")
-            if prompt != "0":
-                self.feast: dict = self.agenda[month_str][day_str][prompt].get("feast")
-                self.rank: dict = self.agenda[month_str][day_str][prompt].get("rank")
-                self.cls: dict = self.get_class_type(self.agenda[month_str][day_str][prompt].get("class"))
+        try:
+            for key, value in keys.items():
+                # if value.get('where') == "omnia":
+                if True:
+                    rank = value.get("rank")
+                    if rank in ranks:
+                        feast = value.get("feast")
+                        if feast:
+                            if rank not in celebrations:
+                                celebrations[rank] = {}
+                            next_index = len(celebrations[rank]) + 1
+                            celebrations[rank][next_index] = feast
+
+            mayor_feast = self.evaluate_celebrations(celebrations)
+            if isinstance(mayor_feast, tuple):
+                return mayor_feast
             else:
-                self.feast = "Dzień powszedni"
-                self.rank = ""
-                self.cls = ""
+                return None
 
+        except KeyError as e:
+            print(f"Key error: {e}")
+            return {}
         except Exception as e:
-            print(e)
+            print(f"An error occurred: {e}")
+            return {}
+
+    def evaluate_celebrations(self, celebrations: dict) -> tuple:
+        map_ranks = {
+            "KL": 0,
+            "ML": 1,
+            "MO": 2,
+            "F": 3,
+            "S": 4,
+        }
+
+        try:
+            m = []
+            for key, value in celebrations.items():
+                if key in map_ranks:
+                    m.append(map_ranks[key])
+                else:
+                    print(f"Rank {key} not found in map_ranks.")
+
+            if m:
+                # Find the key corresponding to the value
+                key = next((k for k, v in map_ranks.items() if v == max(m)), None)
+                return celebrations[key], key
+
+        except KeyError:
+            pass
+
+        except Exception as ie:
+            print(ie)
+
+    def extract_feast(self, feast):
+        feasts = []
+        celebration, rank = feast
+        for key, value in celebration.items():
+            feasts.append((value, rank))
+
+        return feasts
+
+    def choose_celebration(self):
+        """
+        Scaning all liturgical conmemorations and return tuple of feast and its rank
+        """
+        mayor = self.get_celebrations()
+        intro = "Dziś w liturgii:\n"
+        normal = "DZIEŃ POWSZEDNI\n"
+
+        if not mayor:
+            print(intro + normal)
+        else:
+            feasts = self.extract_feast(mayor)
+
+            ask = "Wybierz obchód:\n"
+            for i, celebration in enumerate(feasts):
+                ask += f"[{i+1}] {feasts[i][0]} {feasts[i][1]}\n"
+
+            prompt = int(input(ask))
+            self.feast = feasts[prompt-1][0]
+            self.rank = feasts[prompt-1][1]
+
+            print(f"{intro}{self.feast} [{self.rank}]")
+
+    def set_feast_data(self, prompt):
+        print(self.get_celebrations())
+        if prompt != "0":
+            self.feast: str = self.agenda[month_str][day_str][prompt].get("feast")
+            self.rank: str = self.agenda[month_str][day_str][prompt].get("rank")
+            self.cls: str = self.get_class_type(self.agenda[month_str][day_str][prompt].get("class"))
+        else:
+            self.feast = "Dzień powszedni"
+            self.rank = ""
+            self.cls = ""
 
     @staticmethod
     def get_class_type(cls_type):
@@ -565,5 +649,3 @@ class Propia(Skeleton):
                 return cls_type
         else:
             return cls_type
-
-

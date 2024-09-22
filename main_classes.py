@@ -312,8 +312,9 @@ class Readings(Hours, ABC):
         print(self.opening())
         print(self.hymn())
         print(self.psalmodia())
-        print(self.werse())
+        print(self.verse())
         print(self.readings())
+        print(self.responsory())
         print(self.tedeum())
         print(self.prayer())
         print(self.dismisal())
@@ -342,14 +343,14 @@ class Readings(Hours, ABC):
 
         return psalmody
 
-    def werse(self):
+    def verse(self):
         """
         s|f - propia | comunes
         0-6|m - psalter
         """
-        werse = self.base[self.psalter_week][self.weekday_no].get('werse', "")
-        if werse != "":
-            return f"\u2731 WERSET \u2731\n{werse}"
+        verse = self.base[self.psalter_week][self.weekday_no].get('verse', "")
+        if verse != "":
+            return f"\u2731 WERSET \u2731\n{verse}"
         else:
             return "\n*** no werse for today in database ***\n"
 
@@ -358,11 +359,19 @@ class Readings(Hours, ABC):
         1 lecture + own responsory -> propia de tempore (pdt) | when s|f -> propia|comunes
         2 lecture + own responsory -> date | -> 'pdt'
         """
-        lectures = ''
-        for r in ["i_reading", "ii_reading"]:
-            lectures += self.base[self.psalter_week][self.weekday_no].get(r, f"*** no {r} for today in database ***") + "\n"
 
+        lectures = ''
+        for r in ["i reading", "ii reading"]:
+            lectures += self.base[self.psalter_week][self.weekday_no].get(r, f"*** no {r} for today in database ***") + "\n"
         return lectures
+
+    def responsory(self):
+        """ """
+        respons = self.base[self.psalter_week][self.weekday_no].get('responsory', "")
+        if respons != "":
+            return f"\u2731 RESPONSORIUM \u2731\n{respons}"
+        else:
+            return "\n*** no responsory for today in database ***\n"
 
     def tedeum(self):
         poetic = self.const["lec_tedeum_poetic"]
@@ -581,7 +590,7 @@ class Daytime(Hours, ABC):
     def __init__(self, propiae):
         super().__init__(propiae)
         self.propiae = propiae
-        self.hour = hour
+        self.hour = self.time_of_day_category()
         self.const = self.get_const()
         self.psalter_base = self.get_psalter()
         self.fixed_base = self.get_fixed()
@@ -589,6 +598,17 @@ class Daytime(Hours, ABC):
         self.def_inter = True
         self.psalter_week = str(self.propiae.current_psalter_week)
         self.weekday_no = str(self.propiae.lg_day.weekday())
+
+    @staticmethod
+    def time_of_day_category():
+        current_hour = datetime.datetime.now().hour
+
+        if current_hour < 12:
+            return "ter"  # Before 12:00 PM
+        elif 12 <= current_hour < 15:
+            return "sex"  # Between 12:00 PM and 3:00 PM
+        else:
+            return "non"  # After 3:00 PM
 
     def get_psalter(self):
         season = self.propiae.season
