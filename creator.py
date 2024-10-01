@@ -153,7 +153,7 @@ class Skeleton:
         # Calculate dominical cycle (A, B, C)
         dominical_cycle = {0: "B", 1: "C", 2: "A"}[(self.year - 2020) % 3]
 
-        # Calculate weekday cycle (I, II)
+        # Calculate the weekday cycle (I, II)
         weekday_cycle = "I" if self.year % 2 == 0 else "II"
 
         return dominical_cycle, weekday_cycle
@@ -372,7 +372,7 @@ class Skeleton:
             if self.season == "xms":
                 return 1
             elif self.season == "len":
-                # form Ash W. to Sat. 4th week of psalter
+                # form Ash W. to saturday 4th week of psalter
                 if self.check_ashes_week():
                     self.actual_sunday = "Tydzień po Popielcu"
                     return 4
@@ -380,16 +380,16 @@ class Skeleton:
                     # Find the Sunday that corresponds to `lg_day`
                     self.actual_sunday = self.first_day_of_week()
                     # Find the index of the proper week
-                    for index in range(4):
-                        if self.actual_sunday in self.sunday_dates[index::4]:
-                            return index + 1
+                    for i in range(4):
+                        if self.actual_sunday in self.sunday_dates[i::4]:
+                            return i + 1
             else:
                 # Find the Sunday that corresponds to `lg_day`
                 self.actual_sunday = self.first_day_of_week()
                 # Find the index of the proper week
-                for index in range(4):
-                    if self.actual_sunday in self.sunday_dates[index::4]:
-                        return index + 1
+                for i in range(4):
+                    if self.actual_sunday in self.sunday_dates[i::4]:
+                        return i + 1
 
             # If no match is found, raise an error
             raise IndexError(
@@ -453,8 +453,7 @@ class Skeleton:
             if q_day.weekday() == 6:  # Sunday has weekday number 6
                 if q_day not in self.sunday_dates:
                     self.sunday_dates.append(q_day)
-                if q_day.isocalendar()[
-                    1] - ot_mod not in self.sunday_weeknumbers:
+                if q_day.isocalendar()[1] - ot_mod not in self.sunday_weeknumbers:
                     self.sunday_weeknumbers.append(
                         q_day.isocalendar()[1] - ot_mod)
                 number_of_weeks.append(q_day)
@@ -621,7 +620,8 @@ class Propia(Skeleton):
             print("error", e)
             raise Exception(e)
 
-    def evaluate_celebrations(self, celebrations: list) -> tuple[list, str]:
+    @staticmethod
+    def evaluate_celebrations(celebrations: list) -> tuple[list, str]:
         ranks = {
             "KL": 0,
             "ML": 1,
@@ -693,7 +693,7 @@ class Propia(Skeleton):
                 elif isinstance(celebrations[0], str):
                     if celebrations[1] not in ["ML", "MA", "KL"]:
                         self.feast, self.rank = celebrations
-                        print(f"Dziś w liturgii:\n[1] {self.feast} [{self.rank}]\n")
+                        print(f"Dziś w liturgii:\n{self.feast} [{self.rank}]\n")
                         return
                     else:
                         ask += f"[{1}] {celebrations[0]} [{celebrations[1]}]\n"

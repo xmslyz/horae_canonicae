@@ -10,16 +10,16 @@ import user_profile
 
 
 def pray():
-    # today = datetime.datetime.today().date()
-    # pp = Propia(today)
+    today = datetime.datetime.today().date()
+    pp = Propia(today)
     # other = datetime.date(2024, 9, 17)
     # pp = Propia(other)
 
 
-    for i in range(1, 31):
-        print(i)
-        other = datetime.date(2024, 10, i)
-        pp = Propia(other)
+    # for i in range(1, 31):
+    #     print(i)
+    #     other = datetime.date(2024, 10, i)
+    #     pp = Propia(other)
 
     # while True:
     #     prompt = input(
