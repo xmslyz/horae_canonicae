@@ -1,0 +1,50 @@
+{
+  "arch": {
+    "bia": "bia\u0142ostockiej",
+    "cze": "cz\u0119stochowskiej",
+    "gda": "gda\u0144skiej",
+    "gni": "gnie\u017bnienie\u0301skiej",
+    "kat": "katowickiej",
+    "kra": "krakowskiej",
+    "lub": "lubelskiej",
+    "lod": "\u0142\u00f3dzkiej",
+    "poz": "pozna\u0144skiej",
+    "prz": "przemyski",
+    "szk": "szczeci\u0144sko-kamie\u0144skiej",
+    "war": "warmi\u0144skiej",
+    "waw": "warszawskiej",
+    "wro": "wroc\u0142awskiej"
+  },
+  "diec": {
+    "bzy": "bielsko-\u017cywieckiej",
+    "byd": "bydgoskiej",
+    "dro": "drohiczy\u0144skiej",
+    "elb": "elbl\u0105skiej",
+    "elk": "e\u0142ckiej",
+    "gli": "gliwickiej",
+    "kal": "kaliskiej",
+    "kie": "kieleckiej",
+    "kok": "koszali\u0144sko-ko\u0142obrzeskiej",
+    "leg": "legnickiej",
+    "lom": "\u0142om\u017cy\u0144skiej",
+    "low": "\u0142owickiej",
+    "opo": "opolskiej",
+    "pel": "pelpli\u0144skiej",
+    "plo": "p\u0142ockiej",
+    "rad": "radomskiej",
+    "rze": "rzeszowskiej",
+    "san": "sandomierskiej",
+    "sie": "siedleckiej",
+    "sos": "sosnowieckiej",
+    "swi": "\u015bwidnickiej",
+    "tar": "tarnowskiej",
+    "tor": "toru\u0144skiej",
+    "wap": "warszawsko-praskiej",
+    "wlo": "w\u0142oc\u0142awskiej",
+    "zam": "zamojsko-lubaczowskiej",
+    "zgo": "zielonog\u00f3rsko-gorzowskiej"
+  },
+  "ordp": {
+    "ord": "Ordynariacie Polowym"
+  }
+}

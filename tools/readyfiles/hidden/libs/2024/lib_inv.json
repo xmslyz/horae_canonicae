@@ -1,0 +1,664 @@
+{
+    "9": {
+        "1": {
+            "": {
+                "recipients": "***",
+                "date": "Niedziela, 1 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXII NIEDZIELA ZWYK\u0141A B"
+            }
+        },
+        "2": {
+            "p": {
+                "recipients": "***",
+                "date": "Poniedzia\u0142ek, 2 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "U kapucyn\u00f3w",
+                "date": "Poniedzia\u0142ek, 2 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH M\u0118CZENNIK\u00d3WAPOLINAREGO MORELA, PREZBITERA, I TOWARZYSZY",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "U franciszkan\u00f3w konwentualnych",
+                "date": "Poniedzia\u0142ek, 2 wrze\u015bnia 2024",
+                "office": "B\u0141. JANA FRANCISZKA BURT\u00c9,PREZBITERA I M\u0118CZENNIKA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w3": {
+                "recipients": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+                "date": "Poniedzia\u0142ek, 2 wrze\u015bnia 2024",
+                "office": "B\u0141. LUDWIKA J\u00d3ZEFA FRAN\u00c7OIS, PREZBITERA,I TOWARZYSZY, M\u0118CZENNIK\u00d3W",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w4": {
+                "recipients": "U jezuit\u00f3w",
+                "date": "Poniedzia\u0142ek, 2 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH PREZBITER\u00d3WI M\u0118CZENNIK\u00d3W REWOLUCJI FRANCUSKIEJORAZ WOJNY DOMOWEJ W HISZPANII",
+                "feast_lvl": "Wspomnienie dowolne"
+            }
+        },
+        "3": {
+            "p": {
+                "recipients": "***",
+                "date": "Wtorek, 3 wrze\u015bnia 2024",
+                "office": "\u015aW. GRZEGORZA WIELKIEGO,PAPIE\u017bA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w1": {
+                "recipients": "W zakonach benedykty\u0144skich",
+                "date": "Wtorek, 3 wrze\u015bnia 2024",
+                "office": "\u015aW. GRZEGORZA WIELKIEGO,PAPIE\u017bA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w2": {
+                "recipients": "W Rodzinie \u015bw. Paw\u0142a",
+                "date": "Wtorek, 3 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEJ MARYI PANNYMATKI DOBREGO PASTERZA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "4": {
+            "p": {
+                "recipients": "***",
+                "date": "\u015aroda, 4 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "\u015aroda, 4 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH DZIEWIC I M\u0118CZENNICMARII STELLI I TOWARZYSZEK",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W archidiecezji cz\u0119stochowskiej",
+                "date": "\u015aroda, 4 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH DZIEWIC I M\u0118CZENNICMARII KANUTY I TOWARZYSZEK",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w3": {
+                "recipients": "W diecezji e\u0142ckiej",
+                "date": "\u015aroda, 4 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH DZIEWIC I M\u0118CZENNICMARII KANIZJI, MARII SERGII I TOWARZYSZEK",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "W diecezji kaliskiej",
+                "date": "\u015aroda, 4 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH DZIEWIC I M\u0118CZENNICGWIDONY CIERPKI I TOWARZYSZEK",
+                "feast_lvl": "Wspomnienie dowolne"
+            }
+        },
+        "5": {
+            "p": {
+                "recipients": "***",
+                "date": "Czwartek, 5 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "W zakonie dominika\u0144skim",
+                "date": "Czwartek, 5 wrze\u015bnia 2024",
+                "office": "DOROCZNE WSPOMNIENIE ZMAR\u0141YCHDOMOWNIK\u00d3W I DOBRODZIEJ\u00d3W NASZEGO ZAKONU",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w2": {
+                "recipients": "U salwatorian\u00f3w i salwatorianek",
+                "date": "Czwartek, 5 wrze\u015bnia 2024",
+                "office": "B\u0141. MARII OD APOSTO\u0141\u00d3W, DZIEWICY",
+                "feast_lvl": "\u015awi\u0119to"
+            }
+        },
+        "6": {
+            "": {
+                "recipients": "***",
+                "date": "Pi\u0105tek, 6 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXII tydzie\u0144 Okresu Zwyk\u0142ego"
+            }
+        },
+        "7": {
+            "p": {
+                "recipients": "***",
+                "date": "Sobota, 7 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "Sobota, 7 wrze\u015bnia 2024",
+                "office": "\u015aW. MELCHIORA GRODZIECKIEGO,PREZBITERA I M\u0118CZENNIKA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "U jezuit\u00f3w",
+                "date": "Sobota, 7 wrze\u015bnia 2024",
+                "office": "\u015aWI\u0118TYCH PREZBITER\u00d3W I M\u0118CZENNIK\u00d3WMELCHIORA GRODZIECKIEGO, STEFANA PONGRACZAI MARKA KRI\u017bA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w3": {
+                "recipients": "W archidiecezjach katowickiej i warszawskiejoraz w diecezjach drohiczy\u0144skiej i siedleckiej",
+                "date": "Sobota, 7 wrze\u015bnia 2024",
+                "office": "B\u0141. IGNACEGO K\u0141OPOTOWSKIEGO, PREZBITERA",
+                "feast_lvl": "Wspomnienie dowolne"
+            }
+        },
+        "8": {
+            "p": {
+                "recipients": "***",
+                "date": "Niedziela, 8 wrze\u015bnia 2024",
+                "office": "III tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIII NIEDZIELA ZWYK\u0141A B"
+            },
+            "w1": {
+                "recipients": "W diecezji tarnowskiej i w S\u0119dziszowie Ma\u0142opolskim",
+                "date": "Niedziela, 8 wrze\u015bnia 2024",
+                "office": "NARODZENIE NAJ\u015aWI\u0118TSZEJ MARYI PANNYg\u0142\u00f3wnej Patronki diecezji i miasta",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            },
+            "w2": {
+                "recipients": "W diecezji bydgoskiej",
+                "date": "Niedziela, 8 wrze\u015bnia 2024",
+                "office": "NARODZENIE NAJ\u015aWI\u0118TSZEJ MARYI PANNYMATKI PI\u0118KNEJ MI\u0141O\u015aCIg\u0142\u00f3wnej Patronki diecezji",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            },
+            "w3": {
+                "recipients": "W Gietrzwa\u0142dzie",
+                "date": "Niedziela, 8 wrze\u015bnia 2024",
+                "office": "NARODZENIE NAJ\u015aWI\u0118TSZEJ MARYI PANNYNAJ\u015aWI\u0118TSZEJ MARYI PANNY GIETRZWA\u0141DZKIEJ",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "9": {
+            "p": {
+                "recipients": "***",
+                "date": "Poniedzia\u0142ek, 9 wrze\u015bnia 2024",
+                "office": "III tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "Poniedzia\u0142ek, 9 wrze\u015bnia 2024",
+                "office": "\u015aW. PIOTRA KLAWERA, PREZBITERA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "U jezuit\u00f3w",
+                "date": "Poniedzia\u0142ek, 9 wrze\u015bnia 2024",
+                "office": "\u015aW. PIOTRA KLAWERA, PREZBITERA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w3": {
+                "recipients": "W archidiecezji krakowskiej",
+                "date": "Poniedzia\u0142ek, 9 wrze\u015bnia 2024",
+                "office": "B\u0141. ANIELI SALAWY, DZIEWICY",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "W zakonach franciszka\u0144skich",
+                "date": "Poniedzia\u0142ek, 9 wrze\u015bnia 2024",
+                "office": "B\u0141. ANIELI SALAWY, DZIEWICYpatronki Franciszka\u0144skiego Zakonu \u015awieckich w Polsce",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "10": {
+            "p": {
+                "recipients": "***",
+                "date": "Wtorek, 10 wrze\u015bnia 2024",
+                "office": "III tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "W zakonie cysters\u00f3w",
+                "date": "Wtorek, 10 wrze\u015bnia 2024",
+                "office": "B\u0141. OGLERIUSZA, OPATA",
+                "feast_lvl": "Komemoracja dowolna"
+            },
+            "w2": {
+                "recipients": "U jezuit\u00f3w",
+                "date": "Wtorek, 10 wrze\u015bnia 2024",
+                "office": "B\u0141. FRANCISZKA GARATE, ZAKONNIKA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w3": {
+                "recipients": "W zakonach augustia\u0144skich",
+                "date": "Wtorek, 10 wrze\u015bnia 2024",
+                "office": "\u015aW. MIKO\u0141AJA Z TOLENTINO, PREZBITERA",
+                "feast_lvl": "\u015awi\u0119to"
+            }
+        },
+        "11": {
+            "p": {
+                "recipients": "***",
+                "date": "\u015aroda, 11 wrze\u015bnia 2024",
+                "office": "III tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "W prowincjach OFM",
+                "date": "\u015aroda, 11 wrze\u015bnia 2024",
+                "office": "B\u0141. BONAWENTURY Z BARCELONY, ZAKONNIKA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+                "date": "\u015aroda, 11 wrze\u015bnia 2024",
+                "office": "\u015aW. JANA GABRIELA PERBOYRE'A,PREZBITERA I M\u0118CZENNIKA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w3": {
+                "recipients": "W zakonach karmelita\u0144skich",
+                "date": "\u015aroda, 11 wrze\u015bnia 2024",
+                "office": "B\u0141. MARII OD JEZUSA L\u00d3PEZ RIVAS, DZIEWICY",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "U si\u00f3str redemptorystek",
+                "date": "\u015aroda, 11 wrze\u015bnia 2024",
+                "office": "B\u0141. MARII CELESTE CROSTAROSA,DZIEWICY I ZAKONNICYza\u0142o\u017cycielki zgromadzenia",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "12": {
+            "p": {
+                "recipients": "***",
+                "date": "Czwartek, 12 wrze\u015bnia 2024",
+                "office": "III tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIII tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "Czwartek, 12 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEGO IMIENIA MARYI",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "U pijar\u00f3w",
+                "date": "Czwartek, 12 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEGO IMIENIA MARYI",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w3": {
+                "recipients": "W diecezji gliwickiej",
+                "date": "Czwartek, 12 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY,MATKI SPRAWIEDLIWO\u015aCI I MI\u0141O\u015aCI SPO\u0141ECZNEJPatronki diecezji",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w4": {
+                "recipients": "W archidiecezji katowickiej",
+                "date": "Czwartek, 12 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY Z PIEKARg\u0142\u00f3wnej Patronki archidiecezji",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "13": {
+            "": {
+                "recipients": "***",
+                "date": "Pi\u0105tek, 13 wrze\u015bnia 2024",
+                "office": "\u015aW. JANA CHRYZOSTOMA,BISKUPA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "14": {
+            "p": {
+                "recipients": "***",
+                "date": "Sobota, 14 wrze\u015bnia 2024",
+                "office": "PODWY\u017bSZENIE KRZY\u017bA \u015aWI\u0118TEGO",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w": {
+                "recipients": "U pasjonist\u00f3w",
+                "date": "Sobota, 14 wrze\u015bnia 2024",
+                "office": "PODWY\u017bSZENIE KRZY\u017bA \u015aWI\u0118TEGO",
+                "feast_lvl": "\u015awi\u0119to"
+            }
+        },
+        "15": {
+            "p": {
+                "recipients": "***",
+                "date": "Niedziela, 15 wrze\u015bnia 2024",
+                "office": "IV tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIV NIEDZIELA ZWYK\u0141A B"
+            },
+            "w1": {
+                "recipients": "W Wa\u0142brzychu",
+                "date": "Niedziela, 15 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY BOLESNEJPatronki miasta",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            },
+            "w2": {
+                "recipients": "W zgromadzeniu Si\u00f3str Adoratorek Krwi Chrystusa",
+                "date": "Niedziela, 15 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY BOLESNEJNIEWIASTY NOWEGO PRZYMIERZAPatronki Zgromadzenia",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "16": {
+            "": {
+                "recipients": "***",
+                "date": "Poniedzia\u0142ek, 16 wrze\u015bnia 2024",
+                "office": "\u015aWI\u0118TYCH M\u0118CZENNIK\u00d3WKORNELIUSZA, PAPIE\u017bA, I CYPRIANA, BISKUPA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "17": {
+            "p": {
+                "recipients": "***",
+                "date": "Wtorek, 17 wrze\u015bnia 2024",
+                "office": "IV tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIV tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "Wtorek, 17 wrze\u015bnia 2024",
+                "office": "\u015aW. ROBERTA BELLARMINA,BISKUPA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "U jezuit\u00f3w",
+                "date": "Wtorek, 17 wrze\u015bnia 2024",
+                "office": "\u015aW. ROBERTA BELLARMINA,BISKUPA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w3": {
+                "recipients": "***",
+                "date": "Wtorek, 17 wrze\u015bnia 2024",
+                "office": "\u015aW. ZYGMUNTA SZCZ\u0118SNEGO FELI\u0143SKIEGO, BISKUPA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "***",
+                "date": "Wtorek, 17 wrze\u015bnia 2024",
+                "office": "\u015aW. HILDEGARDY, DZIEWICY I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie dowolne"
+            }
+        },
+        "18": {
+            "p": {
+                "recipients": "***",
+                "date": "\u015aroda, 18 wrze\u015bnia 2024",
+                "office": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKAPATRONA POLSKI",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w1": {
+                "recipients": "U jezuit\u00f3w",
+                "date": "\u015aroda, 18 wrze\u015bnia 2024",
+                "office": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKAPATRONA POLSKI",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w2": {
+                "recipients": "W diecezji p\u0142ockiej, w Przasnyszu i w Drobinie",
+                "date": "\u015aroda, 18 wrze\u015bnia 2024",
+                "office": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKAg\u0142\u00f3wnego patrona diecezji i miasta",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            },
+            "w3": {
+                "recipients": "Poza Polsk\u0105",
+                "date": "\u015aroda, 18 wrze\u015bnia 2024",
+                "office": "IV tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIV tydzie\u0144 Okresu Zwyk\u0142ego"
+            }
+        },
+        "19": {
+            "p": {
+                "recipients": "***",
+                "date": "Czwartek, 19 wrze\u015bnia 2024",
+                "office": "IV tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXIV tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "Czwartek, 19 wrze\u015bnia 2024",
+                "office": "\u015aW. JANUAREGO, BISKUPA I M\u0118CZENNIKA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W diecezji \u015bwidnickiej",
+                "date": "Czwartek, 19 wrze\u015bnia 2024",
+                "office": "B\u0141. GERHARDA HIRSCHFELDERA,PREZBITERA I M\u0118CZENNIKA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w3": {
+                "recipients": "W archidiecezji warszawskieji w diecezji warszawsko-praskiej",
+                "date": "Czwartek, 19 wrze\u015bnia 2024",
+                "office": "\u015aW. ROBERTA BELLARMINA,BISKUPA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "W archidiecezji warszawskieji w diecezji warszawsko-praskiej",
+                "date": "Czwartek, 19 wrze\u015bnia 2024",
+                "office": "\u015aW. HILDEGARDY, DZIEWICY I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie dowolne"
+            }
+        },
+        "20": {
+            "p": {
+                "recipients": "***",
+                "date": "Pi\u0105tek, 20 wrze\u015bnia 2024",
+                "office": "\u015aWI\u0118TYCH M\u0118CZENNIK\u00d3WANDRZEJA KIM TAEGON, PREZBITERA,PAW\u0141A CHONG HASANG I TOWARZYSZY",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w1": {
+                "recipients": "W diecezji legnickiej",
+                "date": "Pi\u0105tek, 20 wrze\u015bnia 2024",
+                "office": "ROCZNICA PO\u015aWI\u0118CENIAKO\u015aCIO\u0141A KATEDRALNEGO W LEGNICY",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w2": {
+                "recipients": "W ko\u015bciele katedralnym w Legnicy",
+                "date": "Pi\u0105tek, 20 wrze\u015bnia 2024",
+                "office": "ROCZNICA PO\u015aWI\u0118CENIAKO\u015aCIO\u0141A KATEDRALNEGO W LEGNICY",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "21": {
+            "": {
+                "recipients": "***",
+                "date": "Sobota, 21 wrze\u015bnia 2024",
+                "office": "\u015aW. MATEUSZA, APOSTO\u0141A I EWANGELISTY",
+                "feast_lvl": "\u015awi\u0119to"
+            }
+        },
+        "22": {
+            "p": {
+                "recipients": "***",
+                "date": "Niedziela, 22 wrze\u015bnia 2024",
+                "office": "I tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXV NIEDZIELA ZWYK\u0141A B"
+            },
+            "w": {
+                "recipients": "W ko\u015bciele katedralnym w Siedlcach",
+                "date": "Niedziela, 22 wrze\u015bnia 2024",
+                "office": "ROCZNICA PO\u015aWI\u0118CENIAKO\u015aCIO\u0141A KATEDRALNEGO W SIEDLCACH",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "23": {
+            "p": {
+                "recipients": "***",
+                "date": "Poniedzia\u0142ek, 23 wrze\u015bnia 2024",
+                "office": "\u015aW. PIO Z PIETRELCINY, PREZBITERA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w": {
+                "recipients": "W zakonach franciszka\u0144skich",
+                "date": "Poniedzia\u0142ek, 23 wrze\u015bnia 2024",
+                "office": "\u015aW. PIO Z PIETRELCINY, PREZBITERA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "24": {
+            "p": {
+                "recipients": "***",
+                "date": "Wtorek, 24 wrze\u015bnia 2024",
+                "office": "I tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXV tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "W prowincjach OFM",
+                "date": "Wtorek, 24 wrze\u015bnia 2024",
+                "office": "\u015aW. PACYFIKA Z SAN SEVERINO, PREZBITERA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W II Zakonie Franciszka\u0144skim",
+                "date": "Wtorek, 24 wrze\u015bnia 2024",
+                "office": "ZNALEZIENIE CIA\u0141A \u015aW. KLARY",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w3": {
+                "recipients": "U paulin\u00f3w",
+                "date": "Wtorek, 24 wrze\u015bnia 2024",
+                "office": "\u015aW. TEKLI, DZIEWICY I M\u0118CZENNICY",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "U pasjonist\u00f3w",
+                "date": "Wtorek, 24 wrze\u015bnia 2024",
+                "office": "\u015aW. WINCENTEGO MARII STRAMBIEGO, BISKUPA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "25": {
+            "p": {
+                "recipients": "***",
+                "date": "\u015aroda, 25 wrze\u015bnia 2024",
+                "office": "I tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXV tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "W archidiecezji warszawskiejoraz w diecezjach warszawsko-praskiej i radomskiej",
+                "date": "\u015aroda, 25 wrze\u015bnia 2024",
+                "office": "B\u0141. W\u0141ADYS\u0141AWA Z GIELNIOWA, PREZBITERA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W zakonach franciszka\u0144skich",
+                "date": "\u015aroda, 25 wrze\u015bnia 2024",
+                "office": "B\u0141. W\u0141ADYS\u0141AWA Z GIELNIOWA, PREZBITERA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w3": {
+                "recipients": "W archidiecezji warmi\u0144skiej",
+                "date": "\u015aroda, 25 wrze\u015bnia 2024",
+                "office": "ROCZNICA PO\u015aWI\u0118CENIABAZYLIKI METROPOLITALNEJ WE FROMBORKU",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w4": {
+                "recipients": "W bazylice metropolitalnej we Fromborku",
+                "date": "\u015aroda, 25 wrze\u015bnia 2024",
+                "office": "ROCZNICA PO\u015aWI\u0118CENIABAZYLIKI METROPOLITALNEJ WE FROMBORKU",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "26": {
+            "p": {
+                "recipients": "***",
+                "date": "Czwartek, 26 wrze\u015bnia 2024",
+                "office": "I tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXV tydzie\u0144 Okresu Zwyk\u0142ego"
+            },
+            "w1": {
+                "recipients": "***",
+                "date": "Czwartek, 26 wrze\u015bnia 2024",
+                "office": "\u015aWI\u0118TYCH M\u0118CZENNIK\u00d3W KOSMY I DAMIANA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W Polsce",
+                "date": "Czwartek, 26 wrze\u015bnia 2024",
+                "office": "\u015aWI\u0118TYCH M\u0118CZENNIK\u00d3WWAWRZY\u0143CA RUIZ I TOWARZYSZY",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w3": {
+                "recipients": "W zakonie dominika\u0144skim",
+                "date": "Czwartek, 26 wrze\u015bnia 2024",
+                "office": "\u015aW. DOMINIKA IB\u00c1\u00d1EZA DE ERQUICIA, PREZBITERA,\u015aW. WAWRZY\u0143CA RUIZ, B\u0141. ALFONSA NAVARETTE,PREZBITERA, I TOWARZYSZY, M\u0118CZENNIK\u00d3W",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w4": {
+                "recipients": "W diecezji siedleckiej",
+                "date": "Czwartek, 26 wrze\u015bnia 2024",
+                "office": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY LE\u015aNIA\u0143SKIEJ",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        },
+        "27": {
+            "p": {
+                "recipients": "***",
+                "date": "Pi\u0105tek, 27 wrze\u015bnia 2024",
+                "office": "\u015aW. WINCENTEGO A PAULO, PREZBITERA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w": {
+                "recipients": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+                "date": "Pi\u0105tek, 27 wrze\u015bnia 2024",
+                "office": "\u015aW. WINCENTEGO A PAULO, PREZBITERAza\u0142o\u017cyciela zgromadzenia",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "28": {
+            "p": {
+                "recipients": "***",
+                "date": "Sobota, 28 wrze\u015bnia 2024",
+                "office": "\u015aW. WAC\u0141AWA, M\u0118CZENNIKA",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w1": {
+                "recipients": "W archidiecezji bia\u0142ostockieji w Ordynariacie Polowym Wojska Polskiego",
+                "date": "Sobota, 28 wrze\u015bnia 2024",
+                "office": "B\u0141. MICHA\u0141A SOPO\u0106KI, PREZBITERA",
+                "feast_lvl": "Wspomnienie dowolne"
+            },
+            "w2": {
+                "recipients": "W Bia\u0142ymstoku",
+                "date": "Sobota, 28 wrze\u015bnia 2024",
+                "office": "B\u0141. MICHA\u0141A SOPO\u0106KI, PREZBITERApatrona miasta",
+                "feast_lvl": "\u015awi\u0119to"
+            },
+            "w3": {
+                "recipients": "W zakonach augustia\u0144skich",
+                "date": "Sobota, 28 wrze\u015bnia 2024",
+                "office": "B\u0141OGOS\u0141AWIONYCH M\u0118CZENNIK\u00d3W JAPO\u0143SKICHFERDYNANDA I TOWARZYSZY",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            },
+            "w4": {
+                "recipients": "Poza Polsk\u0105 oraz w archidiecezji bia\u0142ostockieji w Ordynariacie Polowym Wojska Polskiego",
+                "date": "Sobota, 28 wrze\u015bnia 2024",
+                "office": "I tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXV tydzie\u0144 Okresu Zwyk\u0142ego"
+            }
+        },
+        "29": {
+            "p": {
+                "recipients": "***",
+                "date": "Niedziela, 29 wrze\u015bnia 2024",
+                "office": "II tydzie\u0144 psa\u0142terza",
+                "feast_lvl": "XXVI NIEDZIELA ZWYK\u0141A B"
+            },
+            "w1": {
+                "recipients": "W Sanoku, w Mszanie Dolnej, w Ornontowicach i w Dydni",
+                "date": "Niedziela, 29 wrze\u015bnia 2024",
+                "office": "\u015aW. MICHA\u0141A, ARCHANIO\u0141Ag\u0142\u00f3wnego patrona miasta",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            },
+            "w2": {
+                "recipients": "W bazylice katedralnej w Warszawie-Pradze",
+                "date": "Niedziela, 29 wrze\u015bnia 2024",
+                "office": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI KATEDRALNEJW WARSZAWIE-PRADZE",
+                "feast_lvl": "Uroczysto\u015b\u0107"
+            }
+        },
+        "30": {
+            "": {
+                "recipients": "***",
+                "date": "Poniedzia\u0142ek, 30 wrze\u015bnia 2024",
+                "office": "\u015aW. HIERONIMA,PREZBITERA I DOKTORA KO\u015aCIO\u0141A",
+                "feast_lvl": "Wspomnienie obowi\u0105zkowe"
+            }
+        }
+    }
+}

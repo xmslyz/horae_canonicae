@@ -40,11 +40,12 @@ def start():
     other = datetime.date(2024, 10, 7)
     off = Officium(other)
 
-    # inv = lg.Invitatory(off)
-    # inv.pray()
-
     lau = lg.Morning(off)
+    lau.with_inv = False
     lau.pray()
+
+    # ter = lg.Daytime(off)
+    # ter.pray()
 
 
 if __name__ == "__main__":

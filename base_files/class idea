@@ -1,0 +1,20 @@
+class Base
+
+class Person(Base)
+class Church(Base)
+
+class Maria(Person)
+class Apostoles(Person)
+class Martires(Person)
+class Martir(Martires)
+class Pastores(Person)
+class Doctores(Person)
+class Virgenes(Perosn)
+
+
+class HolyMan(Person)
+class HolyWoman(Person)
+class Religious(Holy)
+class Miesricordi(Holy)
+class Educator(Holy)
+

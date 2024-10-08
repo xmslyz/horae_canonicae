@@ -1,0 +1,84 @@
+{
+  "25": {
+    "psalter": null,
+    "0": {
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": "",
+        "prayer": ""
+      }
+    },
+    "1": {
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": "",
+        "prayer": ""
+      }
+    },
+    "2": {
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": "",
+        "prayer": ""
+      }
+    },
+    "3": {
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": "",
+        "prayer": ""
+      }
+    },
+    "4": {
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": "",
+        "prayer": ""
+      }
+    },
+    "5": {
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": "",
+        "prayer": ""
+      }
+    },
+    "6": {
+      "i vis": {
+        "ant A": "",
+        "ant B": "",
+        "ant C": "",
+        "prayer": ""
+      },
+      "lec": {
+        "i lectura": "",
+        "i responsorium": "",
+        "ii lectura": "",
+        "ii responsorium": ""
+      },
+      "lau": {
+        "ant A": "",
+        "ant B": "",
+        "ant C": "",
+        "prayer": ""
+      },
+      "ii vis": {
+        "ant A": "",
+        "ant B": "",
+        "ant C": ""
+      }
+    }
+  }
+}

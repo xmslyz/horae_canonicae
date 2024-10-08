@@ -1,0 +1,1052 @@
+{
+    "15": {
+        "date": "1",
+        "weekday": "Ndz",
+        "where": null,
+        "feast": "XXII Niedziela Zwyk\u0142a (rok B)",
+        "feast_type": ""
+    },
+    "16": {
+        "date": "2",
+        "weekday": "Pon",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "17": {
+        "date": "2",
+        "weekday": "Pon",
+        "where": "U kapucyn\u00f3w",
+        "feast": "B\u0142ogos\u0142awionych m\u0119czennik\u00f3w Apolinarego Morela, prezbitera, i Towarzyszy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "18": {
+        "date": "2",
+        "weekday": "Pon",
+        "where": "U franciszkan\u00f3w konwentualnych",
+        "feast": "B\u0142. Jana Franciszka Burt\u00e9, prezbitera i m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "19": {
+        "date": "2",
+        "weekday": "Pon",
+        "where": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+        "feast": "B\u0142. Ludwika J\u00f3zefa Fran\u00e7ois, prezbitera, i Towarzyszy, m\u0119czennik\u00f3w",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "20": {
+        "date": "2",
+        "weekday": "Pon",
+        "where": "U jezuit\u00f3w",
+        "feast": "B\u0142ogos\u0142awionych Jakuba Bonnauda, prezbitera, i Towarzyszy; J\u00f3zefa Imberta i Jana Miko\u0142aja Cordiera, prezbiter\u00f3w; Tomasza Sitjara, prezbitera, i Towarzyszy; Jana Fausti, prezbitera, i Towarzyszy, m\u0119czennik\u00f3w",
+        "feast_type": "Wsp. dowolne"
+    },
+    "21": {
+        "date": "3",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "\u015aw. Grzegorza Wielkiego, papie\u017ca i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "22": {
+        "date": "3",
+        "weekday": "Wt",
+        "where": "W zakonach benedykty\u0144skich",
+        "feast": "\u015aW. GRZEGORZA WIELKIEGO, PAPIE\u017bA I DOKTORA KO\u015aCIO\u0141A",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "23": {
+        "date": "3",
+        "weekday": "Wt",
+        "where": "W Rodzinie \u015bw. Paw\u0142a",
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny, Matki Dobrego Pasterza",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "24": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "25": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": null,
+        "feast": "B\u0142ogos\u0142awionych dziewic i m\u0119czennic Marii Stelli i Towarzyszek",
+        "feast_type": "Wsp. dowolne"
+    },
+    "26": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W archidiecezji cz\u0119stochowskiej",
+        "feast": "B\u0142ogos\u0142awionych dziewic i m\u0119czennic Marii Kanuty i Towarzyszek",
+        "feast_type": "Wsp. dowolne"
+    },
+    "27": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W diecezji e\u0142ckiej",
+        "feast": "B\u0142ogos\u0142awionych dziewic i m\u0119czennic Marii Kanizji, Marii Sergii i Towarzyszek",
+        "feast_type": "Wsp. dowolne"
+    },
+    "28": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W diecezji kaliskiej",
+        "feast": "B\u0142ogos\u0142awionych dziewic i m\u0119czennic Gwidony Cierpki i Towarzyszek",
+        "feast_type": "Wsp. dowolne"
+    },
+    "29": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "U franciszkan\u00f3w konwentualnych",
+        "feast": "\u015aw. R\u00f3\u017cy z Viterbo, dziewicy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "30": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W Rodzinie \u015bw. Paw\u0142a",
+        "feast": "\u015aw. Grzegorza Wielkiego, papie\u017ca i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "31": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W zakonie Kanonik\u00f3w Regularnych Latera\u0144skich",
+        "feast": "B\u0142ogos\u0142awionych prezbiter\u00f3w i m\u0119czennik\u00f3w Jana Karola M. Bernarda du Cornillet, Jana Franciszka Bonnel de Pradal i Klaudiusza Ponse",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "32": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W diecezji \u0142om\u017cy\u0144skiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W \u0141OM\u017bY",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "33": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W ko\u015bciele katedralnym w \u0141om\u017cy",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W \u0141OM\u017bY",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "34": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "We Wschowie",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY ZE WSCHOWY, Patronki miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "35": {
+        "date": "4",
+        "weekday": "\u015ar",
+        "where": "W zakonach augustia\u0144skich",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY, MATKI POCIESZENIA",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "36": {
+        "date": "5",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "37": {
+        "date": "5",
+        "weekday": "Czw",
+        "where": "W zakonie dominika\u0144skim",
+        "feast": "Doroczne wspomnienie zmar\u0142ych domownik\u00f3w i dobrodziej\u00f3w naszego Zakonu",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "38": {
+        "date": "5",
+        "weekday": "Czw",
+        "where": "U salwatorian\u00f3w i salwatorianek",
+        "feast": "B\u0141. MARII OD APOSTO\u0141\u00d3W, DZIEWICY",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "39": {
+        "date": "6",
+        "weekday": "Pt",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "40": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "41": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": null,
+        "feast": "\u015aw. Melchiora Grodzieckiego, prezbitera i m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "42": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": "W diecezji bielsko-\u017cywieckiej",
+        "feast": "\u015aw. Melchiora Grodzieckiego, prezbitera i m\u0119czennika",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "43": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": "U jezuit\u00f3w",
+        "feast": "\u015awi\u0119tych prezbiter\u00f3w i m\u0119czennik\u00f3w Melchiora Grodzieckiego, Stefana Pongracza i Marka Kri\u017ca",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "44": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": "W archidiecezjach katowickiej i warszawskiej oraz w diecezjach drohiczy\u0144skiej i siedleckiej",
+        "feast": "B\u0142. Ignacego K\u0142opotowskiego, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "45": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": "W archidiecezji lubelskiej i w diecezji warszawsko-praskiej",
+        "feast": "B\u0142. Ignacego K\u0142opotowskiego, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "46": {
+        "date": "7",
+        "weekday": "Sob",
+        "where": null,
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny",
+        "feast_type": "Wsp. dowolne"
+    },
+    "48": {
+        "date": "8",
+        "weekday": "Ndz",
+        "where": null,
+        "feast": "XXIII Niedziela Zwyk\u0142a (rok B)",
+        "feast_type": ""
+    },
+    "49": {
+        "date": "8",
+        "weekday": "Ndz",
+        "where": "W diecezji tarnowskiej i w S\u0119dziszowie Ma\u0142opolskim",
+        "feast": "NARODZENIE NAJ\u015aWI\u0118TSZEJ MARYI PANNY, g\u0142\u00f3wnej Patronki diecezji i miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "50": {
+        "date": "8",
+        "weekday": "Ndz",
+        "where": "W diecezji bydgoskiej",
+        "feast": "NARODZENIE NAJ\u015aWI\u0118TSZEJ MARYI PANNY, MATKI PI\u0118KNEJ MI\u0141O\u015aCI, g\u0142\u00f3wnej Patronki diecezji",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "51": {
+        "date": "8",
+        "weekday": "Ndz",
+        "where": "W Gietrzwa\u0142dzie",
+        "feast": "NARODZENIE NAJ\u015aWI\u0118TSZEJ MARYI PANNYNAJ\u015aWI\u0118TSZEJ MARYI PANNY GIETRZWA\u0141DZKIEJ",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "52": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "53": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": null,
+        "feast": "\u015aw. Piotra Klawera, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "54": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "U jezuit\u00f3w",
+        "feast": "\u015aw. Piotra Klawera, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "55": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "W archidiecezji krakowskiej",
+        "feast": "B\u0142. Anieli Salawy, dziewicy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "56": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "W zakonach franciszka\u0144skich",
+        "feast": "B\u0142. Anieli Salawy, dziewicy, patronki Franciszka\u0144skiego Zakonu \u015awieckich w Polsce",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "57": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "W zakonie Kanonik\u00f3w Regularnych Latera\u0144skich",
+        "feast": "\u015aw. Piotra z Pebrak, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "58": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+        "feast": "B\u0142. Fryderyka Antoniego Ozanama",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "59": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "W diecezji zielonog\u00f3rsko-gorzowskiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W GORZOWIE WIELKOPOLSKIM",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "60": {
+        "date": "9",
+        "weekday": "Pon",
+        "where": "W ko\u015bciele katedralnym w Gorzowie Wielkopolskim",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W GORZOWIE WIELKOPOLSKIM",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "61": {
+        "date": "10",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "62": {
+        "date": "10",
+        "weekday": "Wt",
+        "where": "W zakonie cysters\u00f3w",
+        "feast": "B\u0142. Ogleriusza, opata",
+        "feast_type": "Komem. dowolna"
+    },
+    "63": {
+        "date": "10",
+        "weekday": "Wt",
+        "where": "U jezuit\u00f3w",
+        "feast": "B\u0142. Franciszka G\u00e1rate, zakonnika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "64": {
+        "date": "10",
+        "weekday": "Wt",
+        "where": "W zakonach augustia\u0144skich",
+        "feast": "\u015aW. MIKO\u0141AJA Z TOLENTINO, PREZBITERA",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "65": {
+        "date": "11",
+        "weekday": "\u015ar",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "66": {
+        "date": "11",
+        "weekday": "\u015ar",
+        "where": "W prowincjach OFM",
+        "feast": "B\u0142. Bonawentury z Barcelony, zakonnika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "67": {
+        "date": "11",
+        "weekday": "\u015ar",
+        "where": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+        "feast": "\u015aw. Jana Gabriela Perboyre'a, prezbitera i m\u0119czennika",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "68": {
+        "date": "11",
+        "weekday": "\u015ar",
+        "where": "W zakonach karmelita\u0144skich",
+        "feast": "B\u0142. Marii od Jezusa L\u00f3pez Rivas, dziewicy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "69": {
+        "date": "11",
+        "weekday": "\u015ar",
+        "where": "U si\u00f3str redemptorystek",
+        "feast": "B\u0142. Marii Celeste Crostarosa, dziewicy i zakonnicy, za\u0142o\u017cycielki zgromadzenia",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "70": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "71": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "Naj\u015bwi\u0119tszego Imienia Maryi",
+        "feast_type": "Wsp. dowolne"
+    },
+    "72": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "U pijar\u00f3w",
+        "feast": "NAJ\u015aWI\u0118TSZEGO IMIENIA MARYI",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "73": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W diecezji gliwickiej",
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny, Matki Sprawiedliwo\u015bci i Mi\u0142o\u015bci Spo\u0142ecznej, Patronki diecezji",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "74": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W archidiecezji katowickiej",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY PIEKARSKIEJ, g\u0142\u00f3wnej Patronki archidiecezji",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "75": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W Piekarach \u015al\u0105skich",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY PIEKARSKIEJ, MATKI SPRAWIEDLIWO\u015aCI I MI\u0141O\u015aCI SPO\u0141ECZNEJ, Patronki miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "76": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W diecezji rzeszowskiej",
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny Rzeszowskiej",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "77": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W Rzeszowie",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY RZESZOWSKIEJ",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "78": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W Kro\u015bnie",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY MURKOWEJ, Patronki miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "79": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W zakonie cysters\u00f3w",
+        "feast": "\u015aw. Piotra z Tarentaise, biskupa",
+        "feast_type": "Wsp. dowolne"
+    },
+    "80": {
+        "date": "12",
+        "weekday": "Czw",
+        "where": "W zakonie Kanonik\u00f3w Regularnych Latera\u0144skich",
+        "feast": "\u015aw. Alberta, biskupa",
+        "feast_type": "Wsp. dowolne"
+    },
+    "81": {
+        "date": "13",
+        "weekday": "Pt",
+        "where": null,
+        "feast": "\u015aw. Jana Chryzostoma, biskupa i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "82": {
+        "date": "14",
+        "weekday": "Sob",
+        "where": null,
+        "feast": "PODWY\u017bSZENIE KRZY\u017bA \u015aWI\u0118TEGO",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "83": {
+        "date": "14",
+        "weekday": "Sob",
+        "where": "U pasjonist\u00f3w",
+        "feast": "PODWY\u017bSZENIE KRZY\u017bA \u015aWI\u0118TEGO",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "85": {
+        "date": "15",
+        "weekday": "Ndz",
+        "where": null,
+        "feast": "XXIV Niedziela Zwyk\u0142a (rok B)",
+        "feast_type": ""
+    },
+    "86": {
+        "date": "15",
+        "weekday": "Ndz",
+        "where": "W Wa\u0142brzychu",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY BOLESNEJ, Patronki miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "87": {
+        "date": "15",
+        "weekday": "Ndz",
+        "where": "U doloryst\u00f3w i u si\u00f3str serafitek",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY BOLESNEJ",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "88": {
+        "date": "15",
+        "weekday": "Ndz",
+        "where": "W zgromadzeniu Si\u00f3str Adoratorek Krwi Chrystusa",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY BOLESNEJ, NIEWIASTY NOWEGO PRZYMIERZA, Patronki Zgromadzenia",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "89": {
+        "date": "16",
+        "weekday": "Pon",
+        "where": null,
+        "feast": "\u015awi\u0119tych m\u0119czennik\u00f3w Korneliusza, papie\u017ca, i Cypriana, biskupa",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "90": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "91": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "\u015aw. Roberta Bellarmina, biskupa i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. dowolne"
+    },
+    "92": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "U jezuit\u00f3w",
+        "feast": "\u015aw. Roberta Bellarmina, biskupa i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "93": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "\u015aw. Zygmunta Szcz\u0119snego Feli\u0144skiego, biskupa",
+        "feast_type": "Wsp. dowolne"
+    },
+    "94": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W archidiecezji warszawskiej i w diecezji warszawsko-praskiej",
+        "feast": "\u015aw. Zygmunta Szcz\u0119snego Feli\u0144skiego, biskupa",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "95": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "\u015aw. Hildegardy, dziewicy i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. dowolne"
+    },
+    "96": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W zakonach benedykty\u0144skich",
+        "feast": "\u015aw. Hildegardy, dziewicy i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. dowolne"
+    },
+    "97": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W zakonie cysters\u00f3w",
+        "feast": "\u015aw. Marcina z Finojosa, biskupa",
+        "feast_type": "Komem. dowolna"
+    },
+    "98": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W zakonie Kanonik\u00f3w Regularnych Latera\u0144skich",
+        "feast": "\u015aw. Piotra z Arbues, m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "99": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W zakonie dominika\u0144skim",
+        "feast": "\u015aw. Jana Mac\u00edasa, zakonnika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "100": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W zakonach franciszka\u0144skich",
+        "feast": "STYGMAT\u00d3W \u015aW. FRANCISZKA Z ASY\u017bU",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "101": {
+        "date": "17",
+        "weekday": "Wt",
+        "where": "W zakonach karmelita\u0144skich",
+        "feast": "\u015aW. ALBERTA JEROZOLIMSKIEGO, BISKUPA I PRAWODAWCY NASZEGO ZAKONU",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "102": {
+        "date": "18",
+        "weekday": "\u015ar",
+        "where": null,
+        "feast": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKA, PATRONA POLSKI",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "103": {
+        "date": "18",
+        "weekday": "\u015ar",
+        "where": "W archidiecezji warszawskiej",
+        "feast": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKA, patrona archidiecezji",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "104": {
+        "date": "18",
+        "weekday": "\u015ar",
+        "where": "U jezuit\u00f3w",
+        "feast": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKA, PATRONA POLSKI",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "105": {
+        "date": "18",
+        "weekday": "\u015ar",
+        "where": "W diecezji p\u0142ockiej, w Przasnyszu i w Drobinie",
+        "feast": "\u015aW. STANIS\u0141AWA KOSTKI, ZAKONNIKA, g\u0142\u00f3wnego patrona diecezji i miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "106": {
+        "date": "18",
+        "weekday": "\u015ar",
+        "where": "Poza Polsk\u0105",
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "107": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "108": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "\u015aw. Januarego, biskupa i m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "109": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "W diecezji \u015bwidnickiej",
+        "feast": "B\u0142. Gerharda Hirschfeldera, prezbitera i m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "110": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "W archidiecezji warszawskiej i w diecezji warszawsko-praskiej",
+        "feast": "\u015aw. Roberta Bellarmina, biskupa i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. dowolne"
+    },
+    "111": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "W archidiecezji warszawskiej i w diecezji warszawsko-praskiej",
+        "feast": "\u015aw. Hildegardy z Bingen, dziewicy i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. dowolne"
+    },
+    "112": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "U kapucyn\u00f3w",
+        "feast": "\u015aw. J\u00f3zefa z Kupertynu, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "113": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "W prowincjach OFM",
+        "feast": "\u015aw. J\u00f3zefa z Kupertynu, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "114": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "U franciszkan\u00f3w konwentualnych",
+        "feast": "\u015aW. J\u00d3ZEFA Z KUPERTYNU, PREZBITERA",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "115": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "U kapucyn\u00f3w",
+        "feast": "\u015aw. Franciszka Marii z Camporosso, zakonnika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "116": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "W diecezji rzeszowskiej",
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny z La Salette, Pojednawczyni grzesznik\u00f3w",
+        "feast_type": "Wsp. dowolne"
+    },
+    "117": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "U saletyn\u00f3w i u Misjonarzy \u015awi\u0119tej Rodziny",
+        "feast": "NAJ\u015aWI\u0118TSZEJ MARYI PANNY Z LA SALETTE, POJEDNAWCZYNI GRZESZNIK\u00d3W, g\u0142\u00f3wnej Patronki zgromadzenia",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "118": {
+        "date": "19",
+        "weekday": "Czw",
+        "where": "W diecezji legnickiej",
+        "feast": "\u015awi\u0119tych m\u0119czennik\u00f3w Andrzeja Kim Taegon, prezbitera, Paw\u0142a Chong Hasang i Towarzyszy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "119": {
+        "date": "20",
+        "weekday": "Pt",
+        "where": null,
+        "feast": "\u015awi\u0119tych m\u0119czennik\u00f3w Andrzeja Kim Taegon, prezbitera, Paw\u0142a Chong Hasang i ich Towarzyszy",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "120": {
+        "date": "20",
+        "weekday": "Pt",
+        "where": "W diecezji legnickiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W LEGNICY",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "121": {
+        "date": "20",
+        "weekday": "Pt",
+        "where": "W ko\u015bciele katedralnym w Legnicy",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W LEGNICY",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "122": {
+        "date": "21",
+        "weekday": "Sob",
+        "where": null,
+        "feast": "\u015aW. MATEUSZA, APOSTO\u0141A I EWANGELISTY",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "124": {
+        "date": "22",
+        "weekday": "Ndz",
+        "where": null,
+        "feast": "XXV Niedziela Zwyk\u0142a (rok B)",
+        "feast_type": ""
+    },
+    "125": {
+        "date": "22",
+        "weekday": "Ndz",
+        "where": "W ko\u015bciele katedralnym w Siedlcach",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W SIEDLCACH",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "126": {
+        "date": "23",
+        "weekday": "Pon",
+        "where": null,
+        "feast": "\u015aw. Pio z Pietrelciny, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "127": {
+        "date": "23",
+        "weekday": "Pon",
+        "where": "W zakonach franciszka\u0144skich",
+        "feast": "\u015aw. Pio z Pietrelciny, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "128": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "129": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "W prowincjach OFM",
+        "feast": "\u015aw. Pacyfika z San Severino, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "130": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "W II Zakonie Franciszka\u0144skim",
+        "feast": "Znalezienie cia\u0142a \u015bw. Klary",
+        "feast_type": "Wsp. dowolne"
+    },
+    "131": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "U paulin\u00f3w",
+        "feast": "\u015aw. Tekli, dziewicy i m\u0119czennicy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "132": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "U pasjonist\u00f3w",
+        "feast": "\u015aw. Wincentego Marii Strambiego, biskupa",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "133": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "W diecezji bielsko-\u017cywieckiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W BIELSKU-BIA\u0141EJ",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "134": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "W ko\u015bciele katedralnym w Bielsku-Bia\u0142ej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W BIELSKU-BIA\u0141EJ",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "135": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "W diecezji kaliskiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W KALISZU",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "136": {
+        "date": "24",
+        "weekday": "Wt",
+        "where": "W ko\u015bciele katedralnym w Kaliszu",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA KO\u015aCIO\u0141A KATEDRALNEGO W KALISZU",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "137": {
+        "date": "25",
+        "weekday": "\u015ar",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "138": {
+        "date": "25",
+        "weekday": "\u015ar",
+        "where": "W archidiecezji warszawskiej oraz w diecezjach warszawsko-praskiej i radomskiej",
+        "feast": "B\u0142. W\u0142adys\u0142awa z Gielniowa, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "139": {
+        "date": "25",
+        "weekday": "\u015ar",
+        "where": "W zakonach franciszka\u0144skich",
+        "feast": "B\u0142. W\u0142adys\u0142awa z Gielniowa, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "140": {
+        "date": "25",
+        "weekday": "\u015ar",
+        "where": "W archidiecezji warmi\u0144skiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI METROPOLITALNEJ WE FROMBORKU",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "141": {
+        "date": "25",
+        "weekday": "\u015ar",
+        "where": "W bazylice metropolitalnej we Fromborku",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI METROPOLITALNEJ WE FROMBORKU",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "142": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "143": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": null,
+        "feast": "\u015awi\u0119tych m\u0119czennik\u00f3w Kosmy i Damiana",
+        "feast_type": "Wsp. dowolne"
+    },
+    "144": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W Polsce",
+        "feast": "\u015awi\u0119tych m\u0119czennik\u00f3w Wawrzy\u0144ca Ruiz i Towarzyszy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "145": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W zakonie dominika\u0144skim",
+        "feast": "\u015aw. Dominika Ib\u00e1\u00f1eza de Erquicia, prezbitera, \u015bw. Wawrzy\u0144ca Ruiz, b\u0142. Alfonsa Navarrete, prezbitera, i Towarzyszy, m\u0119czennik\u00f3w",
+        "feast_type": "Wsp. dowolne"
+    },
+    "146": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W diecezji siedleckiej",
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny Le\u015bnia\u0144skiej",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "147": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W zakonach franciszka\u0144skich",
+        "feast": "\u015aw. Elzeara Sabrana i b\u0142. Delfiny, ma\u0142\u017conk\u00f3w",
+        "feast_type": "Wsp. dowolne"
+    },
+    "148": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "U kapucyn\u00f3w",
+        "feast": "B\u0142ogos\u0142awionych m\u0119czennik\u00f3w Aureliusza z Vinalesa, prezbitera, i Towarzyszy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "149": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W zakonie Kanonik\u00f3w Regularnych Latera\u0144skich",
+        "feast": "\u015aw. Ketyla, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "150": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "U redemptoryst\u00f3w",
+        "feast": "B\u0142. Kaspra Stanggassingera, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "151": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W diecezji kieleckiej",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI KATEDRALNEJ W KIELCACH",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "152": {
+        "date": "26",
+        "weekday": "Czw",
+        "where": "W bazylice katedralnej w Kielcach",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI KATEDRALNEJ W KIELCACH",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "153": {
+        "date": "27",
+        "weekday": "Pt",
+        "where": null,
+        "feast": "\u015aw. Wincentego a Paulo, prezbitera",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "154": {
+        "date": "27",
+        "weekday": "Pt",
+        "where": "W zgromadzeniach Ksi\u0119\u017cy Misjonarzy i Si\u00f3str Mi\u0142osierdzia",
+        "feast": "\u015aW. WINCENTEGO A PAULO, PREZBITERA, za\u0142o\u017cyciela zgromadzenia",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "155": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": null,
+        "feast": "\u015aw. Wac\u0142awa, m\u0119czennika",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "156": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "W archidiecezji bia\u0142ostockiej i w Ordynariacie Polowym Wojska Polskiego",
+        "feast": "\u015aw. Wac\u0142awa, m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "157": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "W archidiecezji bia\u0142ostockiej i w Ordynariacie Polowym Wojska Polskiego",
+        "feast": "B\u0142. Micha\u0142a Sopo\u0107ki, prezbitera",
+        "feast_type": "Wsp. dowolne"
+    },
+    "158": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "W Bia\u0142ymstoku",
+        "feast": "B\u0141. MICHA\u0141A SOPO\u0106KI, PREZBITERA, patrona miasta",
+        "feast_type": "\u015awi\u0119to"
+    },
+    "159": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "W zakonach augustia\u0144skich",
+        "feast": "B\u0142ogos\u0142awionych m\u0119czennik\u00f3w japo\u0144skich Ferdynanda i Towarzyszy",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    },
+    "160": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "Poza Polsk\u0105 oraz w archidiecezji bia\u0142ostockiej i w Ordynariacie Polowym Wojska Polskiego",
+        "feast": "Dzie\u0144 powszedni",
+        "feast_type": ""
+    },
+    "161": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "Poza Polsk\u0105",
+        "feast": "\u015aw. Wac\u0142awa, m\u0119czennika",
+        "feast_type": "Wsp. dowolne"
+    },
+    "162": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "Poza Polsk\u0105",
+        "feast": "\u015awi\u0119tych m\u0119czennik\u00f3w Wawrzy\u0144ca Ruiz i Towarzyszy",
+        "feast_type": "Wsp. dowolne"
+    },
+    "163": {
+        "date": "28",
+        "weekday": "Sob",
+        "where": "Poza Polsk\u0105",
+        "feast": "Naj\u015bwi\u0119tszej Maryi Panny",
+        "feast_type": "Wsp. dowolne"
+    },
+    "165": {
+        "date": "29",
+        "weekday": "Ndz",
+        "where": null,
+        "feast": "XXVI Niedziela Zwyk\u0142a (rok B)",
+        "feast_type": ""
+    },
+    "166": {
+        "date": "29",
+        "weekday": "Ndz",
+        "where": "W Sanoku, w Mszanie Dolnej, w Ornontowicach i w Dydni",
+        "feast": "\u015aW. MICHA\u0141A, ARCHANIO\u0141A, patrona miasta",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "167": {
+        "date": "29",
+        "weekday": "Ndz",
+        "where": "W bazylice katedralnej diecezji warszawsko-praskiej w Warszawie",
+        "feast": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI KATEDRALNEJ W WARSZAWIE-PRADZE",
+        "feast_type": "Uroczysto\u015b\u0107"
+    },
+    "168": {
+        "date": "30",
+        "weekday": "Pon",
+        "where": null,
+        "feast": "\u015aw. Hieronima, prezbitera i doktora Ko\u015bcio\u0142a",
+        "feast_type": "Wsp. obowi\u0105zkowe"
+    }
+}

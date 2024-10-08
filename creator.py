@@ -503,12 +503,13 @@ class Skeleton:
 class Officium(Skeleton):
     def __init__(self, lg_day: datetime.date):
         super().__init__(lg_day)
-        self.propia_cls = None
+        self.office_cls = None
         self.rank = None
         self.feast = None
         self.patria = True
         self.ordo = None
         self.agenda = self.open_database()
+        self.propia = self.open_propia()
         self.user = User(6)
         self.locus = self.user.loci
         self.choose_celebration()
@@ -516,6 +517,11 @@ class Officium(Skeleton):
     @staticmethod
     def open_database():
         with open("litcalendar/anual_agenda.json", encoding="utf-8") as f:
+            return json.load(f)
+
+    @staticmethod
+    def open_propia():
+        with open("base_files/propia/pro.json", encoding="utf-8") as f:
             return json.load(f)
 
     def check_localization(self, place) -> bool:
@@ -673,7 +679,7 @@ class Officium(Skeleton):
         if not celebrations:
             # If there are no celebrations, print default message
             print(intro + normal[4:])
-            self.feast, self.rank, self.propia_cls = "Dzień powszedni", None, None
+            self.feast, self.rank, self.office_cls = "Dzień powszedni", None, None
             return
 
         else:
@@ -690,7 +696,7 @@ class Officium(Skeleton):
                 elif isinstance(celebrations[0], str):
                     if celebrations[1] not in ["ML", "MA", "KL"]:
                         self.feast, self.rank = celebrations
-                        self.get_propia_class("1")
+                        self.get_office_class("1")
                         print(f"Dziś w liturgii:\n{self.feast} [{self.rank}]")
                         return None
                     else:
@@ -711,16 +717,17 @@ class Officium(Skeleton):
                             self.feast = "Dzień powszedni"
                             self.rank = None
                             break
+
                         elif 1 <= prompt <= len(celebrations) + 1:
                             if only_one:
                                 self.feast = celebrations[0]
                                 self.rank = celebrations[1]
-                                self.get_propia_class(prompt_str)
+                                self.get_office_class(prompt_str)
                                 break
                             else:
                                 self.feast = celebrations[0][prompt - 1]
                                 self.rank = celebrations[1]
-                                self.get_propia_class(prompt_str)
+                                self.get_office_class(prompt_str)
                                 break
                         else:
                             print("Niepoprawny wybór, spróbuj ponownie.")
@@ -734,9 +741,9 @@ class Officium(Skeleton):
                 print("error", e)
                 pass
 
-    def get_propia_class(self, prompt) -> None:
+    def get_office_class(self, prompt) -> None:
         if prompt != "0":
-            self.propia_cls: str = self.get_class_type(self.agenda[str(self.lg_day.month)][str(self.lg_day.day)][prompt].get("class"))
+            self.office_cls: str = self.get_class_type(self.agenda[str(self.lg_day.month)][str(self.lg_day.day)][prompt].get("class"))
 
     @staticmethod
     def get_class_type(cls_type):
