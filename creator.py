@@ -14,13 +14,14 @@ import inspect
 
 from certifi import where
 
+from tools.indexer import petitions
 from user_profile import User
 import gausianmethod
 
 
 class Skeleton:
     def __init__(self, lg_day: datetime.date):
-        self.lg_day = lg_day
+        self.lg_date = lg_day
         self.year = None
         self.dominical_cycle = None
         self.weekday_cycle = None
@@ -52,7 +53,7 @@ class Skeleton:
 
     def __str__(self):
         return (
-            f"Szukana data:\t\t{self.lg_day}\n"
+            f"Szukana data:\t\t{self.lg_date}\n"
             f"Rok Liturgiczny:\t{self.year} - {self.year + 1}\n"
             f"Okres liturgiczny: \t{self.season}\n"
             f"Cykl czytań:\t\t{self.dominical_cycle} [{self.weekday_cycle}]\n"
@@ -96,10 +97,10 @@ class Skeleton:
         """
         try:
             # Check the Advent period in the previous, current, and next year
-            for s_year in range(self.lg_day.year - 1, self.lg_day.year + 2):
+            for s_year in range(self.lg_date.year - 1, self.lg_date.year + 2):
                 advent = self.advent_start_date(s_year)
                 next_advent = self.advent_start_date(s_year + 1)
-                if advent <= self.lg_day < next_advent:
+                if advent <= self.lg_date < next_advent:
                     return s_year
 
         except Exception as e:
@@ -189,7 +190,7 @@ class Skeleton:
             self.adv_start = self.advent_start_date(self.year)
             self.adv_end = datetime.datetime.strptime(f'24.12.{self.year}',
                                                       '%d.%m.%Y').date()
-            query = self.adv_start <= self.lg_day <= self.adv_end
+            query = self.adv_start <= self.lg_date <= self.adv_end
             if query:
                 return query
 
@@ -201,7 +202,7 @@ class Skeleton:
             self.xms_start = datetime.datetime.strptime(f'25.12.{self.year}',
                                                         '%d.%m.%Y').date()
             self.xms_end = self.baptism_sunday()
-            query = self.xms_start <= self.lg_day <= self.xms_end
+            query = self.xms_start <= self.lg_date <= self.xms_end
             if query:
                 return query
         except Exception as e:
@@ -211,7 +212,7 @@ class Skeleton:
         try:
             self.ot1_start = self.baptism_sunday() + datetime.timedelta(1)
             self.ot1_end = self.len_start - datetime.timedelta(1)
-            query = self.ot1_start <= self.lg_day < self.ot1_end
+            query = self.ot1_start <= self.lg_date < self.ot1_end
             if query:
                 return query
         except Exception as e:
@@ -227,7 +228,7 @@ class Skeleton:
             self.maundy_thursday = self.eas_start - datetime.timedelta(3)
             self.good_friday = self.eas_start - datetime.timedelta(2)
             self.holy_saturday = self.eas_start - datetime.timedelta(1)
-            query = self.len_start <= self.lg_day < self.eas_start
+            query = self.len_start <= self.lg_date < self.eas_start
             if query:
                 return query
         except Exception as e:
@@ -235,7 +236,7 @@ class Skeleton:
 
     def easter_season(self) -> bool:
         try:
-            query = self.eas_start <= self.lg_day < self.eas_end
+            query = self.eas_start <= self.lg_date < self.eas_end
             if query:
                 return query
         except Exception as e:
@@ -246,7 +247,7 @@ class Skeleton:
             self.ot2_start = self.eas_end + datetime.timedelta(1)
             self.ot2_end = (self.advent_start_date(self.year + 1) -
                             datetime.timedelta(1))
-            query = self.ot2_start <= self.lg_day < self.ot2_end
+            query = self.ot2_start <= self.lg_date < self.ot2_end
             if query:
                 return query
         except Exception as e:
@@ -358,9 +359,9 @@ class Skeleton:
                 raise ValueError(
                     f'The dates {initium}, {finis}, and {c_day} are all the '
                     f'same.')
-            if self.lg_day < initium or self.lg_day > finis:
+            if self.lg_date < initium or self.lg_date > finis:
                 raise ValueError(
-                    f'The date {self.lg_day} is not within the range '
+                    f'The date {self.lg_date} is not within the range '
                     f'{initium}-{finis}.')
 
             # if season is ot2, needs joining
@@ -378,14 +379,14 @@ class Skeleton:
                     self.actual_sunday = "Tydzień po Popielcu"
                     return 4
                 else:
-                    # Find the Sunday that corresponds to `lg_day`
+                    # Find the Sunday that corresponds to `lg_date`
                     self.actual_sunday = self.first_day_of_week()
                     # Find the index of the proper week
                     for i in range(4):
                         if self.actual_sunday in self.sunday_dates[i::4]:
                             return i + 1
             else:
-                # Find the Sunday that corresponds to `lg_day`
+                # Find the Sunday that corresponds to `lg_date`
                 self.actual_sunday = self.first_day_of_week()
                 # Find the index of the proper week
                 for i in range(4):
@@ -406,7 +407,7 @@ class Skeleton:
             raise Exception(f"An error occurred: {e}")
 
     def check_ashes_week(self):
-        return self.len_start <= self.lg_day <= self.len_start + datetime.timedelta(
+        return self.len_start <= self.lg_date <= self.len_start + datetime.timedelta(
             3)
 
     def psalter_weeks(self):
@@ -485,7 +486,7 @@ class Skeleton:
 
             for sunday in self.sunday_dates:
                 # Calculate the difference in days
-                difference = (self.lg_day - sunday).days
+                difference = (self.lg_date - sunday).days
                 # If the difference is within the current week (0 to 6),
                 # return the Sunday
                 if 0 <= difference < 7:
@@ -493,7 +494,7 @@ class Skeleton:
 
             # If no valid Sunday is found, raise ValueError
             raise ValueError(
-                f"No valid Sunday found for the date {self.lg_day}")
+                f"No valid Sunday found for the date {self.lg_date}")
 
         except ValueError as e:
             print(f"Error: {e}")
@@ -503,7 +504,7 @@ class Skeleton:
 class Officium(Skeleton):
     def __init__(self, lg_day: datetime.date):
         super().__init__(lg_day)
-        self.office_cls = None
+        self.commons = None
         self.rank = None
         self.feast = None
         self.patria = True
@@ -565,8 +566,8 @@ class Officium(Skeleton):
             dict: A dictionary where keys are liturgical ranks (e.g., "S", "F")
                   and values are dictionaries of feasts with an index as the key.
         """
-        month_str = str(self.lg_day.month)
-        day_str = str(self.lg_day.day)
+        month_str = str(self.lg_date.month)
+        day_str = str(self.lg_date.day)
 
         try:
             keys = self.agenda[month_str][day_str]
@@ -679,7 +680,7 @@ class Officium(Skeleton):
         if not celebrations:
             # If there are no celebrations, print default message
             print(intro + normal[4:])
-            self.feast, self.rank, self.office_cls = "Dzień powszedni", None, None
+            self.feast, self.rank, self.commons = "Dzień powszedni", None, None
             return
 
         else:
@@ -696,7 +697,14 @@ class Officium(Skeleton):
                 elif isinstance(celebrations[0], str):
                     if celebrations[1] not in ["ML", "MA", "KL"]:
                         self.feast, self.rank = celebrations
-                        self.get_office_class("1")
+                        off_key = None
+                        keys = self.agenda[str(self.lg_date.month)][str(self.lg_date.day)].keys()
+
+                        for key in keys:
+                            if self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key]["feast"] == self.feast:
+                                off_key = key
+
+                        self.get_office_class(off_key)
                         print(f"Dziś w liturgii:\n{self.feast} [{self.rank}]")
                         return None
                     else:
@@ -743,7 +751,7 @@ class Officium(Skeleton):
 
     def get_office_class(self, prompt) -> None:
         if prompt != "0":
-            self.office_cls: str = self.get_class_type(self.agenda[str(self.lg_day.month)][str(self.lg_day.day)][prompt].get("class"))
+            self.commons: str = self.get_class_type(self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][prompt].get("class"))
 
     @staticmethod
     def get_class_type(cls_type):

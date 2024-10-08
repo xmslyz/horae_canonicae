@@ -37,15 +37,15 @@ def start():
     # today = datetime.datetime.today().date()
     # off = Officium(today)
 
-    other = datetime.date(2024, 10, 7)
+    other = datetime.date(2024, 9, 29)
     off = Officium(other)
 
     lau = lg.Morning(off)
     lau.with_inv = False
-    lau.pray()
+    lau.default_inter = False
+    lau.pater_intro = True
 
-    # ter = lg.Daytime(off)
-    # ter.pray()
+    lau.pray()
 
 
 if __name__ == "__main__":

@@ -1080,8 +1080,14 @@
             "2": {
                 "feast": "ROCZNICA PO\u015aWI\u0118CENIA BAZYLIKI KATEDRALNEJ W WARSZAWIE-PRADZE",
                 "rank": "S",
-                "class": "",
+                "class": "ECC",
                 "where": "W bazylice katedralnej diecezji warszawsko-praskiej w Warszawie"
+            },
+            "3": {
+                "feast": "\u015Awi\u0119tych archanio\u0142\u00f3w Micha\u0142a, Gabriela i Rafa\u0142a",
+                "rank": "F",
+                "class": "",
+                "where": "omnia"
             }
         },
         "30": {

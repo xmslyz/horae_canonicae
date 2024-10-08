@@ -8,6 +8,8 @@ from random import choice, random
 class User:
     def __init__(self, slider):
         self.loci = None
+        self.city = None
+        self.church = None
         self.slider = slider
         self.set_localization()
 
@@ -20,8 +22,11 @@ class User:
         for i in range(3):
             abreviatures.extend([x for x in locis[i][1].keys()])
 
-        # self.loci = choice(abreviatures)
-        self.loci = "bzy"
+        self.loci = choice(abreviatures)
+        # self.loci = "wap"
+        self.city = ""
+        self.church = ""
+
 
     def slider_choice(self, A, B) -> str:
         """
