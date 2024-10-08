@@ -21,10 +21,13 @@ def computus(year: int):
         year (int): known year
 
     Returns:
-        (datetime) date of Easter
-    """
-    # Assign A and B values based on the year
+        (datetime.date) Date of Easter
 
+    Raises:
+        ValueError: If the year is out of range for Easter computation.
+    """
+
+    # Assign A and B values based on the year
     if 33 <= year <= 1582:
         A, B = 15, 6
     elif 1583 <= year <= 1699:
@@ -52,10 +55,10 @@ def computus(year: int):
     elif 2900 <= year <= 2999:
         A, B = 28, 5
     else:
-        raise ValueError(f"Year {year} is out of range for Easter computation.")
+        raise ValueError(f"Easter computation is only supported for years between 33 and 2999. Year {year} is out of range.")
 
-    pointday = datetime.datetime.strptime(f'22-03-{str(year).zfill(4)}',
-                                          '%d-%m-%Y')
+    # pointday = datetime.datetime.strptime(f'22-03-{str(year).zfill(4)}','%d-%m-%Y')
+    pointday = datetime.datetime(year, 3, 22)
 
     a: int = year % 19
     b: int = year % 4
@@ -64,6 +67,7 @@ def computus(year: int):
     d: int = ((a * 19) + A) % 30
     e: int = ((2 * b) + (4 * c) + (6 * d) + B) % 7
 
+    # Handling exceptions for specific years that require adjusting the Easter date
     if year in [1609, 1981, 1954, 2049, 2076, 2106, 2133, 2201, 2296, 2448,
                 2668, 2725, 2820]:
         swift = datetime.timedelta(d + e - 7)

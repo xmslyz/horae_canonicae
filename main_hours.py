@@ -2,34 +2,31 @@
 # +JMJ
 
 import abc
-import json
-from abc import ABC
 import datetime
+import inspect
+import json
 import random
-from webbrowser import Error
+from abc import ABC
+from random import choice
 
-from colorama import Fore, Style, init
-
-from creator import Skeleton
+from colorama import Fore, Style
 
 
 class Hours:
     def __init__(self, propiae):
-        self.__rank = None
+        self.__rank = propiae.rank
+        self.propia_cls = propiae.propia_cls
+        self.feast = propiae.feast
+        self.propiae = propiae
+        self.propia = self.propiae.lg_day
+
         self.__joined = False
         self.__with_inv = True
         self.__is_lent = False
         self.__full = True
         self.__clasic_td = True
-        # self.propiae = self.propiae()
-        self.propiae = propiae
-        self.propia = self.propiae.lg_day
         self.hour = None
 
-    # @staticmethod
-    # def propiae():
-    #     sk = Skeleton(datetime.datetime.today().date())
-    #     return sk
 
     @staticmethod
     def get_const():
@@ -47,6 +44,11 @@ class Hours:
                     return json.load(f)
         except FileNotFoundError:
             raise Exception
+
+    @staticmethod
+    def get_common():
+        with open(f"base_files/common/common.json", encoding="utf-8") as f:
+            return json.load(f)
 
     @abc.abstractmethod
     def pray(self):
@@ -66,7 +68,7 @@ class Hours:
         raise NotImplementedError
 
     @abc.abstractmethod
-    def psalm(self, psalm):
+    def psalm(self, psalm, args):
         """ """
         ant = psalm["antifona"] + "\n"
         ind = psalm["psalm_index"] + "\n" if len(psalm["psalm_index"]) > 0 else ""
@@ -277,7 +279,23 @@ class Invitatory(Hours, ABC):
         psalm_cita = base["cit"]
         estr = base["est"]
 
-        ant = self.inv_ant()[self.psalter_week][self.weekday_no]
+        psalter = self.inv_ant()[self.psalter_week][self.weekday_no]
+        common = self.get_common()[self.propia_cls[0]]["inv"]
+
+        if isinstance(common, dict):
+            common = choice([x for x in common.values()])
+
+        prop = "!!! is not yet implemented !!!"
+
+        # for feasts and solemnities
+        if self.rank in ["S", "F"]:
+            ant = common
+        # for memories aut-aut
+        elif self.rank in ["MO", "ML"]:
+
+            ant = self.propiae.user.slider_choice(psalter, common)
+        else:
+            ant = prop
 
         estribillos = ''
         for e in range(len(estr)):
@@ -288,7 +306,7 @@ class Invitatory(Hours, ABC):
             estribillos += "\n" + ant
 
         psalmody = (
-            psalm_no + psalm_title + psalm_cita + "\n" + "Ant." + ant + "\n" + estribillos
+            psalm_no + psalm_title + psalm_cita + "\n" + "Ant." + " " + ant + "\n" + estribillos
         )
 
         return psalmody
@@ -404,6 +422,7 @@ class Morning(Hours, ABC):
         self.hour = "lau"
         self.const = self.get_const()
         self.base = self.get_base()
+        self.common = self.get_common()
         self.solo = True
         self.def_inter = True
         self.pater_intro = False
@@ -446,16 +465,31 @@ class Morning(Hours, ABC):
         We wspomnienia świętych, jeśli nie ma hymnu własnego, można go dowolnie wybrać albo z Tekstów wspólnych, albo z bieżącego dnia.
 
         """
-        return f"\u2731 HYMN \u2731\n{self.base[self.psalter_week][self.weekday_no]['hymn']}"
+        psalter = self.base[self.psalter_week][self.weekday_no]["hymn"]
+        common = self.get_common()[self.propia_cls[0]]["lau"]["hymn"]
+        propiae = "not implemented yet"
 
-    def psalm(self, psalm):
+        hymn = self.propiae.user.slider_choice(psalter, common)
+        return f"\u2731 HYMN \u2731\n{hymn}"
+
+    def psalm(self, psalm, i):
         """        """
-        ant = psalm["antifona"] + "\n"
-        ind = psalm["psalm_index"] + "\n" if len(psalm["psalm_index"]) > 0 else ""
-        tit = psalm["psalm_title"] + "\n" if len(psalm["psalm_title"]) > 0 else ""
-        com = psalm["psalm_comment"] + "\n" if len(psalm["psalm_comment"]) > 0 else ""
 
-        txt = psalm["psalm_txt"] + "\n"
+
+        ant = psalm["antifona"] + "\n"
+
+
+        if self.rank in ["F", "S"]:
+            psalm = self.get_base()["1"]["6"][f"psalm{i}"]
+        else:
+            psalm = self.get_base()[self.psalter_week][self.weekday_no][f"psalm{i}"]
+
+
+        ind = psalm.get("psalm_index", "") + "\n" if len(psalm.get("psalm_index", "")) > 0 else ""
+        tit = psalm.get("psalm_title", "") + "\n" if len(psalm.get("psalm_title", "")) > 0 else ""
+        com = psalm.get("psalm_comment", "") + "\n" if len(psalm.get("psalm_comment", "")) > 0 else ""
+
+        txt = psalm.get("psalm_txt", "") + "\n"
         indented = ''
         txt_splited = txt.split("\n")
         indent = True
@@ -497,8 +531,15 @@ class Morning(Hours, ABC):
 
         """
         psalmody = "\u2731 PSALMODIA \u2731\n"
-        for psalm in ["psalm1", "psalm2", "psalm3"]:
-            psalmody += self.psalm(self.base[self.psalter_week][self.weekday_no][psalm])
+
+        psalter = self.base[self.psalter_week][self.weekday_no]
+        common = self.get_common()[self.propia_cls[0]]["lau"]
+        propiae = "not implemented yet"
+
+        ps = self.propiae.user.slider_choice(psalter, common)
+
+        for i, psalm in enumerate(["psalm1", "psalm2", "psalm3"], 1):
+            psalmody += self.psalm(ps[psalm], i)
 
         return psalmody
 
@@ -855,7 +896,7 @@ class Evening(Hours, ABC):
                 return (f"\u2731 PIEŚŃ MARYI (Łk 1, 46-55) \u2731\n\n"
                         f"{canticle}\n{self.const["maria_txt"]}\n{canticle}\n")
             else:
-                # take from other part of base .. from Propia !!
+                # take from other part of base .. from Officium !!
                 return "\n*** no Antiphone for Canticle of Maria for today in database ***\n"
         else:
             return "\n*** no Antiphone for Canticle of Maria for today in database ***\n"

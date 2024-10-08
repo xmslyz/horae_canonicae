@@ -4,6 +4,7 @@
 import datetime
 import json
 import re
+from calendar import month
 from operator import index
 from pprint import pprint
 from traceback import extract_tb
@@ -13,7 +14,7 @@ import inspect
 
 from certifi import where
 
-import user_profile
+from user_profile import User
 import gausianmethod
 
 
@@ -499,27 +500,23 @@ class Skeleton:
             raise  # Re-raise the ValueError to propagate the error
 
 
-class Propia(Skeleton):
+class Officium(Skeleton):
     def __init__(self, lg_day: datetime.date):
         super().__init__(lg_day)
-        self.cls = None
+        self.propia_cls = None
         self.rank = None
         self.feast = None
-        self.locus = None
         self.patria = True
         self.ordo = None
         self.agenda = self.open_database()
-        self.get_user_localization()
+        self.user = User(6)
+        self.locus = self.user.loci
         self.choose_celebration()
 
     @staticmethod
     def open_database():
         with open("litcalendar/anual_agenda.json", encoding="utf-8") as f:
             return json.load(f)
-
-    def get_user_localization(self):
-        loc = user_profile.User()
-        self.locus = loc.loci
 
     def check_localization(self, place) -> bool:
         """
@@ -676,7 +673,7 @@ class Propia(Skeleton):
         if not celebrations:
             # If there are no celebrations, print default message
             print(intro + normal[4:])
-            self.feast, self.rank = "Dzień powszedni", None
+            self.feast, self.rank, self.propia_cls = "Dzień powszedni", None, None
             return
 
         else:
@@ -693,21 +690,23 @@ class Propia(Skeleton):
                 elif isinstance(celebrations[0], str):
                     if celebrations[1] not in ["ML", "MA", "KL"]:
                         self.feast, self.rank = celebrations
-                        print(f"Dziś w liturgii:\n{self.feast} [{self.rank}]\n")
-                        return
+                        self.get_propia_class("1")
+                        print(f"Dziś w liturgii:\n{self.feast} [{self.rank}]")
+                        return None
                     else:
                         ask += f"[{1}] {celebrations[0]} [{celebrations[1]}]\n"
 
                 # Prepare the prompt based on whether a higher rank celebration exists
                 if upper_rank:
-                    prompt_message = "Wybierz obchód:\n" + ask
+                    prompt_message = "Wybierz obchód:\n" + ask.strip()
                 else:
                     prompt_message = "Wybierz obchód:\n" + normal + ask
 
                 # Loop until valid input is provided
                 while True:
                     try:
-                        prompt = int(input(prompt_message))
+                        prompt_str = input(prompt_message)
+                        prompt = int(prompt_str)
                         if prompt == 0:
                             self.feast = "Dzień powszedni"
                             self.rank = None
@@ -716,10 +715,12 @@ class Propia(Skeleton):
                             if only_one:
                                 self.feast = celebrations[0]
                                 self.rank = celebrations[1]
+                                self.get_propia_class(prompt_str)
                                 break
                             else:
                                 self.feast = celebrations[0][prompt - 1]
                                 self.rank = celebrations[1]
+                                self.get_propia_class(prompt_str)
                                 break
                         else:
                             print("Niepoprawny wybór, spróbuj ponownie.")
@@ -733,26 +734,16 @@ class Propia(Skeleton):
                 print("error", e)
                 pass
 
-    def set_feast_data(self, prompt):
-        print(">", self.highest_rank_celebrations())
+    def get_propia_class(self, prompt) -> None:
         if prompt != "0":
-            self.feast: str = self.agenda[month_str][day_str][prompt].get("feast")
-            self.rank: str = self.agenda[month_str][day_str][prompt].get("rank")
-            self.cls: str = self.get_class_type(self.agenda[month_str][day_str][prompt].get("class"))
-        else:
-            self.feast = "Dzień powszedni"
-            self.rank = ""
-            self.cls = ""
+            self.propia_cls: str = self.get_class_type(self.agenda[str(self.lg_day.month)][str(self.lg_day.day)][prompt].get("class"))
 
     @staticmethod
     def get_class_type(cls_type):
         """ """
-        if cls_type:
-            classes = cls_type.split("|")
+        try:
+            if cls_type:
+                return cls_type.split("|")
 
-            if len(classes) == 1:
-                return cls_type
-            else:
-                return cls_type
-        else:
-            return cls_type
+        except Exception as e:
+            print(e)

@@ -2,7 +2,7 @@
 # +JMJ
 
 import datetime
-from creator import Propia
+from creator import Officium
 import main_hours as lg
 from main_hours import Hours, Evening
 import user_profile
@@ -11,15 +11,15 @@ import user_profile
 
 def pray():
     today = datetime.datetime.today().date()
-    pp = Propia(today)
+    pp = Officium(today)
     # other = datetime.date(2024, 9, 17)
-    # pp = Propia(other)
+    # pp = Officium(other)
 
 
     # for i in range(1, 31):
     #     print(i)
     #     other = datetime.date(2024, 10, i)
-    #     pp = Propia(other)
+    #     pp = Officium(other)
 
     # while True:
     #     prompt = input(
