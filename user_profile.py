@@ -22,8 +22,8 @@ class User:
         for i in range(3):
             abreviatures.extend([x for x in locis[i][1].keys()])
 
-        self.loci = choice(abreviatures)
-        # self.loci = "wap"
+        # self.loci = choice(abreviatures)
+        self.loci = "bia"
         self.city = ""
         self.church = ""
 

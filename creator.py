@@ -502,16 +502,17 @@ class Skeleton:
 
 
 class Officium(Skeleton):
-    def __init__(self, lg_day: datetime.date):
+    def __init__(self, lg_day: datetime.date, slider=0):
         super().__init__(lg_day)
         self.commons = None
         self.rank = None
         self.feast = None
+        self.subclass = None
         self.patria = True
         self.ordo = None
         self.agenda = self.open_database()
         self.propia = self.open_propia()
-        self.user = User(6)
+        self.user = User(slider)
         self.locus = self.user.loci
         self.choose_celebration()
 
@@ -751,7 +752,11 @@ class Officium(Skeleton):
 
     def get_office_class(self, prompt) -> None:
         if prompt != "0":
-            self.commons: str = self.get_class_type(self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][prompt].get("class"))
+            keys = self.agenda[str(self.lg_date.month)][str(self.lg_date.day)].keys()
+            for key in keys:
+                if self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key]["feast"] == self.feast:
+                    self.commons: str = self.get_class_type(self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key].get("class"))
+                    self.subclass: str = self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key].get("subclass")
 
     @staticmethod
     def get_class_type(cls_type):

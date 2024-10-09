@@ -37,8 +37,8 @@ def start():
     # today = datetime.datetime.today().date()
     # off = Officium(today)
 
-    other = datetime.date(2024, 9, 29)
-    off = Officium(other)
+    other = datetime.date(2024, 9, 7)
+    off = Officium(other, 6)
 
     lau = lg.Morning(off)
     lau.with_inv = False
@@ -46,6 +46,17 @@ def start():
     lau.pater_intro = True
 
     lau.pray()
+
+    # for i in range(1, 31):
+    #     other = datetime.date(2024, 9, i)
+    #     off = Officium(other, 6)
+    #
+    #     lau = lg.Morning(off)
+    #     lau.with_inv = False
+    #     lau.default_inter = False
+    #     lau.pater_intro = True
+    #
+    #     lau.pray()
 
 
 if __name__ == "__main__":

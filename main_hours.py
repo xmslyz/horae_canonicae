@@ -7,6 +7,7 @@ import inspect
 import json
 import random
 from abc import ABC
+from encodings.punycode import selective_find
 from random import choice
 
 from colorama import Fore, Style
@@ -58,14 +59,21 @@ class Hours:
         with open("base_files/propia/pro.json", encoding="utf-8") as f:
             return json.load(f)
 
-    @staticmethod
-    def check_optional(entry):
+    def check_optional(self, entry) -> str | dict:
         """
         Checks if the dictionary has multiple keys (optional texts). If so, returns a random choice.
         Otherwise, returns the only key's value. If `entry` is a string, returns it as is.
         """
         if isinstance(entry, dict):
-            if "1" in entry.keys():
+            if [x for x in entry.keys() if x.startswith("#")]:
+                # Choose a correct key from the dictionary
+                if self.office.subclass == "v":
+                    return entry["#v"]
+                elif self.office.subclass == "m":
+                    return entry["#m"]
+                elif self.office.subclass == "f":
+                    return entry["#f"]
+            elif [x for x in entry.keys() if x.isnumeric]:
                 # Choose a random key from the dictionary
                 random_key = choice(list(entry.keys()))
                 print(f"[check optional] -> got [no. {random_key}] | total number of optional texts available ({len(entry)})")
@@ -73,7 +81,10 @@ class Hours:
             else:
                 # Only one key in the dictionary, return its value
                 print("[check optional] -> only one key")
-                return next(iter(entry.values()))
+                # print(entry.values())
+                # return next(iter(entry.values()))
+                return entry
+
         elif isinstance(entry, str):
             return entry
         else:
@@ -82,9 +93,7 @@ class Hours:
     def check_for_propia(self):
         month = self.office.lg_date.month
         day = self.office.lg_date.day
-
         propia = self.get_propia()
-
         try:
             if self.office.feast in propia[str(month)][str(day)].keys():
                 return True
@@ -145,7 +154,6 @@ class Hours:
             try:
                 # Try to retrieve common prayers for the current feast
                 common = self.get_common()[self.office.commons[0]][self.hour]
-
                 # If a specific office part is requested, attempt to retrieve it
                 if off_part_name:
                     common = common.get(off_part_name, f"*** no {off_part_name} for today in database ***")
@@ -540,16 +548,16 @@ class Morning(Hours, ABC):
         print("\u272A JUTRZNIA \u272A")
         print("\u255A" + "\u2550" * 11 + "\u255D")
 
-        print(self.opening())
-        print(self.hymn())
-        print(self.psalmodia())
-        print(self.readings())
+        # print(self.opening())
+        # print(self.hymn())
+        # print(self.psalmodia())
+        # print(self.readings())
         print(self.responsory())
-        print(self.canticle())
-        print(self.intercessions())
-        print(self.paternoster())
-        print(self.prayer())
-        print(self.dismisal())
+        # print(self.canticle())
+        # print(self.intercessions())
+        # print(self.paternoster())
+        # print(self.prayer())
+        # print(self.dismisal())
 
     def opening(self):
         """ """
@@ -569,7 +577,8 @@ class Morning(Hours, ABC):
         We wspomnienia świętych, jeśli nie ma hymnu własnego, można go dowolnie wybrać albo z Tekstów wspólnych, albo z bieżącego dnia.
 
         """
-        hymn = self.get_proper_text("hymn")
+        h = self.get_proper_text("hymn")
+        hymn = self.check_optional(h)
         return f"\u2731 HYMN \u2731\n{hymn}"
 
     def psalm(self, psalm, i):
@@ -697,7 +706,9 @@ class Morning(Hours, ABC):
         We wspomnienia świętych prośby bierze się albo z Tekstów wspólnych, albo z bieżącego dnia, chyba że są własne.
 
         """
-        intercessions = self.get_proper_text("petitions")
+        inter = self.get_proper_text("petitions")
+        intercessions = self.check_optional(inter)
+
         if intercessions:
             petis = ""
             resp_template = Fore.LIGHTGREEN_EX + intercessions["resp"] + Style.RESET_ALL
