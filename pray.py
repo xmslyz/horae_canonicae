@@ -38,23 +38,25 @@ if __name__ == "__main__":
     other = datetime.date(2024, 9, 7)
     for x in range(3):
         off = Officium(other, 6, x)
-        pray = lg.Morning(off)
+        # pray = lg.Morning(off)
+        pray = lg.Readings(off)
         pray.with_inv = True
         pray.no_ant = True
         pray.default_inter = False
         pray.pater_intro = True
-        pray.joined = True
-        print(pray)
-        print(pray.opening())
-        print(pray.hymn())
-        print(pray.psalmodia())
+        # pray.joined = True
+        # print(pray)
+        # print(pray.opening())
+        # print(pray.hymn())
+        # print(pray.psalmodia())
+        # print(pray.verse())
         print(pray.readings())
-        print(pray.responsory())
-        print(pray.canticle())
-        print(pray.paternoster())
-        print(pray.intercessions())
-        print(pray.prayer())
-        print(pray.dismisal())
+        # print(pray.responsory())
+        # print(pray.canticle())
+        # print(pray.paternoster())
+        # print(pray.intercessions())
+        # print(pray.prayer())
+        # print(pray.dismisal())
 
 
 
