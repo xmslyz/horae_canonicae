@@ -3,20 +3,23 @@
 
 import datetime
 import json
+import logging
+import os
+import pathlib
 import re
-from calendar import month
-from operator import index
-from pprint import pprint
-from traceback import extract_tb
-from weakref import ProxyTypes
-from webbrowser import Error
-import inspect
 
-from certifi import where
-
-from tools.indexer import petitions
-from user_profile import User
 import gausianmethod
+from user_profile import User
+
+filename = os.path.basename(__file__).split('.')[0]
+logger_dir = pathlib.Path.cwd() / f'__{filename}.log'
+logger = logging.getLogger(__name__)
+f_handler = logging.FileHandler(str(logger_dir), delay=True)
+f_handler.setLevel(logging.WARNING)
+f_format = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s() - %(message)s')
+f_handler.setFormatter(f_format)
+logger.addHandler(f_handler)
 
 
 class Skeleton:
@@ -48,7 +51,6 @@ class Skeleton:
         self.holy_saturday = None
         self.eas_start = None
         self.eas_end = None
-
         self.gen_cal()
 
     def __str__(self):
@@ -194,8 +196,9 @@ class Skeleton:
             if query:
                 return query
 
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def xmass_season(self) -> bool:
         try:
@@ -206,7 +209,7 @@ class Skeleton:
             if query:
                 return query
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def ordinary_season(self) -> bool:
         try:
@@ -215,8 +218,9 @@ class Skeleton:
             query = self.ot1_start <= self.lg_date < self.ot1_end
             if query:
                 return query
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def lent_season(self) -> bool:
         try:
@@ -231,16 +235,18 @@ class Skeleton:
             query = self.len_start <= self.lg_date < self.eas_start
             if query:
                 return query
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def easter_season(self) -> bool:
         try:
             query = self.eas_start <= self.lg_date < self.eas_end
             if query:
                 return query
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def ordinary_season_alter(self) -> bool:
         try:
@@ -250,8 +256,9 @@ class Skeleton:
             query = self.ot2_start <= self.lg_date < self.ot2_end
             if query:
                 return query
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def is_epiphany_in_first_week(self):
         """
@@ -273,8 +280,9 @@ class Skeleton:
 
             # If the first day of the year is Monday (0) or Tuesday (1), return True
             return first_day_no in [0, 1]
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def baptism_sunday(self):
         """
@@ -303,8 +311,9 @@ class Skeleton:
                 days=days_until_next_sunday)
 
             return baptism_sunday_date.date()
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def easter_time(self):
         """
@@ -327,8 +336,9 @@ class Skeleton:
             pentecost = easter + eastertide
 
             return ash_wednesday, easter, pentecost
+
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
     def find_proper_week(self) -> int:
         """
@@ -496,14 +506,14 @@ class Skeleton:
             raise ValueError(
                 f"No valid Sunday found for the date {self.lg_date}")
 
-        except ValueError as e:
-            print(f"Error: {e}")
-            raise  # Re-raise the ValueError to propagate the error
+        except Exception as e:
+            logger.exception(e)
 
 
 class Officium(Skeleton):
-    def __init__(self, lg_day: datetime.date, slider=0):
+    def __init__(self, lg_day: datetime.date, slider=0, debug="x"):
         super().__init__(lg_day)
+        self.debuging = debug
         self.commons = None
         self.rank = None
         self.feast = None
@@ -547,7 +557,7 @@ class Officium(Skeleton):
                         return bool(re.findall(f"^.*{sub_value}.*$", place))
 
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
 
         return False  # Return False if no match is found
 
@@ -572,8 +582,9 @@ class Officium(Skeleton):
 
         try:
             keys = self.agenda[month_str][day_str]
-        except KeyError:
-            print(f"No data for {month_str}-{day_str} in the agenda.")
+
+        except KeyError as ke:
+            logger.exception(f"{ke} | No data for {month_str}-{day_str} in the agenda.")
             return {}
 
         celebrations = {}
@@ -590,10 +601,11 @@ class Officium(Skeleton):
             return celebrations
 
         except KeyError as e:
-            print(f"Key error: {e}")
+            logger.exception(f"Key error: {e}")
             return {}
+
         except Exception as e:
-            print(f"An error occurred: {e}")
+            logger.exception(f"An error occurred: {e}")
             return {}
 
     def compare_dictionary(self, dictionary):
@@ -622,7 +634,7 @@ class Officium(Skeleton):
             return self.evaluate_celebrations(feasts)
 
         except Exception as e:
-            print("error", e)
+            logger.exception(e)
             raise Exception(e)
 
     @staticmethod
@@ -664,8 +676,8 @@ class Officium(Skeleton):
                 else:
                     return names_with_max_rank[0], map_ranks[max_rank_value]
 
-        except KeyError as ie:
-            print("error", ie)
+        except KeyError as e:
+            logger.exception(e)
 
     def choose_celebration(self):
         """
@@ -680,7 +692,6 @@ class Officium(Skeleton):
 
         if not celebrations:
             # If there are no celebrations, print default message
-            print(intro + normal[4:])
             self.feast, self.rank, self.commons = "Dzień powszedni", None, None
             return
 
@@ -720,7 +731,7 @@ class Officium(Skeleton):
                 # Loop until valid input is provided
                 while True:
                     try:
-                        prompt_str = input(prompt_message)
+                        prompt_str = input(prompt_message) if self.debuging == "x" else str(self.debuging)
                         prompt = int(prompt_str)
                         if prompt == 0:
                             self.feast = "Dzień powszedni"
@@ -747,16 +758,21 @@ class Officium(Skeleton):
                 print(f"{intro}{self.feast} [{self.rank}]")
 
             except Exception as e:
-                print("error", e)
+                logger.exception(e)
                 pass
 
     def get_office_class(self, prompt) -> None:
         if prompt != "0":
             keys = self.agenda[str(self.lg_date.month)][str(self.lg_date.day)].keys()
-            for key in keys:
-                if self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key]["feast"] == self.feast:
-                    self.commons: str = self.get_class_type(self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key].get("class"))
-                    self.subclass: str = self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key].get("subclass")
+            try:
+                for key in keys:
+                    if (self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key]["feast"] == self.feast) and (
+                            self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key]["rank"] == self.rank
+                    ):
+                        self.commons: str = self.get_class_type(self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key].get("class"))
+                        self.subclass: str = self.agenda[str(self.lg_date.month)][str(self.lg_date.day)][key].get("subclass")
+            except KeyError:
+                pass
 
     @staticmethod
     def get_class_type(cls_type):
@@ -766,4 +782,4 @@ class Officium(Skeleton):
                 return cls_type.split("|")
 
         except Exception as e:
-            print(e)
+            logger.exception(e)

@@ -14,6 +14,7 @@ This project is a comprehensive tool designed for arranging the Liturgy of the H
 
 - **Test Cases**: Comprehensive testing suite to ensure accuracy and reliability of date calculations, prayer set generation, and error handling.
 
+- **QR CODE**: In future option for president of celebration, preparing office texts and generating qr code to upload on other devices
 ### Installation
 
 To install the tool, clone this repository and install the required dependencies:
@@ -35,7 +36,3 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 ### License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
-
-Feel free to adjust the description to better fit your project specifics or additional features you might have!

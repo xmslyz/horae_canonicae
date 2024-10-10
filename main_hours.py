@@ -2,17 +2,31 @@
 # +JMJ
 
 import abc
-import datetime
 import inspect
+import datetime
 import json
+import logging
+import os
+import pathlib
 import random
 from abc import ABC
-from encodings.punycode import selective_find
+from pickle import PROTO
 from random import choice
 
 from colorama import Fore, Style
 
-from tools.indexer import responsory, petitions
+filename = os.path.basename(__file__).split('.')[0]
+logger_dir = pathlib.Path.cwd() / f'__{filename}.log'
+logger = logging.getLogger(__name__)
+f_handler = logging.FileHandler(str(logger_dir), delay=True)
+f_handler.setLevel(logging.WARNING)
+f_format = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s() - %(message)s')
+f_handler.setFormatter(f_format)
+logger.addHandler(f_handler)
+
+TEST = True
+# print("context:", inspect.stack()[0].function, "| line:", inspect.stack()[0].lineno) if TEST else None
 
 
 class Hours:
@@ -27,6 +41,8 @@ class Hours:
         self.__is_lent = False
         self.__full = True
         self.__clasic_td = True
+        self.no_ant = False  # if False invitatory has only ant in begining and end
+        self.ask_always = False  # will always ask you when more than 1 option
         self.solo = True
         self.will_be_sung = False
         self.hour = None
@@ -46,7 +62,9 @@ class Hours:
             else:
                 with open(f"base_files/{season}/{season}_{self.hour}.json", encoding="utf-8") as f:
                     return json.load(f)
-        except FileNotFoundError:
+
+        except FileNotFoundError as e:
+            logger.error(e)
             raise Exception
 
     @staticmethod
@@ -65,30 +83,44 @@ class Hours:
         Otherwise, returns the only key's value. If `entry` is a string, returns it as is.
         """
         if isinstance(entry, dict):
-            if [x for x in entry.keys() if x.startswith("#")]:
-                # Choose a correct key from the dictionary
-                if self.office.subclass == "v":
-                    return entry["#v"]
-                elif self.office.subclass == "m":
-                    return entry["#m"]
-                elif self.office.subclass == "f":
-                    return entry["#f"]
-            elif [x for x in entry.keys() if x.isnumeric]:
-                # Choose a random key from the dictionary
-                random_key = choice(list(entry.keys()))
-                print(f"[check optional] -> got [no. {random_key}] | total number of optional texts available ({len(entry)})")
-                return entry[random_key]
+            # as for now, cases from common M
+            if [x for x in entry.keys() if x.startswith("#")] and self.office.commons[0] == "M":
+                return self.hashed_options(entry)
+            elif [x for x in entry.keys() if x.isdigit()]:
+                return self.numeric_options(entry)
             else:
                 # Only one key in the dictionary, return its value
-                print("[check optional] -> only one key")
-                # print(entry.values())
-                # return next(iter(entry.values()))
                 return entry
 
         elif isinstance(entry, str):
             return entry
         else:
+            logger.error("Entry not dictionary nor a string.")
             raise TypeError("Entry must be a dictionary or a string.")
+
+    @staticmethod
+    def numeric_options(entry):
+        try:
+            # Choose a random key from the dictionary
+            random_key = choice([x for x in entry.keys() if x.isdigit()])
+            print(f"[check optional] -> got [no. {random_key}] | total number of optional texts available ({len(entry)})")
+            return entry[random_key]
+
+        except Exception as e:
+            logger.exception(e)
+            raise Exception
+
+    def hashed_options(self, entry):
+        # Choose a correct key from the dictionary
+        try:
+            return entry[f"#{self.office.subclass}"]
+
+        except KeyError:
+            return self.numeric_options(entry)
+
+        except Exception as e:
+            logger.exception(e)
+            raise Exception
 
     def check_for_propia(self):
         month = self.office.lg_date.month
@@ -99,9 +131,12 @@ class Hours:
                 return True
 
         except KeyError:
-            return None
+            return False
 
-    def get_proper_text(self, off_part_name=None):
+        except Exception as e:
+            logger.exception(e)
+
+    def get_proper_text(self, off_part_name=None) -> dict | str:
         """
         Retrieves the proper prayer text based on the office date, feast, hour, and optional part name like "hymn" or "prayer".
 
@@ -126,7 +161,7 @@ class Hours:
             """
             try:
                 # Get the base text for the date, feast, and hour
-                text = self.propia_base[str(self.office.lg_date.month)][str(self.office.lg_date.day)][self.office.feast].get(self.hour, "")
+                text = self.propia_base[str(self.office.lg_date.month)][str(self.office.lg_date.day)][self.office.feast].get(self.hour)
 
                 # If a specific office part is requested, attempt to retrieve it
                 if not off_part_name:
@@ -139,8 +174,10 @@ class Hours:
 
             except KeyError:
                 # Return None if no matching text is found
-                print("here")
                 return None
+
+            except Exception as e:
+                logger.exception(e)
 
         def get_psalter_text():
             """
@@ -150,63 +187,101 @@ class Hours:
             # Retrieve the psalter text for the current week and weekday
             psalter = self.season_base[self.psalter_week][self.weekday_no]
             psalter_part = psalter if not off_part_name else psalter.get(off_part_name, None)
-
             try:
                 # Try to retrieve common prayers for the current feast
                 common = self.get_common()[self.office.commons[0]][self.hour]
                 # If a specific office part is requested, attempt to retrieve it
                 if off_part_name:
-                    common = common.get(off_part_name, f"*** no {off_part_name} for today in database ***")
+                    if isinstance(common, dict):
+                        common = common.get(off_part_name, f"*** no {off_part_name} for today in database ***")
+                    else:
+                        logger.debug("common is not a dictionary")
+
+                    # Use the user's slider choice to decide between a psalter and common prayer
+                    return self.office.user.slider_choice(psalter_part, common)
+                else:
+                    return self.office.user.slider_choice(psalter_part, common)
+
             except TypeError:
                 # If there's an error retrieving common prayers, return psalter text
+                logger.warning(
+                    "There's an error retrieving common prayers from: "
+                    f"{self.office.commons}\n"
+                    f"{self.office.rank}\n"
+                    f"{self.office.feast}\n"
+                    f"{self.office.subclass}\n, returning psalter text"
+                )
                 return psalter_part
 
-            # Use the user's slider choice to decide between psalter and common prayer
-            return self.office.user.slider_choice(psalter_part, common)
+            except Exception as e:
+                logger.exception(e)
 
         # First check if we can use the propia prayers
         if self.check_for_propia():
             propia = get_propia_text()
             return propia if propia != "empty" else get_psalter_text()
         else:
+            #
             # Otherwise, use the psalter or common prayers
             return get_psalter_text()
 
     @abc.abstractmethod
-    def pray(self):
-        """ """
-
-    @abc.abstractmethod
     def opening(self):
         """ """
-        raise NotImplementedError
 
     def hymn(self):
         """ """
 
+    def format_hymn(self, hymn):
+        try:
+            lines = hymn.split("\n")
+            new_str = ''
+            for line in lines:
+                if line[0].isdigit():
+                    new_str += line[0] + "\n" + line[2:] + "\n"
+                else:
+                    new_str += line + "\n"
+
+            return self.coloured_hymn(new_str)
+
+        except Exception as e:
+            logger.exception(e)
+            return 'Ocurred error during formating'
+
+    @staticmethod
+    def coloured_hymn(hymn: str) -> str:
+        coloured_txt = ''
+        next_line = None
+        lines = hymn.split("\n")
+        for i, line in enumerate(lines):
+            if line.isdigit() and i != next_line:
+                next_line = i + 1
+                spacer = "" if i == 0 else "\n"
+                coloured_txt += (
+                        spacer + Fore.YELLOW + line + Style.RESET_ALL + " " + lines[next_line] + "\n"
+                )
+            elif i != next_line:
+                coloured_txt += line + "\n"
+
+            else:
+                pass
+
+        return coloured_txt.strip()
+
     @abc.abstractmethod
     def psalmodia(self):
         """ """
-        raise NotImplementedError
 
     @abc.abstractmethod
-    def psalm(self, psalm, args):
+    def _psalm(self, psalm, args):
         """ """
-        ant = psalm["antifona"] + "\n"
-        ind = psalm["psalm_index"] + "\n" if len(psalm["psalm_index"]) > 0 else ""
-        tit = psalm["psalm_title"] + "\n" if len(psalm["psalm_title"]) > 0 else ""
-        com = psalm["psalm_comment"] + "\n" if len(psalm["psalm_comment"]) > 0 else ""
-        txt = psalm["psalm_txt"] + "\n"
 
+    @staticmethod
+    def indent_psalm(txt):
         indented = ''
         txt_splited = txt.split("\n")
-        if self.hour == "lau":
-            indent = True
-        else:
-            indent = False
-
+        indent = True
         cross = 0
-
         for i in range(len(txt_splited)):
             if txt_splited[i].endswith("*"):
                 if cross + 1 == i:
@@ -219,46 +294,89 @@ class Hours:
 
             spacer = "\t" if indent else ""
             indented += f"{spacer}{txt_splited[i]}\n"
+        return indented
 
-        w = psalm.get("werse", "")
-        werse = w if w != "" else ""
-
-        return (
-                Fore.RED + "Ant. " + Fore.GREEN + ant +
-                Fore.LIGHTRED_EX + ind +
-                Fore.LIGHTYELLOW_EX + tit +
-                Fore.LIGHTCYAN_EX + com +
-                Style.RESET_ALL + indented +
-                Fore.RED + "Ant. " + Fore.GREEN + ant +
-                Style.RESET_ALL + "\n" + werse
-        )
+    def checking_psalms(self, psalm, i):
+        # for Feasts and Solemnities (and some propias) psalms are taken from Sunday of 1st week of psalter
+        if self.rank in ["F", "S"] or psalm.get("solemn"):
+            psalm = self.get_base()["1"]["6"][f"psalm{i}"]
+        else:
+            psalm = self.get_base()[self.psalter_week][self.weekday_no][f"psalm{i}"]
+        return psalm
 
     @abc.abstractmethod
     def readings(self):
         """ """
-        raise NotImplementedError
+
+    @staticmethod
+    def colour_lecture(txt: str) -> str:
+        sigla, lecture, *excess = txt.split("\n")
+        return Fore.YELLOW + sigla + "\n" + Style.RESET_ALL + lecture
+
+    @abc.abstractmethod
+    def responsory(self):
+        """ """
+
+    @staticmethod
+    def colour_responsory(res):
+        txt = ""
+        lines = res.split("\n")
+        for i, line in enumerate(lines, 1):
+            if i != 2:
+                line = line.replace("*", "/")
+
+            if i % 2 != 0:
+                txt += Fore.YELLOW + line + Style.RESET_ALL + " "
+            elif i % 2 == 0:
+                txt += line + "\n"
+
+        return txt
 
     @abc.abstractmethod
     def canticle(self):
         """ for Morning and Evening """
 
+    @staticmethod
+    def colour_canticle_ant(canticle_ant):
+        return Fore.YELLOW + "Ant. " + Style.RESET_ALL + f"{canticle_ant}\n"
+
     @abc.abstractmethod
     def intercessions(self):
         """ for Morning and Evening """
 
-    @abc.abstractmethod
+    def colour_intercessions(self, intercessions):
+        petis = ""
+        response = Fore.LIGHTGREEN_EX + intercessions["resp"] + Style.RESET_ALL
+
+        if self.default_inter:
+            intro = f"{intercessions['intro']}" + f" {response}\n\n"
+        else:
+            intro = f"{intercessions['intro']}\n\n"
+        for i in range(len(intercessions.keys()) - 1):
+            pet_dict = intercessions.get(f"pet{i}")
+            if pet_dict:
+                if self.default_inter:
+                    resp = f"{pet_dict['w'].replace('-', '')}\n" + response
+                    petis += f"{pet_dict['k']}{resp}\n"
+                else:
+                    resp = Fore.LIGHTBLACK_EX + f"{pet_dict['w'].replace('-', '')}" + Style.RESET_ALL + "\n"
+                    petis += f"{pet_dict['k']}{resp}\n"
+
+        return intro, petis
+
     def paternoster(self):
         """ for Morning and Evening """
+        intro = self.const[f"pn_{random.choice(range(1, 10))}"] if self.pater_intro else ""
+        paternoster = self.const["paternoster"]
+        return f"\u2731 MODLITWA PAŃSKA \u2731\n" + Fore.LIGHTBLUE_EX + intro + Style.RESET_ALL + "\n" + paternoster
 
     @abc.abstractmethod
     def prayer(self):
         """ """
-        raise NotImplementedError
 
     @abc.abstractmethod
     def dismisal(self):
         """ """
-        raise NotImplementedError
 
     @property
     def rank(self):
@@ -345,7 +463,15 @@ class Invitatory(Hours, ABC):
     def __init__(self, officium):
         super().__init__(officium)
         self.hour = "inv"
-        self.__no_ant = False
+
+    def __str__(self):
+        return (
+                "\u2554" + "\u2550" * 11 + "\u2557\n"
+                                           "\u272A WEZWANIE \u272A\n"
+                                           "\u255A" + "\u2550" * 11 + "\u255D\n"
+                                                                      f"{self.opening()}"
+                                                                      f"{self.psalmodia()}"
+        )
 
     @property
     def no_ant(self):
@@ -358,14 +484,6 @@ class Invitatory(Hours, ABC):
     @no_ant.setter
     def no_ant(self, no_ant: bool = False):
         self.__no_ant = no_ant
-
-    def pray(self):
-        print("\u2554" + "\u2550" * 11 + "\u2557")
-        print("\u272A WEZWANIE \u272A")
-        print("\u255A" + "\u2550" * 11 + "\u255D")
-
-        print(self.opening())
-        print(self.psalmodia())
 
     def opening(self):
         return self.const["aperies"]
@@ -386,23 +504,26 @@ class Invitatory(Hours, ABC):
         s|f - propia
         m - psalter *propia
         """
-
+        ant = ''
         ant_map = {"1": "95", "2": "100", "3": "24", "4": "67"}
         mapped_value = ant_map.get(self.psalter_week)
         base = self.inv_base()[mapped_value]
-        psalm_no = base["num"]
-        psalm_title = base["mot"]
-        psalm_cita = base["cit"]
+        psalm_no = Fore.LIGHTRED_EX + base["num"] + "\n"
+        psalm_title = Fore.LIGHTYELLOW_EX +base["mot"] + "\n"
+        psalm_cita = Fore.LIGHTCYAN_EX + base["cit"] + "\n" + Style.RESET_ALL
         estr = base["est"]
 
         psalter_ant = self.inv_ant()[self.psalter_week][self.weekday_no]
+        ant = psalter_ant
         if self.office.feast == "Dzień powszedni":
             ant = psalter_ant
+
         elif self.check_for_propia():
             try:
                 ant = self.get_propia()[str(self.office.lg_date.month)][str(self.office.lg_date.day)][self.office.feast]["inv"]
             except KeyError:
                 ant = "!!! Not in database yet !!!"
+
         else:
             try:
                 common_ant = self.get_common()[self.office.commons[0]]["inv"]
@@ -414,20 +535,23 @@ class Invitatory(Hours, ABC):
             # for feasts and solemnities
             if self.rank in ["S", "F"]:
                 ant = common_ant
+
             # for memories aut-aut
             elif self.rank in ["MO", "ML"]:
                 ant = self.office.user.slider_choice(psalter_ant, common_ant)
 
         estribillos = ''
         for e in range(len(estr)):
-            estribillos += estr[e]
-            if self.no_ant is False:
-                estribillos += "\n" + ant + "\n"
-        if self.no_ant:
-            estribillos += "\n" + ant
+            estribillos += estr[e] + "\n\n"
+
+            if not self.no_ant and e != len(estr) - 1:
+                estribillos += Fore.LIGHTYELLOW_EX + "Ant." + Style.RESET_ALL + " " + ant + "\n\n"
 
         psalmody = (
-                psalm_no + psalm_title + psalm_cita + "\n" + "Ant." + " " + ant + "\n" + estribillos
+                psalm_no + psalm_title + psalm_cita + "\n" +
+                Fore.LIGHTYELLOW_EX + "Ant." + Style.RESET_ALL + " " + ant + "\n\n" +
+                estribillos
+                + Fore.LIGHTYELLOW_EX + "Ant." + Style.RESET_ALL + " " + ant + "\n"
         )
 
         return psalmody
@@ -439,24 +563,25 @@ class Readings(Hours, ABC):
         self.hour = "lec"
         self.base = self.get_base()
 
-    def pray(self):
-        print("\u2554" + "\u2550" * 17 + "\u2557")
-        print("\u272A GODZINA CZYTAŃ \u272A")
-        print("\u255A" + "\u2550" * 17 + "\u255D")
-
-        print(self.opening())
-        print(self.hymn())
-        print(self.psalmodia())
-        print(self.verse())
-        print(self.readings())
-        print(self.responsory())
-        print(self.tedeum())
-        print(self.prayer())
-        print(self.dismisal())
+    def __str__(self):
+        return (
+                "\u2554" + "\u2550" * 17 + "\u2557\n"
+                                           "\u272A GODZINA CZYTAŃ \u272A\n"
+                                           "\u255A" + "\u2550" * 17 + "\u255D\n"
+                                                                      f"{self.opening()}"
+                                                                      f"{self.hymn()}"
+                                                                      f"{self.psalmodia()}"
+                                                                      f"{self.verse()}"
+                                                                      f"{self.readings()}"
+                                                                      f"{self.responsory()}"
+                                                                      f"{self.tedeum()}"
+                                                                      f"{self.prayer()}"
+                                                                      f"{self.dismisal()}"
+        )
 
     def opening(self):
         aleluya = " Alleluja." if not self.is_lent else ""
-        return "" if self.joined else f"{self.const["opening"]}{aleluya}\n"
+        return "" if self.joined else f"{self.const['opening']}{aleluya}\n"
 
     def hymn(self):
         """
@@ -543,31 +668,33 @@ class Morning(Hours, ABC):
         self.default_inter = True  # default intercesions style
         self.pater_intro = False  # introduction for Our Father
 
-    def pray(self):
-        print("\u2554" + "\u2550" * 11 + "\u2557")
-        print("\u272A JUTRZNIA \u272A")
-        print("\u255A" + "\u2550" * 11 + "\u255D")
-
-        # print(self.opening())
-        # print(self.hymn())
-        # print(self.psalmodia())
-        # print(self.readings())
-        print(self.responsory())
-        # print(self.canticle())
-        # print(self.intercessions())
-        # print(self.paternoster())
-        # print(self.prayer())
-        # print(self.dismisal())
+    def __str__(self):
+        return (
+                "\u2554" + "\u2550" * 11 + "\u2557\n"
+                                           "\u272A JUTRZNIA \u272A\n"
+                                           "\u255A" + "\u2550" * 11 + "\u255D\n"
+                                                                      f"{self.opening()}"
+                                                                      f"{self.hymn()}"
+                                                                      f"{self.psalmodia()}"
+                                                                      f"{self.readings()}"
+                                                                      f"{self.responsory()}"
+                                                                      f"{self.canticle()}"
+                                                                      f"{self.intercessions()}"
+                                                                      f"{self.paternoster()}"
+                                                                      f"{self.prayer()}"
+                                                                      f"{self.dismisal()}"
+        )
 
     def opening(self):
         """ """
         if self.with_inv:
             inv = Invitatory(self.office)
+            inv.no_ant = self.no_ant
             return f"{inv.opening()}\n{inv.psalmodia()}"
 
         else:
             aleluya = " Alleluja." if not self.is_lent else ""
-            return "" if self.joined else f"{self.const["opening"]}{aleluya}\n"
+            return "" if self.joined else f"{self.const['opening']}{aleluya}\n"
 
     def hymn(self):
         """
@@ -579,46 +706,26 @@ class Morning(Hours, ABC):
         """
         h = self.get_proper_text("hymn")
         hymn = self.check_optional(h)
-        return f"\u2731 HYMN \u2731\n{hymn}"
+        fomated_hymn = self.format_hymn(hymn)
+        return f"\u2731 HYMN \u2731\n{fomated_hymn}\n\n"
 
-    def psalm(self, psalm, i):
-        """        """
+    def _psalm(self, psalm, i):
+        """ """
         ant = psalm["antifona"] + "\n"
-
-        if self.rank in ["F", "S"] or psalm.get("solemn"):
-            psalm = self.get_base()["1"]["6"][f"psalm{i}"]
-        else:
-            psalm = self.get_base()[self.psalter_week][self.weekday_no][f"psalm{i}"]
+        psalm = self.checking_psalms(psalm, i)  # checking if shoudn't be solemn psalm
 
         ind = psalm.get("psalm_index", "") + "\n" if len(psalm.get("psalm_index", "")) > 0 else ""
         tit = psalm.get("psalm_title", "") + "\n" if len(psalm.get("psalm_title", "")) > 0 else ""
         com = psalm.get("psalm_comment", "") + "\n" if len(psalm.get("psalm_comment", "")) > 0 else ""
-
         txt = psalm.get("psalm_txt", "") + "\n"
-        indented = ''
-        txt_splited = txt.split("\n")
-        indent = True
-        cross = 0
-
-        for i in range(len(txt_splited)):
-            if txt_splited[i].endswith("*"):
-                if cross + 1 == i:
-                    pass
-                else:
-                    indent = not indent
-            elif txt_splited[i].endswith("†"):
-                indent = not indent
-                cross = i
-
-            spacer = "\t" if indent else ""
-            indented += f"{spacer}{txt_splited[i]}\n"
+        indented_txt = self.indent_psalm(txt)
 
         return (
                 Fore.YELLOW + "Ant. " + Style.RESET_ALL + ant +
                 Fore.LIGHTRED_EX + ind +
                 Fore.LIGHTYELLOW_EX + tit +
                 Fore.LIGHTCYAN_EX + com +
-                Style.RESET_ALL + indented.strip() + "\n" +
+                Style.RESET_ALL + indented_txt.strip() + "\n" +
                 Fore.YELLOW + "Ant. " + Style.RESET_ALL + ant + "\n" +
                 Style.RESET_ALL
         )
@@ -636,7 +743,7 @@ class Morning(Hours, ABC):
         ps = self.get_proper_text()
 
         for i, psalm in enumerate(["psalm1", "psalm2", "psalm3"], 1):
-            psalmody += self.psalm(ps[psalm], i)
+            psalmody += self._psalm(ps[psalm], i)
 
         return psalmody
 
@@ -650,13 +757,9 @@ class Morning(Hours, ABC):
         txt = self.get_proper_text("lecture")
         if txt:
             try:
-                sigla, lecture, *excess = txt.split("\n")
+                coloured = self.colour_lecture(txt)
+                return f"\u2731 CZYTANIE \u2731\n" + coloured + "\n\n"
 
-                return (
-                    f"\u2731 CZYTANIE \u2731\n" + Fore.YELLOW +
-                    sigla + "\n" + Style.RESET_ALL +
-                    lecture + "\n"
-                )
             except ValueError:
                 return f"*** no lecture for today in database ***"
 
@@ -665,17 +768,10 @@ class Morning(Hours, ABC):
         s|f - propia | comunes
         0-6|m - psalter
         """
-        res = self.get_proper_text("responsory")
-        txt = ""
-        lines = res.split("\n")
-        for i, line in enumerate(lines, 1):
-            if i % 2 != 0:
-                txt += Fore.YELLOW + line + Style.RESET_ALL + " "
-            elif i % 2 == 0:
-                txt += line + "\n"
-
-        if res:
-            return f"\u2731 RESPONSORIUM KRÓTKIE \u2731\n{txt}"
+        resp = self.get_proper_text("responsory")
+        if resp:
+            coloured = self.colour_responsory(resp)
+            return f"\u2731 RESPONSORIUM KRÓTKIE \u2731\n{coloured}\n"
         else:
             return "\n*** no responsory for today in database ***\n"
 
@@ -689,12 +785,13 @@ class Morning(Hours, ABC):
         canticle_ant = self.get_proper_text("zachary")
 
         if canticle_ant:
-            return (f"\u2731 PIEŚŃ ZACHARIASZA (Łk 1, 68-79) \u2731\n"
-                    + Fore.YELLOW + "Ant. " + Style.RESET_ALL +
-                    f"{canticle_ant}\n"
-                    f"{self.const["zac_txt"]}"
-                    + Fore.YELLOW + "Ant. " + Style.RESET_ALL +
-                    f"{canticle_ant}\n")
+            return (
+                    f"\u2731 PIEŚŃ ZACHARIASZA" + Fore.LIGHTYELLOW_EX + " (Łk 1, 68-79) " + Style.RESET_ALL + "\u2731\n" +
+                    self.colour_canticle_ant(canticle_ant)
+                    + f"{self.const['zac_txt']}" +
+                    self.colour_canticle_ant(canticle_ant)
+                    + "\n"
+            )
         else:
             return "\n*** no Antiphone for Canticle of Zacariach for today in database ***\n"
 
@@ -707,45 +804,25 @@ class Morning(Hours, ABC):
 
         """
         inter = self.get_proper_text("petitions")
-        intercessions = self.check_optional(inter)
 
-        if intercessions:
-            petis = ""
-            resp_template = Fore.LIGHTGREEN_EX + intercessions["resp"] + Style.RESET_ALL
-            if self.default_inter:
-                intro = f"{intercessions['intro']}" + f"{resp_template}\n\n"
-            else:
-                intro = f"{intercessions['intro']}\n\n"
-
-            for i in range(len(intercessions.keys()) - 1):
-                pet_dict = intercessions.get(f"pet{i}")
-                if pet_dict:
-                    if self.default_inter:
-                        resp = f"{pet_dict['w'].replace('-', '')}\n" + resp_template
-                        petis += f"{pet_dict['k']}{resp}\n"
-                    else:
-                        resp = Fore.LIGHTGREEN_EX + f"{pet_dict['w'].replace('-', '')}" + Style.RESET_ALL + "\n"
-                        petis += f"{pet_dict['k']}{resp}\n"
-            return (
-                    f"\u2731 PROŚBY \u2731\n" + intro + petis.strip() + "\n"
-            )
+        if inter:
+            intercessions = self.check_optional(inter)
+            intro, petitions = self.colour_intercessions(intercessions)
+            return f"\u2731 PROŚBY \u2731\n" + intro + petitions
         else:
             return "\n*** no Intercessions for today in database ***\n"
 
-    def paternoster(self):
-        intro = self.const[f"pn_{random.choice(range(1, 10))}"] if self.pater_intro else ""
-        paternoster = self.const["paternoster"]
-        return f"\u2731 MODLITWA PAŃSKA \u2731\n" + Fore.LIGHTBLUE_EX + intro + Style.RESET_ALL + "\n" + paternoster
+
 
     def prayer(self):
         """
         Po "Ojcze nasz" odmawia się modlitwę, której nie poprzedza się wezwaniem "Módlmy się".
         Tę modlitwę końcową w niedziele Okresu Zwykłego bierze się z Tekstów okresowych,
         w dni powszednie z psałterza, w oficjach o świętych z Tekstów własnych lub wspólnych.
-
         """
-        prayer = self.check_optional(self.get_proper_text("prayer"))
-        return f"\u2731 MODLITWA \u2731\n{prayer}" if not self.joined else ""
+        prayers = self.get_proper_text("prayer")
+        prayer = self.check_optional(prayers)
+        return f"\u2731 MODLITWA \u2731\n{prayer}"
 
     def dismisal(self):
         return "\n" + self.const["lau_ending_one"] if self.solo else "\n" + self.const["lau_ending_priest"]
@@ -760,6 +837,28 @@ class Daytime(Hours, ABC):
         self.fixed_base = self.get_fixed()
         self.solo = True
         self.def_inter = True
+
+    def __str__(self):
+        if self.hour == "ter":
+            h = "MODLITWA PREZEDPOŁUDNIOWA"
+        elif self.hour == "sex":
+            h = "MODLITWA POŁUDNIOWA"
+        elif self.hour == "non":
+            h = "MODLITWA POPOŁUDNIOWA"
+        else:
+            raise ValueError("No such daytime hour")
+
+        return (
+                "\u2554" + "\u2550" * 12 + "\u2557\n"
+                                           f"\u272A {h} \u272A\n"
+                                           "\u255A" + "\u2550" * 12 + "\u255D\n"
+                                                                      f"{self.opening()}"
+                                                                      f"{self.hymn()}"
+                                                                      f"{self.psalmodia()}"
+                                                                      f"{self.readings()}"
+                                                                      f"{self.prayer()}"
+                                                                      f"{self.dismisal()}"
+        )
 
     @staticmethod
     def time_of_day_category():
@@ -796,32 +895,10 @@ class Daytime(Hours, ABC):
         except FileNotFoundError:
             raise Exception
 
-    def pray(self):
-
-        if self.hour == "ter":
-            h = "MODLITWA PREZEDPOŁUDNIOWA"
-        elif self.hour == "sex":
-            h = "MODLITWA POŁUDNIOWA"
-        elif self.hour == "non":
-            h = "MODLITWA POPOŁUDNIOWA"
-        else:
-            raise ValueError("No such daytime hour")
-
-        print("\u2554" + "\u2550" * 12 + "\u2557")
-        print(f"\u272A {h} \u272A")
-        print("\u255A" + "\u2550" * 12 + "\u255D")
-
-        print(self.opening())
-        print(self.hymn())
-        print(self.psalmodia())
-        print(self.readings())
-        print(self.prayer())
-        print(self.dismisal())
-
     def opening(self):
         """ """
         aleluya = " Alleluja." if not self.is_lent else ""
-        return "" if self.joined else f"{self.const["opening"]}{aleluya}\n"
+        return "" if self.joined else f"{self.const['opening']}{aleluya}\n"
 
     def hymn(self):
         """ ALWAYS FROM FIXED """
@@ -909,30 +986,33 @@ class Evening(Hours, ABC):
         self.def_inter = True
         self.pater_intro = False
 
-    def pray(self):
-        print("\u2554" + "\u2550" * 12 + "\u2557")
-        print("\u272A NIESZPORY \u272A")
-        print("\u255A" + "\u2550" * 12 + "\u255D")
-
-        print(self.opening())
-        print(self.hymn())
-        print(self.psalmodia())
-        print(self.readings())
-        print(self.responsory())
-        print(self.canticle())
-        print(self.intercessions())
-        print(self.paternoster())
-        print(self.prayer())
-        print(self.dismisal())
+    def __str__(self):
+        return (
+                "\u2554" + "\u2550" * 12 + "\u2557"
+                                           "\u272A NIESZPORY \u272A"
+                                           "\u255A" + "\u2550" * 12 + "\u255D"
+                                                                      f"{self.opening()}"
+                                                                      f"{self.hymn()}"
+                                                                      f"{self.psalmodia()}"
+                                                                      f"{self.readings()}"
+                                                                      f"{self.responsory()}"
+                                                                      f"{self.canticle()}"
+                                                                      f"{self.intercessions()}"
+                                                                      f"{self.paternoster()}"
+                                                                      f"{self.prayer()}"
+                                                                      f"{self.dismisal()}"
+        )
 
     def opening(self):
         """ """
         aleluya = " Alleluja." if not self.is_lent else ""
-        return "" if self.joined else f"{self.const["opening"]}{aleluya}\n"
+        return "" if self.joined else f"{self.const['opening']}{aleluya}\n"
 
     def hymn(self):
         """   """
-        return f"\u2731 HYMN \u2731\n{self.base[self.psalter_week][self.weekday_no]['hymn']}"
+        h = self.get_proper_text("hymn")
+        hymn = self.check_optional(h)
+        return f"\u2731 HYMN \u2731\n{hymn}"
 
     def psalm(self, psalm):
         """        """
@@ -1013,7 +1093,7 @@ class Evening(Hours, ABC):
         if canticle != "":
             if self.weekday_no not in ["5", "6"]:
                 return (f"\u2731 PIEŚŃ MARYI (Łk 1, 46-55) \u2731\n\n"
-                        f"{canticle}\n{self.const["maria_txt"]}\n{canticle}\n")
+                        f"{canticle}\n{self.const['maria_txt']}\n{canticle}\n")
             else:
                 # take from other part of base .. from Officium !!
                 return "\n*** no Antiphone for Canticle of Maria for today in database ***\n"
@@ -1063,6 +1143,21 @@ class Night(Hours, ABC):
         self.solo = True
         self.def_inter = True
 
+    def __str__(self):
+        return (
+                "\u2554" + "\u2550" * 11 + "\u2557\n"
+                                           f"\u272A KOMPLETA \u272A\n"
+                                           "\u255A" + "\u2550" * 11 + "\u255D\n"
+                                                                      f"{self.opening()}"
+                                                                      f"{self.confesion()}"
+                                                                      f"{self.hymn()}"
+                                                                      f"{self.psalmodia()}"
+                                                                      f"{self.readings()}"
+                                                                      f"{self.prayer()}"
+                                                                      f"{self.dismisal()}"
+                                                                      f"{self.maria()}"
+        )
+
     def get_base(self):
         try:
             with open(f"base_files/com/com.json", encoding="utf-8") as f:
@@ -1070,24 +1165,10 @@ class Night(Hours, ABC):
         except FileNotFoundError:
             raise Exception
 
-    def pray(self):
-        print("\u2554" + "\u2550" * 11 + "\u2557")
-        print(f"\u272A KOMPLETA \u272A")
-        print("\u255A" + "\u2550" * 11 + "\u255D")
-
-        print(self.opening())
-        print(self.confesion())
-        print(self.hymn())
-        print(self.psalmodia())
-        print(self.readings())
-        print(self.prayer())
-        print(self.dismisal())
-        print(self.maria())
-
     def opening(self):
         """ """
         aleluya = " Alleluja." if not self.is_lent else ""
-        return "" if self.joined else f"{self.get_base()["inicium"]}{aleluya}\n"
+        return "" if self.joined else f"{self.get_base()['inicium']}{aleluya}\n"
 
     def confesion(self):
         intro = f"\u2731 RACHUNEK SUMIENIA \u2731\n"
@@ -1096,7 +1177,7 @@ class Night(Hours, ABC):
 
     def hymn(self):
         """ ALWAYS FROM FIXED """
-        return f"\u2731 HYMN \u2731\n\n{self.get_base()["hymn"][self.psalter_week]}"
+        return f"\u2731 HYMN \u2731\n\n{self.get_base()['hymn'][self.psalter_week]}"
 
     def psalm(self, psalm):
         """ ALWAYS FROM PSALTERY """
