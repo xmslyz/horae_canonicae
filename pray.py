@@ -50,13 +50,18 @@ if __name__ == "__main__":
         # print(pray.hymn())
         # print(pray.psalmodia())
         # print(pray.verse())
-        print(pray.readings())
-        # print(pray.responsory())
+        # print(pray.readings())
         # print(pray.canticle())
         # print(pray.paternoster())
         # print(pray.intercessions())
-        # print(pray.prayer())
-        # print(pray.dismisal())
+        print(pray.prayer())
+        print(pray.dismisal())
+
+# finished in 778 main_hours
+# 1 >lau -> ?
+# 2 i vis | ii vis ??
+
+
 
 
 

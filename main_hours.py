@@ -94,6 +94,8 @@ class Hours:
 
         elif isinstance(entry, str):
             return entry
+        elif not entry:
+            return f"*** no text for today in database ***"
         else:
             logger.error(f"Entry not dictionary nor a string but {type(entry)}")
             raise TypeError("Entry must be a dictionary or a string.")
@@ -472,6 +474,21 @@ class Hours:
         paternoster = self.const["paternoster"]
         return f"\u2731 MODLITWA PAŃSKA \u2731\n" + Fore.LIGHTBLUE_EX + intro + Style.RESET_ALL + "\n" + paternoster
 
+    def tedeum(self):
+        poetic = self.const["lec_tedeum_poetic"]
+        poetic_extra = self.const["lec_tedeum_poetic_extra"]
+        clasic = self.const["lec_tedeum_clasic"]
+        clasic_extra = self.const["lec_tedeum_clasic_extra"]
+
+        if self.full:
+            clasic += clasic_extra
+            poetic += poetic_extra
+
+        if self.rank in ["f", "s"] and not self.is_lent:
+            return clasic if self.clasic_td else poetic
+        else:
+            return ""
+
     @abc.abstractmethod
     def prayer(self):
         """ """
@@ -677,7 +694,6 @@ class Readings(Hours, ABC):
                                                                       f"{self.psalmodia()}"
                                                                       f"{self.verse()}"
                                                                       f"{self.readings()}"
-                                                                      f"{self.responsory()}"
                                                                       f"{self.tedeum()}"
                                                                       f"{self.prayer()}"
                                                                       f"{self.dismisal()}"
@@ -746,33 +762,21 @@ class Readings(Hours, ABC):
                 lectures += formated_lecture
         return lectures
 
-    def responsory(self):
-        """ """
-        respons = self.base[self.psalter_week][self.weekday_no].get('responsory', "")
-        if respons != "":
-            return f"\u2731 RESPONSORIUM \u2731\n{respons}"
-        else:
-            return "\n*** no responsory for today in database ***\n"
 
-    def tedeum(self):
-        poetic = self.const["lec_tedeum_poetic"]
-        poetic_extra = self.const["lec_tedeum_poetic_extra"]
-        clasic = self.const["lec_tedeum_clasic"]
-        clasic_extra = self.const["lec_tedeum_clasic_extra"]
-
-        if self.full:
-            clasic += clasic_extra
-            poetic += poetic_extra
-
-        if self.rank in ["f", "s"] and not self.is_lent:
-            return clasic if self.clasic_td else poetic
-        else:
-            return ""
 
     def prayer(self):
         """ pdt|propia|comunes """
         ...
-        prayer = self.base[self.psalter_week][self.weekday_no].get("prayer", f"*** no prayers for today in database ***")
+        text = self.get_proper_text("prayer")
+        prayer = self.check_optional(text)
+
+        if prayer.startswith(">"):
+            redirect = prayer[1:]
+
+            redirected_txt = self.get_proper_text(redirect)
+
+            # here i finished
+
         return f"MODLITWA\nMódlmy się:\n{prayer}\nAmen.\n" if not self.joined else ""
 
     def dismisal(self):
