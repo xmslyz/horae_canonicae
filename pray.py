@@ -31,31 +31,41 @@ MS 1634
 """
 
 
-if __name__ == "__main__":
-    # today = datetime.datetime.today().date()
-    # off = Officium(today)
-
-    other = datetime.date(2024, 9, 7)
+def test():
+    o = datetime.date(2024, 9, 7)
     for x in range(3):
-        off = Officium(other, 6, x)
-        # pray = lg.Morning(off)
-        pray = lg.Readings(off)
-        pray.with_inv = True
-        pray.no_ant = True
-        pray.default_inter = False
-        pray.pater_intro = True
-        # pray.joined = True
-        # print(pray)
-        # print(pray.opening())
-        # print(pray.hymn())
-        # print(pray.psalmodia())
-        # print(pray.verse())
-        # print(pray.readings())
-        # print(pray.canticle())
-        # print(pray.paternoster())
-        # print(pray.intercessions())
-        print(pray.prayer())
-        print(pray.dismisal())
+        of = Officium(o, 6, x)
+        p = lg.Morning(of)
+        # p = lg.Readings(of)
+        p.with_inv = True
+        p.no_ant = True
+        p.default_inter = False
+        p.pater_intro = True
+        p.joined = True
+        print(p)
+        print(p.opening())
+        print(p.hymn())
+        print(p.psalmodia())
+        print(p.verse())
+        print(p.readings())
+        print(p.canticle())
+        print(p.paternoster())
+        print(p.intercessions())
+        print(p.prayer())
+        print(p.dismisal())
+
+
+if __name__ == "__main__":
+    ddate = datetime.datetime.today().date()
+    # ddate = datetime.date(2024, 9, 7)
+    off = Officium(ddate, 6)
+    # pray = lg.Invitatory(off)
+    pray = lg.Morning(off)
+    pray.joined = True
+    # pray.pater_intro = True
+    print(pray)
+
+
 
 # finished in 778 main_hours
 # 1 >lau -> ?
