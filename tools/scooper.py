@@ -7,6 +7,7 @@ from calendar import weekday
 from random import random
 import indexer
 
+
 def make_ageda():
     with open("../litcalendar/10_2024.json", encoding="utf-8") as f:
         txt = json.load(f)

@@ -777,3 +777,76 @@ def inv_antiphons(elements, i):
     else:
         return " ".join([elements[i + 6], elements[i + 7]])
 
+
+def index_lg(d, key_line='', diki=None):
+    """
+    Przeszukuje słownik rekurencyjnie, zapamiętuje ścieżkę kluczy
+    i zapisuje wartości w słowniku 'diki', jeśli znajdzie wzorzec.
+    """
+    if diki is None:
+        diki = {}  # Inicjalizacja słownika, jeśli nie został przekazany
+
+    if isinstance(d, dict):
+        # Iteracja przez klucze i wartości w słowniku
+        for key, value in d.items():
+            new_key_line = f"{key_line}-{key}"  # Tworzenie ścieżki kluczy
+            if isinstance(value, dict):
+                # Rekurencyjne przetwarzanie wartości, jeśli jest to słownik
+                index_lg(value, new_key_line, diki)
+            elif isinstance(value, str):
+                start, end = 0, 0
+                splited = value.split("\n")
+                for i, x in enumerate(splited):
+                    if re.findall(r"^.*HYMN.*$", x):
+                        start = i + 1
+                        for j, y in enumerate(splited[i:]):
+                            if re.findall(r"^.*PSALMODIA.*$", y):
+                                end = start + j - 1
+                                break
+
+                # Jeśli znaleziono przedział, przetwarzamy tekst
+                if start < end:
+                    ready = splited[start:end]
+
+                    # Tworzenie struktury w 'diki'
+                    diki[new_key_line.lstrip("-")] = {}
+
+                    for o in range(9):
+                        if splited[o].startswith("K. †"):
+                            break
+                        print(splited[o])
+                    print("***")
+
+                    diki[new_key_line.lstrip("-")]["hymn"] = "\n".join(ready)
+                    diki[new_key_line.lstrip("-")]["feast"] = splited[2]
+                    diki[new_key_line.lstrip("-")]["rank"] = splited[3]
+                    diki[new_key_line.lstrip("-")]["class"] = "??"
+                    diki[new_key_line.lstrip("-")]["where"] = splited[0]
+
+                    # result = re.findall(r": ([^,]+),.*$", ready[0])
+                    # # Tworzenie struktury w 'diki'
+                    # diki[new_key_line.lstrip("-")] = {}
+                    # if result:
+                    #     for o in range(9):
+                    #         if splited[o].startswith("K. †"):
+                    #             break
+                    #         if splited[o].isupper():
+                    #             # Dodanie danych do słownika 'diki'
+                    #             diki[new_key_line.lstrip("-")]["hymn"] = "\n".join(ready[1:])
+                    #             diki[new_key_line.lstrip("-")]["feast"] = splited[o]
+                    #             diki[new_key_line.lstrip("-")]["rank"] = splited[o + 1]
+                    #             diki[new_key_line.lstrip("-")]["class"] = result[0]
+                    #         if ":" in splited[o]:
+                    #             diki[new_key_line.lstrip("-")]["where"] = splited[o]
+                    # else:
+                    #     diki[new_key_line.lstrip("-")]["hymn"] = "\n".join(ready)
+                    #     diki[new_key_line.lstrip("-")]["feast"] = splited[2]
+                    #     diki[new_key_line.lstrip("-")]["rank"] = splited[3]
+                    #     diki[new_key_line.lstrip("-")]["class"] = "??"
+                    #     diki[new_key_line.lstrip("-")]["where"] = splited[0]
+
+    return diki
+
+
+
+
