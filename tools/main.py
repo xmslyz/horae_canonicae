@@ -40,9 +40,8 @@ if __name__ == "__main__":
     #     di = indexer.index_lg(d)
     #     with open(f"xxhymns-{h}.json", "w", encoding="utf-8") as f:
     #         json.dump(di, f, indent=4)
-    # tools.polish_json()
-
-    tools.eat_str("com")
+    # tools.eat_str("com")
+    tools.polish_json()
     ...
 
 
